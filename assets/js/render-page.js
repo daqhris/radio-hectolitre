@@ -1,14 +1,15 @@
-// Minimal, framework-free page renderer.
-// Expects the HTML page to include specific container IDs (see next section).
+// Broadcast-page renderer. Framework-free.
+// Expects the HTML page to set window.BROADCAST_ID and window.SITE_BASE,
+// include assets/js/app.js first (for the RadioHecto shared helpers and
+// site nav/footer), then this file.
+
+const { $, clearChildren, createEl, fetchJSON, withBase } = RadioHecto;
 
 const state = {
   broadcast: null,
-  activeTrack: null
+  activeTrack: null,
+  lightboxIndex: 0,
 };
-
-function $(id) {
-  return document.getElementById(id);
-}
 
 function setText(id, text) {
   const el = $(id);
@@ -16,31 +17,8 @@ function setText(id, text) {
   el.textContent = text ?? "";
 }
 
-function setAttr(id, attr, value) {
-  const el = $(id);
-  if (!el) return;
-  el.setAttribute(attr, value);
-}
+/* ---------------------------------------------------------------- Hero */
 
-function clearChildren(el) {
-  while (el.firstChild) el.removeChild(el.firstChild);
-}
-
-function createEl(tag, attrs = {}, children = []) {
-  const el = document.createElement(tag);
-  for (const [k, v] of Object.entries(attrs)) {
-    el.setAttribute(k, String(v));
-  }
-  for (const child of children) {
-    if (typeof child === "string") el.appendChild(document.createTextNode(child));
-    else el.appendChild(child);
-  }
-  return el;
-}
-
-/**
- * Render hero section
- */
 function renderHero() {
   const b = state.broadcast;
   if (!b?.hero) return;
@@ -51,81 +29,154 @@ function renderHero() {
   setText("hero-date", b.hero.dateLine);
   setText("hero-time", b.hero.timeLine);
   setText("hero-venue", b.hero.venueLine);
-
-  // Optional
   setText("hero-short-description", b.hero.shortDescription);
+
+  if (b.hero.heroImage) {
+    const bg = $("hero-bg");
+    if (bg) bg.style.backgroundImage = `url('${withBase(b.hero.heroImage)}')`;
+  }
+
+  document.title = b.hero.title ? `Radio Hectolitre — ${b.hero.title}` : document.title;
 }
 
-/**
- * Render ticker
- */
+/* --------------------------------------------------------------- Ticker */
+
 function renderTicker() {
   const b = state.broadcast;
-  if (!b?.ticker) return;
-
-  const tickerEl = $("ticker-track");
-  if (!tickerEl) return;
-
-  clearChildren(tickerEl);
-
-  for (const item of b.ticker) {
-    const span = createEl("span", { class: "ticker-item" }, [item]);
-    tickerEl.appendChild(span);
-  }
+  if (!b?.ticker?.length) return;
+  RadioHecto.renderTicker(b.ticker);
 }
 
-/**
- * Render photos strip + lightbox thumbnails
- */
+/* --------------------------------------------------------------- Photos */
+
 function renderPhotos() {
   const b = state.broadcast;
+  if (!b?.photos?.length) return;
+
   const strip = $("photo-strip");
   if (!strip) return;
 
   clearChildren(strip);
+  const STRIP_H = 320;
 
-  if (!b?.photos?.length) {
-    strip.appendChild(createEl("div", { class: "empty-state" }, ["No photos available."]));
-    return;
-  }
+  b.photos.forEach((p, i) => {
+    const el = createEl("div", { class: "strip-item" }, []);
+    if (p.w && p.h) {
+      el.style.width = Math.round(STRIP_H * (p.w / p.h)) + "px";
+    }
+    const img = createEl("img", { src: withBase(p.src), alt: p.alt || "", loading: "lazy" });
+    el.appendChild(img);
+    if (p.caption) {
+      el.appendChild(createEl("div", { class: "strip-caption" }, [p.caption]));
+    }
+    el.addEventListener("click", () => openLightbox(i));
+    strip.appendChild(el);
+  });
 
-  for (const p of b.photos) {
-    const item = createEl("div", { class: "strip-item" }, []);
-    const img = createEl("img", { src: p.src, alt: p.alt || "", loading: "lazy" }, []);
+  wireStripControls(strip);
+}
 
-    const captionText = p.caption || p.alt || "";
-    const caption = createEl("div", { class: "strip-caption" }, [captionText]);
+function wireStripControls(strip) {
+  // Drag-to-scroll
+  let isDown = false, startX, scrollLeft;
+  strip.addEventListener("mousedown", (e) => {
+    isDown = true;
+    strip.classList.add("grabbing");
+    startX = e.pageX - strip.offsetLeft;
+    scrollLeft = strip.scrollLeft;
+  });
+  strip.addEventListener("mouseleave", () => { isDown = false; strip.classList.remove("grabbing"); });
+  strip.addEventListener("mouseup", () => { isDown = false; strip.classList.remove("grabbing"); });
+  strip.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - strip.offsetLeft;
+    strip.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
 
-    img.addEventListener("click", () => openLightbox(p));
-    item.appendChild(img);
-    if (captionText) item.appendChild(caption);
+  const left = $("photo-strip-left");
+  const right = $("photo-strip-right");
+  const auto = $("photo-strip-auto");
+  const SCROLL_AMT = 500;
+  if (left) left.addEventListener("click", () => strip.scrollBy({ left: -SCROLL_AMT, behavior: "smooth" }));
+  if (right) right.addEventListener("click", () => strip.scrollBy({ left: SCROLL_AMT, behavior: "smooth" }));
 
-    strip.appendChild(item);
+  if (auto) {
+    let autoInt = null;
+    auto.addEventListener("click", () => {
+      if (autoInt) {
+        clearInterval(autoInt);
+        autoInt = null;
+        auto.textContent = "⟳ auto-parade";
+      } else {
+        autoInt = setInterval(() => {
+          if (strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 2) strip.scrollLeft = 0;
+          else strip.scrollBy({ left: 2, behavior: "auto" });
+        }, 16);
+        auto.textContent = "◼ pause";
+      }
+    });
   }
 }
 
-function openLightbox(photo) {
+/* ------------------------------------------------------------- Lightbox */
+
+function openLightbox(i) {
+  state.lightboxIndex = i;
+  updateLightbox();
   const modal = $("lightbox-modal");
-  const modalImg = $("lightbox-img");
-  const modalCaption = $("lightbox-caption");
-
-  if (!modal || !modalImg) return;
-
-  modal.style.display = "block";
-  modalImg.src = photo.src;
-  modalImg.alt = photo.alt || "";
-  if (modalCaption) modalCaption.textContent = photo.caption || "";
+  if (modal) {
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
 }
 
 function closeLightbox() {
   const modal = $("lightbox-modal");
-  if (!modal) return;
-  modal.style.display = "none";
+  if (modal) modal.style.display = "none";
+  document.body.style.overflow = "";
 }
 
-/**
- * Build audio library list (tracks)
- */
+function updateLightbox() {
+  const b = state.broadcast;
+  const photo = b?.photos?.[state.lightboxIndex];
+  if (!photo) return;
+  const img = $("lightbox-img");
+  const cap = $("lightbox-caption");
+  const counter = $("lightbox-counter");
+  if (img) { img.src = withBase(photo.src); img.alt = photo.alt || ""; }
+  if (cap) cap.textContent = photo.caption || "";
+  if (counter) counter.textContent = `${state.lightboxIndex + 1} / ${b.photos.length}`;
+}
+
+function stepLightbox(delta) {
+  const total = state.broadcast?.photos?.length || 0;
+  if (!total) return;
+  state.lightboxIndex = (state.lightboxIndex + delta + total) % total;
+  updateLightbox();
+}
+
+function wireLightbox() {
+  const modal = $("lightbox-modal");
+  const closeBtn = $("lightbox-close");
+  const prevBtn = $("lightbox-prev");
+  const nextBtn = $("lightbox-next");
+
+  if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
+  if (prevBtn) prevBtn.addEventListener("click", () => stepLightbox(-1));
+  if (nextBtn) nextBtn.addEventListener("click", () => stepLightbox(1));
+  if (modal) modal.addEventListener("click", (e) => { if (e.target === modal) closeLightbox(); });
+
+  document.addEventListener("keydown", (e) => {
+    if (!modal || modal.style.display !== "block") return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") stepLightbox(-1);
+    if (e.key === "ArrowRight") stepLightbox(1);
+  });
+}
+
+/* ---------------------------------------------------------- Track list */
+
 function renderTrackLibrary() {
   const b = state.broadcast;
   if (!b?.tracks?.length) return;
@@ -135,29 +186,28 @@ function renderTrackLibrary() {
 
   clearChildren(list);
 
-  const active = b.tracks.find(t => t.active) || b.tracks[0];
+  const active = b.tracks.find((t) => t.active) || b.tracks[0];
   state.activeTrack = active;
 
   for (const t of b.tracks) {
     const item = createEl("button", { type: "button", class: "track-item" }, []);
     item.dataset.trackNum = t.num || "";
 
-    const label = createEl("div", { class: "track-label" }, []);
-    const title = createEl("div", { class: "track-title" }, [`${t.num ? t.num + " · " : ""}${t.title}`]);
-    const sub = createEl("div", { class: "track-sub" }, [t.sub || ""]);
+    const label = createEl("div", { class: "track-label" }, [
+      createEl("div", { class: "track-title" }, [`${t.num ? t.num + " · " : ""}${t.title}`]),
+      createEl("div", { class: "track-sub" }, [t.sub || ""]),
+    ]);
     const dur = createEl("div", { class: "track-dur" }, [t.dur || ""]);
 
-    label.appendChild(title);
-    label.appendChild(sub);
     item.appendChild(label);
     item.appendChild(dur);
-
     if (t === active) item.classList.add("is-active");
 
     item.addEventListener("click", () => {
       state.activeTrack = t;
       updateActiveTrackUI();
       renderActiveTrackPlayer();
+      setPlaying(false); // swapping tracks stops the ambient meter until Play is pressed again
     });
 
     list.appendChild(item);
@@ -166,71 +216,48 @@ function renderTrackLibrary() {
   renderActiveTrackPlayer();
 }
 
-/**
- * Update active class in track library
- */
 function updateActiveTrackUI() {
   const list = $("track-library");
   if (!list) return;
-
-  const buttons = Array.from(list.querySelectorAll(".track-item"));
-  for (const btn of buttons) {
-    const num = btn.dataset.trackNum;
-    btn.classList.toggle("is-active", num === (state.activeTrack?.num ?? ""));
+  for (const btn of list.querySelectorAll(".track-item")) {
+    btn.classList.toggle("is-active", btn.dataset.trackNum === (state.activeTrack?.num ?? ""));
   }
-
-  // Optional sticky bar fields
   setText("active-track-title", state.activeTrack?.title);
   setText("active-track-sub", state.activeTrack?.sub);
 }
 
-/**
- * Render the active track embed
- */
 function renderActiveTrackPlayer() {
   const t = state.activeTrack;
-  if (!t?.listen) return;
-
   const playerWrap = $("listen-embed");
   if (!playerWrap) return;
 
   clearChildren(playerWrap);
 
-  // Current stage: SoundCloud embeds.
-  // Later: local files can be handled with another case.
-  if (t.listen.type === "soundcloud") {
-    const iframe = document.createElement("iframe");
+  if (t?.listen?.type === "soundcloud") {
+    const iframe = createEl("iframe", {
+      title: t.title ? `Player: ${t.title}` : "Audio player",
+      loading: "lazy",
+      allow: "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture",
+      referrerpolicy: "no-referrer-when-downgrade",
+    });
     iframe.src = t.listen.embedUrl;
-    iframe.title = t.title ? `Player: ${t.title}` : "Audio player";
-    iframe.loading = "lazy";
-    iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
-    iframe.referrerPolicy = "no-referrer-when-downgrade";
     iframe.allowFullscreen = true;
-    iframe.style.width = "100%";
-    iframe.style.border = "0";
-    iframe.style.height = "120px";
-
     playerWrap.appendChild(iframe);
-  } else if (t.listen.type === "file") {
-    // Example placeholder for later extension:
-    // Add a <audio controls> element.
+  } else if (t?.listen?.type === "file") {
     const audio = document.createElement("audio");
     audio.controls = true;
-    audio.src = t.listen.src;
-
+    audio.src = withBase(t.listen.src);
     playerWrap.appendChild(audio);
   } else {
-    playerWrap.textContent = "No player configured for this track.";
+    playerWrap.appendChild(createEl("div", { class: "no-embed" }, ["Recording not published yet for this track."]));
   }
 
-  // Optional sticky bar updates
-  setText("active-track-title", t.title);
-  setText("active-track-sub", t.sub);
+  setText("active-track-title", t?.title);
+  setText("active-track-sub", t?.sub);
 }
 
-/**
- * Render everything for a broadcast page
- */
+/* --------------------------------------------------------- Spoken words */
+
 function renderSpokenWords() {
   const b = state.broadcast;
   if (!b?.spokenWords?.length) return;
@@ -241,20 +268,20 @@ function renderSpokenWords() {
   clearChildren(el);
 
   for (const block of b.spokenWords) {
-    const blockEl = createEl("section", { class: "spoken-block" }, []);
-    const attr = createEl("div", { class: "spoken-attribution" }, [block.attribution || ""]);
-    const text = createEl("p", { class: "spoken-text" }, [block.text || ""]);
-    blockEl.appendChild(attr);
-    blockEl.appendChild(text);
+    const classes = "spoken-block" + (block.variant === "highlight" ? " highlight" : "");
+    const blockEl = createEl("section", { class: classes }, [
+      createEl("div", { class: "spoken-attribution" }, [block.attribution || ""]),
+      createEl("p", { class: "spoken-text" }, [block.text || ""]),
+    ]);
+
+    if (block.note) {
+      blockEl.appendChild(createEl("p", { class: "spoken-note" }, [block.note]));
+    }
 
     if (block.links?.length) {
       const linksWrap = createEl("div", { class: "spoken-links" }, []);
       for (const l of block.links) {
-        const a = document.createElement("a");
-        a.href = l.href;
-        a.textContent = l.label || l.href;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
+        const a = createEl("a", { href: l.href, target: "_blank", rel: "noopener noreferrer" }, [l.label || l.href]);
         linksWrap.appendChild(a);
       }
       blockEl.appendChild(linksWrap);
@@ -263,6 +290,8 @@ function renderSpokenWords() {
     el.appendChild(blockEl);
   }
 }
+
+/* -------------------------------------------------------------- Program */
 
 function renderProgram() {
   const b = state.broadcast;
@@ -274,9 +303,7 @@ function renderProgram() {
   if (container) {
     clearChildren(container);
     for (const p of b.program.paragraphs || []) {
-      const pe = document.createElement("p");
-      pe.textContent = p;
-      container.appendChild(pe);
+      container.appendChild(createEl("p", {}, [p]));
     }
   }
 
@@ -284,46 +311,97 @@ function renderProgram() {
   if (tags) {
     clearChildren(tags);
     for (const tag of b.program.tags || []) {
-      const span = createEl("span", { class: "tag" }, [tag]);
-      tags.appendChild(span);
+      tags.appendChild(createEl("span", { class: "tag" }, [tag]));
     }
   }
 }
 
+/* --------------------------------------------------------- Live button */
+
 function renderHeroLiveButton() {
   const b = state.broadcast;
-  if (!b?.live?.liveStreamUrl) return;
-
   const btn = $("live-stream-button");
-  if (!btn) return;
+  if (!btn || !b?.live?.liveStreamUrl) return;
+  if (b.live.liveLabel) btn.textContent = `▶ ${b.live.liveLabel}`;
+  btn.addEventListener("click", () => window.open(b.live.liveStreamUrl, "_blank", "noopener,noreferrer"));
+}
 
-  btn.addEventListener("click", () => {
-    window.open(b.live.liveStreamUrl, "_blank", "noopener,noreferrer");
+/* ------------------------------------------------- Ambient VU + play btn
+   Two things happen on Play: a decorative VU animation runs in the hero
+   (kept from the original prototype — it's the site's visual signature),
+   and the active track's embed is (re)loaded so Play actually starts
+   audio rather than being purely cosmetic. */
+
+let heroBars = [];
+let vuInterval = null;
+let playing = false;
+
+function buildVUBars() {
+  const vuHero = $("vu-hero");
+  if (!vuHero) return;
+  clearChildren(vuHero);
+  heroBars = [];
+  for (let i = 0; i < 48; i++) {
+    const b = createEl("div", { class: "vu-bar" }, []);
+    vuHero.appendChild(b);
+    heroBars.push(b);
+  }
+}
+
+function animateVU() {
+  heroBars.forEach((b, i) => {
+    const v = Math.abs(Math.sin(Date.now() / 700 + i * 0.35)) * 0.7 + Math.random() * 0.3;
+    const h = Math.round(v * 24) + 2;
+    b.style.height = h + "px";
+    b.style.background = i < 36
+      ? (h > 18 ? "var(--accent)" : h > 10 ? "var(--accent-dim)" : "var(--dim)")
+      : (h > 18 ? "var(--red)" : "var(--dim)");
   });
 }
 
-/**
- * Load JSON and render
- */
-async function loadBroadcastById(broadcastId) {
-  const url = `/data/broadcasts/${broadcastId}.json`;
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Failed to load broadcast JSON: ${url}`);
-  return await res.json();
+function setPlaying(next) {
+  playing = next;
+  const btn = $("play-button");
+  if (btn) btn.classList.toggle("playing", playing);
+
+  if (playing) {
+    vuInterval = setInterval(animateVU, 80);
+  } else {
+    clearInterval(vuInterval);
+    heroBars.forEach((b) => { b.style.height = "2px"; b.style.background = "var(--dim)"; });
+  }
 }
 
-export async function initBroadcastPage() {
-  // Expected: the HTML page sets window.BROADCAST_ID
+function wirePlayButton() {
+  const btn = $("play-button");
+  if (!btn) return;
+  buildVUBars();
+  btn.addEventListener("click", () => {
+    setPlaying(!playing);
+    if (playing && state.activeTrack?.listen?.type === "soundcloud") {
+      // Reload the embed with autoplay so Play has a real effect, not just decoration.
+      const iframe = $("listen-embed")?.querySelector("iframe");
+      if (iframe && !/auto_play=true/.test(iframe.src)) {
+        iframe.src = iframe.src.replace(/auto_play=false/, "auto_play=true");
+      }
+    }
+  });
+}
+
+/* ------------------------------------------------------------------ Init */
+
+async function loadBroadcastById(broadcastId) {
+  return fetchJSON(`data/broadcasts/${broadcastId}.json`);
+}
+
+async function initPage() {
   const broadcastId = window.BROADCAST_ID;
   if (!broadcastId) throw new Error("Missing window.BROADCAST_ID in page.");
 
-  // Optional: lightbox close wiring
-  const modal = $("lightbox-modal");
-  const closeBtn = $("lightbox-close");
-  if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
-  if (modal) modal.addEventListener("click", (e) => {
-    if (e.target === modal) closeLightbox();
-  });
+  await RadioHecto.initChrome();
+
+  wireLightbox();
+  wirePlayButton();
 
   state.broadcast = await loadBroadcastById(broadcastId);
 
@@ -334,4 +412,10 @@ export async function initBroadcastPage() {
   renderSpokenWords();
   renderTrackLibrary();
   renderHeroLiveButton();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initPage);
+} else {
+  initPage();
 }

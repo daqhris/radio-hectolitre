@@ -4,52 +4,55 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Radio Hectolitre — 31 May 2026</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/styles.css" />
 </head>
 
 <body>
+  <div id="site-nav-mount"></div>
+
   <header class="hero">
-    <div class="hero-eyebrows">
-      <span id="hero-eyebrow-left"></span>
-      <span id="hero-eyebrow-right"></span>
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-fade"></div>
+    <div class="vu-hero" id="vu-hero"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrows">
+        <span id="hero-eyebrow-left"></span>&nbsp;·&nbsp;<span id="hero-eyebrow-right"></span>
+      </div>
+      <h1 id="hero-title"></h1>
+      <div class="hero-meta">
+        <div id="hero-date"></div>
+        <div id="hero-time"></div>
+        <div id="hero-venue"></div>
+      </div>
+      <p class="hero-short-description" id="hero-short-description"></p>
     </div>
-
-    <h1 id="hero-title"></h1>
-
-    <div class="hero-meta">
-      <div id="hero-date"></div>
-      <div id="hero-time"></div>
-      <div id="hero-venue"></div>
-    </div>
-
-    <p id="hero-short-description"></p>
   </header>
 
   <div class="sticky-player">
-    <button id="live-stream-button" type="button">Live</button>
-
+    <button class="btn-play" id="play-button" type="button" aria-label="Play / pause ambient meter">
+      <svg class="icon-play" viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11"/></svg>
+      <svg class="icon-pause" viewBox="0 0 12 12"><rect x="1" y="1" width="3.5" height="10"/><rect x="7.5" y="1" width="3.5" height="10"/></svg>
+    </button>
     <div class="now-playing">
       <div id="active-track-title"></div>
       <div id="active-track-sub"></div>
     </div>
-
-    <div class="vu-meter" aria-hidden="true">
-      <!-- Your existing VU meter markup/animation can live here -->
-    </div>
+    <button id="live-stream-button" type="button">▶ Live</button>
   </div>
 
-  <main>
+  <main class="page">
     <section class="program">
-      <h2 id="program-heading"></h2>
+      <h2 class="sec-label">The performance</h2>
+      <h3 class="program-title" id="program-heading"></h3>
       <div id="program-paragraphs"></div>
       <div id="program-tags"></div>
     </section>
 
     <section class="listen">
-      <h2>Listen</h2>
-
+      <h2 class="sec-label">Listen</h2>
       <div id="listen-embed"></div>
-
       <aside class="track-library">
         <h3>Track library</h3>
         <div id="track-library"></div>
@@ -57,34 +60,46 @@
     </section>
 
     <section class="spoken-words">
-      <h2>Spoken words / liner notes</h2>
+      <h2 class="sec-label">Words spoken in the space</h2>
       <div id="spoken-words"></div>
     </section>
 
     <section class="photos">
-      <h2>Documentation</h2>
-      <div id="photo-strip" class="photo-strip"></div>
+      <h2 class="sec-label">Documentation</h2>
+      <div class="photo-strip-wrap">
+        <div id="photo-strip" class="photo-strip"></div>
+      </div>
+      <div class="strip-nav">
+        <button class="strip-btn" id="photo-strip-left" type="button">← scroll</button>
+        <button class="strip-btn" id="photo-strip-right" type="button">scroll →</button>
+        <button class="strip-btn" id="photo-strip-auto" type="button">⟳ auto-parade</button>
+      </div>
     </section>
   </main>
 
   <footer>
-    <div class="ticker">
-      <div id="ticker-track"></div>
-    </div>
+    <div class="ticker"><div class="ticker-track" id="ticker-track"></div></div>
   </footer>
+
+  <div id="site-footer-mount"></div>
 
   <!-- Lightbox -->
   <div id="lightbox-modal" class="lightbox-modal" style="display:none;">
     <div class="lightbox-content">
-      <button id="lightbox-close" type="button">Close</button>
+      <button class="lightbox-nav" id="lightbox-prev" type="button" aria-label="Previous photo">&#8592;</button>
       <img id="lightbox-img" alt="" />
+      <button class="lightbox-nav" id="lightbox-next" type="button" aria-label="Next photo">&#8594;</button>
+      <button id="lightbox-close" type="button" aria-label="Close">&#215;</button>
       <div id="lightbox-caption"></div>
+      <div id="lightbox-counter"></div>
     </div>
   </div>
 
   <script>
     window.BROADCAST_ID = "2026-05-31";
+    window.SITE_BASE = "../../";
   </script>
-  <script src="/assets/js/app.js"></script>
+  <script src="../../assets/js/app.js"></script>
+  <script src="../../assets/js/render-page.js"></script>
 </body>
 </html>

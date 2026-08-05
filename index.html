@@ -1,451 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radio Hectolitre — Time Board Mother Control</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0a0a08;
-  --surface:#131310;
-  --surface2:#1a1a16;
-  --border:#28281f;
-  --border2:#363628;
-  --accent:#c4ef3c;
-  --accent-dim:#7a9424;
-  --amber:#d4a43a;
-  --text:#e2dfd4;
-  --muted:#6a6858;
-  --dim:#2e2e26;
-  --red:#d45030;
-  --mono:'IBM Plex Mono',monospace;
-  --serif:'Cormorant Garamond',serif;
-  --display:'Bebas Neue',sans-serif;
-}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;min-height:100vh;overflow-x:hidden}
-
-/* HERO */
-.hero{position:relative;width:100%;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background-image:url('')}
-.hero-fade{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 25%,rgba(10,10,8,.65) 65%,var(--bg) 100%);z-index:1}
-.hero-content{position:relative;z-index:2;padding:32px 28px 36px;max-width:900px}
-.hero-eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:10px}
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:blink 1.3s ease-in-out infinite;display:inline-block}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.hero-title{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(40px,8vw,92px);line-height:.93;color:var(--text);letter-spacing:-1px;margin-bottom:14px}
-.hero-meta{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
-.hero-meta span{color:var(--amber)}
-.vu-hero{position:relative;z-index:2;padding:0 28px 20px;display:flex;gap:2px;height:28px;align-items:flex-end}
-.vu-bar{flex:1;background:var(--dim);border-radius:1px;min-height:2px;transition:height .07s ease}
-
-/* STICKY PLAYER */
-.player-bar{position:sticky;top:0;z-index:100;background:rgba(10,10,8,.96);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;gap:14px;height:58px;backdrop-filter:blur(8px)}
-.pb-logo{font-family:var(--display);font-size:16px;letter-spacing:2px;color:var(--accent);white-space:nowrap;flex-shrink:0}
-.btn-play{width:38px;height:38px;border-radius:50%;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .15s,background .2s}
-.btn-play:hover{background:#d8ff50;transform:scale(1.07)}
-.btn-play svg{width:13px;height:13px;fill:var(--bg)}
-.btn-play.playing .icon-play{display:none}
-.btn-play:not(.playing) .icon-pause{display:none}
-.pb-track{flex:1;min-width:0}
-.pb-track-name{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pb-track-meta{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
-.pb-progress{flex:2;display:flex;align-items:center;gap:8px;min-width:0}
-.prog-wrap{flex:1;height:2px;background:var(--dim);border-radius:1px;cursor:pointer;position:relative}
-.prog-fill{height:100%;background:var(--accent);border-radius:1px;width:0%;transition:width .4s linear}
-.pb-time{font-size:10px;color:var(--muted);min-width:36px;white-space:nowrap}
-.pb-vol{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.pb-vol-label{font-size:9px;color:var(--muted);letter-spacing:1px}
-input[type=range]{accent-color:var(--accent);width:68px;cursor:pointer}
-.btn-stream{background:none;border:1px solid var(--border2);color:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:1px;padding:6px 12px;border-radius:1px;cursor:pointer;text-transform:uppercase;white-space:nowrap;transition:border-color .2s,color .2s;flex-shrink:0}
-.btn-stream:hover{border-color:var(--accent);color:var(--accent)}
-@media(max-width:640px){.pb-progress,.pb-vol,.btn-stream{display:none}}
-
-/* LAYOUT */
-.page{max-width:1100px;margin:0 auto;padding:0 20px}
-.sec-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-top:48px}
-.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
-
-/* EVENT BLOCK */
-.event-block{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:48px}
-@media(max-width:680px){.event-block{grid-template-columns:1fr;gap:24px}}
-.event-poster-small{width:100%;aspect-ratio:1;background-image:url('')}
-.event-text h2{font-family:var(--serif);font-style:italic;font-weight:300;font-size:28px;color:var(--text);margin-bottom:12px;line-height:1.1}
-.event-text p{font-size:11px;color:var(--muted);line-height:1.9;margin-bottom:14px}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
-.tag{font-size:9px;padding:3px 9px;border:1px solid var(--border2);color:var(--muted);letter-spacing:1px;text-transform:uppercase}
-.tag.hi{border-color:var(--accent-dim);color:var(--accent)}
-
-/* WORDS SECTION */
-.words-section{margin-bottom:48px}
-.words-block{border-left:2px solid var(--accent-dim);padding:20px 24px;margin-bottom:20px;background:var(--surface)}
-.words-block.poem-ref{border-left-color:var(--amber)}
-.words-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.words-text{font-family:var(--serif);font-size:17px;font-weight:300;line-height:1.75;color:var(--text)}
-.words-text em{font-style:italic;color:var(--amber)}
-.words-attr{font-size:9px;color:var(--muted);margin-top:10px;letter-spacing:1px}
-.words-attr a{color:var(--muted);text-decoration:none;transition:color .2s}
-.words-attr a:hover{color:var(--accent)}
-.poem-note{font-size:11px;color:var(--muted);line-height:1.8;margin-top:12px;font-style:italic}
-
-/* HORIZONTAL PHOTO STRIP */
-.photo-strip-wrap{position:relative;margin-bottom:4px;overflow:hidden}
-.photo-strip-wrap::before,.photo-strip-wrap::after{content:'';position:absolute;top:0;bottom:0;width:40px;z-index:10;pointer-events:none}
-.photo-strip-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
-.photo-strip-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
-.photo-strip{display:flex;gap:4px;overflow-x:auto;scroll-behavior:smooth;height:320px;padding:0 4px;cursor:grab;user-select:none;-webkit-overflow-scrolling:touch}
-.photo-strip::-webkit-scrollbar{height:3px}
-.photo-strip::-webkit-scrollbar-track{background:var(--dim)}
-.photo-strip::-webkit-scrollbar-thumb{background:var(--border2)}
-.photo-strip.grabbing{cursor:grabbing}
-.photo-strip.paused{animation-play-state:paused}
-.strip-item{flex-shrink:0;height:100%;position:relative;overflow:hidden;cursor:pointer}
-.strip-item img{height:100%;width:auto;display:block;object-fit:cover;filter:brightness(.88) saturate(.8);transition:filter .3s,transform .4s}
-.strip-item:hover img{filter:brightness(1) saturate(1);transform:scale(1.02)}
-.strip-caption{position:absolute;bottom:0;left:0;right:0;background:rgba(10,10,8,.85);padding:6px 10px;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;opacity:0;transition:opacity .22s}
-.strip-item:hover .strip-caption{opacity:1}
-.strip-nav{display:flex;gap:8px;justify-content:flex-end;margin-top:8px;margin-bottom:36px}
-.strip-btn{background:none;border:1px solid var(--border2);color:var(--muted);font-family:var(--mono);font-size:10px;padding:5px 14px;cursor:pointer;transition:border-color .2s,color .2s;border-radius:1px}
-.strip-btn:hover{border-color:var(--accent);color:var(--accent)}
-
-/* LIGHTBOX */
-.lightbox{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.95);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .22s}
-.lightbox.open{opacity:1;pointer-events:all}
-.lightbox img{max-width:90vw;max-height:88vh;object-fit:contain}
-.lb-close{position:absolute;top:18px;right:22px;font-size:22px;color:var(--muted);cursor:pointer;background:none;border:none;transition:color .2s;line-height:1}
-.lb-close:hover{color:var(--text)}
-.lb-cap{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}
-.lb-nav{position:absolute;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted);cursor:pointer;background:none;border:none;padding:12px;transition:color .2s;line-height:1}
-.lb-nav:hover{color:var(--accent)}
-.lb-prev{left:12px}
-.lb-next{right:12px}
-.lb-counter{position:absolute;top:20px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted);letter-spacing:2px}
-
-/* AUDIO LIBRARY */
-.library{margin-bottom:48px}
-.lib-item{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);cursor:pointer}
-.lib-item:hover .lib-title,.lib-item.active .lib-title{color:var(--accent)}
-.lib-item:hover .lib-num,.lib-item.active .lib-num{color:var(--accent)}
-.lib-num{font-size:10px;color:var(--dim);min-width:24px;padding-top:3px;flex-shrink:0}
-.lib-info{flex:1;min-width:0}
-.lib-title{font-family:var(--serif);font-size:16px;font-weight:300;color:var(--text);margin-bottom:2px}
-.lib-sub{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
-.lib-dur{font-size:10px;color:var(--muted);white-space:nowrap;flex-shrink:0;padding-top:4px}
-.lib-play{width:28px;height:28px;border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:border-color .2s}
-.lib-item:hover .lib-play{border-color:var(--accent)}
-.lib-play svg{width:9px;height:9px;fill:var(--text);margin-left:1px}
-
-/* SOUNDCLOUD */
-.sc-embed{margin-bottom:48px}
-.sc-embed iframe{border:none;width:100%}
-
-/* TICKER */
-.ticker{background:var(--surface);border-top:1px solid var(--border);padding:9px 0;overflow:hidden;white-space:nowrap}
-.ticker-inner{display:inline-block;animation:tick 38s linear infinite}
-@keyframes tick{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
-.ticker span{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-right:32px}
-.ticker span.hi{color:var(--accent-dim)}
-
-/* FOOTER */
-.footer{border-top:1px solid var(--border);padding:28px 0 40px;display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
-@media(max-width:560px){.footer{grid-template-columns:1fr}}
-.footer-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
-.footer-links{display:flex;flex-direction:column;gap:6px}
-.footer-links a{font-size:10px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color .2s}
-.footer-links a:hover{color:var(--accent)}
-.footer-credit{font-size:9px;color:var(--dim);letter-spacing:1px;margin-top:20px;line-height:1.9}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Radio Hectolitre</title>
+  <meta name="description" content="Artists-run broadcasting at Hectolitre, Brussels — live transmissions, documentation and recordings." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-fade"></div>
-  <div class="vu-hero" id="vuHero"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow"><span class="live-dot"></span>Radio Hectolitre &nbsp;·&nbsp; Brussels Transmission</div>
-    <h1 class="hero-title">Time Board<br>Mother Control</h1>
-    <div class="hero-meta"><span>31 May 2026</span> &nbsp;·&nbsp; 20h &nbsp;·&nbsp; Hectolitre, Rue de l'Hectolitre 3 &nbsp;·&nbsp; Site-specific performance</div>
-  </div>
-</section>
+  <div id="site-nav-mount"></div>
 
-<!-- STICKY PLAYER -->
-<div class="player-bar">
-  <div class="pb-logo">R∿HCT</div>
-  <button class="btn-play" id="playBtn" aria-label="Play / pause">
-    <svg class="icon-play" viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11"/></svg>
-    <svg class="icon-pause" viewBox="0 0 12 12"><rect x="1" y="1" width="3.5" height="10"/><rect x="7.5" y="1" width="3.5" height="10"/></svg>
-  </button>
-  <div class="pb-track">
-    <div class="pb-track-name" id="pbTitle">Time Board Mother Control</div>
-    <div class="pb-track-meta">Reactor · Hectolitre · 31 May 2026</div>
-  </div>
-  <div class="pb-progress">
-    <span class="pb-time" id="pbElapsed">0:00</span>
-    <div class="prog-wrap"><div class="prog-fill" id="progFill"></div></div>
-    <span class="pb-time">1:00:00</span>
-  </div>
-  <div class="pb-vol">
-    <span class="pb-vol-label">VOL</span>
-    <input type="range" min="0" max="100" value="80" step="1">
-  </div>
-  <button class="btn-stream" onclick="window.open('https://frpradio.rs/public/frpradio','_blank')">▶ Live stream</button>
-</div>
+  <header class="page-hero">
+    <div class="page-hero-eyebrow">Radio Hectolitre · Brussels</div>
+    <h1 class="page-hero-title">Artists-run<br>broadcasting at Hectolitre</h1>
+    <p class="page-hero-sub">
+      Live transmissions, photo documentation and recordings from the residents of Hectolitre, Brussels.
+      Each performance gets its own broadcast page — a live stream, a listen shelf, spoken words, and a photo strip from the night.
+    </p>
+  </header>
 
-<main class="page">
+  <main class="page">
+    <h2 class="sec-label">Currently transmitting</h2>
+    <div id="current-broadcast"></div>
 
-  <!-- EVENT DESCRIPTION -->
-  <div class="sec-label">◂ The performance</div>
-  <div class="event-block">
-    <div class="event-poster-small"></div>
-    <div class="event-text">
-      <h2>Sound, Electric,<br>Windy Performance</h2>
-      <p>
-        A site-specific performance unfolding inside the Reactor space at Hectolitre. Musicians, scattered through the architecture, move like unstable signals — appearing and disappearing between resonant corners while a "mother board" redirects and contaminates their sounds.
-      </p>
-      <p>
-        Feedback stretches across the rooms, whispers dissolve into fragile tones and circulate through hidden frequencies. The space itself answers back, transforming into a living surface of resonance and interference.
-      </p>
-      <p>
-        Broadcast live via FRP Radio — the inaugural transmission of Radio Hectolitre. The garden was open as a chill-out area after the performance. Documentation photography by <strong style="font-weight:500;color:var(--text)">Mladen Bundalo</strong>. Poster design by <strong style="font-weight:500;color:var(--text)">Bel McLaughlin</strong>.
-      </p>
-      <div class="tags">
-        <span class="tag hi">Live broadcast</span>
-        <span class="tag hi">Recording available</span>
-        <span class="tag">Sound performance</span>
-        <span class="tag">Collective</span>
-        <span class="tag">Improvisation</span>
-        <span class="tag">Flute · Clarinet · Voice · Electronics</span>
-        <span class="tag">AzuraCast</span>
-        <span class="tag">Brussels</span>
-      </div>
-    </div>
-  </div>
+    <h2 class="sec-label"><a href="pages/archive.html" style="color:inherit;text-decoration:none">Past broadcasts ↗</a></h2>
+    <div id="archive-preview"></div>
+  </main>
 
-  <!-- LISTEN -->
-  <div class="sec-label">◂ Listen</div>
-  <div class="sc-embed">
-    <iframe scrolling="no" allow="autoplay"
-      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-816404246&color=%23c4ef3c&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
-      height="200"></iframe>
-    <p style="font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:8px;text-transform:uppercase">Soundcloud · <a href="https://soundcloud.com/user-816404246" target="_blank" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">soundcloud.com/user-816404246</a></p>
-  </div>
+  <footer>
+    <div class="ticker"><div class="ticker-track" id="ticker-track"></div></div>
+  </footer>
 
-  <!-- WORDS SPOKEN -->
-  <div class="sec-label">◂ Words spoken in the space</div>
-  <div class="words-section">
+  <div id="site-footer-mount"></div>
 
-    <div class="words-block">
-      <div class="words-label">Chris-Armel Iradukunda (daqhris) — voiced during the performance</div>
-      <div class="words-text">
-        "Time Board Mother Control has booked a timeslot for a collective toast to an artists-run space where residents watered with sweat a dry ground until growing inter-national wings and flying information in formation towards Italy's 61st Venice Biennale."
-      </div>
-      <div class="words-attr"></div>
-    </div>
-
-    <div class="words-block poem-ref">
-      <div class="words-label" style="color:var(--amber)">Refaat Al-Areer — "If I Must Die, Let It Be a Tale" — read aloud in the space</div>
-      <div class="words-text" style="font-size:14px;line-height:1.9">
-        During the performance, daqhris read aloud "If I Must Die, Let It Be a Tale" by Refaat Al-Areer (1979–2023), Palestinian poet and professor, killed in an Israeli airstrike in Gaza in December 2023. The poem was written days before his death and circulated across the world as both elegy and demand.
-      </div>
-      <div class="poem-note">
-        Two artists — one alive, one no longer — both physically absent from the world's most attended art fair and presently exhibiting their works. The poem was not background. It was a reason to be in the room.
-      </div>
-      <div class="words-attr" style="margin-top:14px">
-        Read the poem: <a href="https://poets.org/poem/if-i-must-die-let-it-be-tale" target="_blank">poets.org ↗</a> &nbsp;·&nbsp;
-        <a href="https://poets.org/poem/if-i-must-die-let-it-be-tale" target="_blank">About the Palestinian poet ↗</a> &nbsp;·&nbsp;
-        <a href="https://daqhris.com/god-bless-usa/pavilion.html" target="_blank">Solidarity Burundi Pavilion (Venice) ↗</a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- PHOTO DOCUMENTATION -->
-  <div class="sec-label">◂ Documentation — photos by Mladen Bundalo</div>
-  <div class="photo-strip-wrap">
-    <div class="photo-strip" id="photoStrip"></div>
-  </div>
-  <div class="strip-nav">
-    <button class="strip-btn" id="stripLeft">← scroll</button>
-    <button class="strip-btn" id="stripRight">scroll →</button>
-    <button class="strip-btn" id="stripAuto">⟳ auto-parade</button>
-  </div>
-
-  <!-- AUDIO LIBRARY -->
-  <div class="sec-label">◂ Audio library</div>
-  <div class="library" id="audioLib"></div>
-
-</main>
-
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span class="hi">Radio Hectolitre</span>
-    <span>Brussels Transmission</span>
-    <span class="hi">Time Board Mother Control</span>
-    <span>31 May 2026 · 20h00</span>
-    <span>Reactor at Hectolitre</span>
-    <span class="hi">Musicians scattered through the architecture</span>
-    <span>Feedback stretches across the rooms</span>
-    <span class="hi">The space itself answers back</span>
-    <span>Refaat Al-Areer · If I Must Die, Let It Be a Tale</span>
-    <span class="hi">Photography · Mladen Bundalo</span>
-    <span>Poster · Bel McLaughlin</span>
-    <span class="hi">daqhris.com</span>
-    <span>Powered by AzuraCast</span>
-    <span>50.8503°N 4.3517°E</span>
-    <span class="hi">hectolitre.space</span>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer class="page">
-  <div class="footer">
-    <div>
-      <div class="footer-label">Radio Hectolitre</div>
-      <div class="footer-links">
-        <a href="https://www.hectolitre.space" target="_blank">↗ hectolitre.space</a>
-        <a href="https://www.hectolitre.space/web-publications.html" target="_blank">↗ Web publications catalogue</a>
-        <a href="https://soundcloud.com/user-816404246" target="_blank">↗ Soundcloud archive</a>
-        <a href="https://frpradio.rs/public/frpradio" target="_blank">↗ Live stream (FRP Radio)</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-label">Links</div>
-      <div class="footer-links">
-        <a href="https://daqhris.com" target="_blank">↗ daqhris.com</a>
-        <a href="https://daqhris.com/god-bless-usa/" target="_blank">↗ God Bless USA (Venice)</a>
-        <a href="https://www.azuracast.com" target="_blank">↗ AzuraCast (open source)</a>
-        <a href="https://github.com/azuracast/azuracast" target="_blank">↗ AzuraCast on GitHub</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-credit">
-    Radio Hectolitre is a project by daqhris, resident at Hectolitre, Brussels.<br>
-    Documentation photography by Mladen Bundalo · Poster design by Bel McLaughlin.<br>
-    Broadcasting infrastructure: AzuraCast (open source) · Hosted by FRP Radio.
-  </div>
-</footer>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <button class="lb-nav lb-prev" id="lbPrev">&#8592;</button>
-  <img src="" id="lbImg" alt="">
-  <button class="lb-nav lb-next" id="lbNext">&#8594;</button>
-  <button class="lb-close" id="lbClose">&#215;</button>
-  <div class="lb-cap" id="lbCap"></div>
-  <div class="lb-counter" id="lbCounter"></div>
-</div>
-<!-- Error Container -->
-<div id="app-error" class="app-error"></div>
-<script type="module" src="/assets/js/app.js"></script>
-
-<script>
-const photos = [
-  {src:""}];
-
-// Build strip
-const strip = document.getElementById('photoStrip');
-const STRIP_H = 320;
-photos.forEach((p, i) => {
-  const el = document.createElement('div');
-  el.className = 'strip-item';
-  // maintain original aspect ratio at fixed height
-  const ratio = p.w / p.h;
-  el.style.width = Math.round(STRIP_H * ratio) + 'px';
-  const img = document.createElement('img');
-  img.src = p.src;
-  img.alt = p.caption;
-  img.loading = 'lazy';
-  const cap = document.createElement('div');
-  cap.className = 'strip-caption';
-  cap.textContent = p.caption;
-  el.appendChild(img);
-  el.appendChild(cap);
-  el.addEventListener('click', () => openLb(i));
-  strip.appendChild(el);
-});
-
-// Drag-to-scroll
-let isDown=false, startX, scrollLeft;
-strip.addEventListener('mousedown', e=>{ isDown=true; strip.classList.add('grabbing'); startX=e.pageX-strip.offsetLeft; scrollLeft=strip.scrollLeft; });
-strip.addEventListener('mouseleave', ()=>{ isDown=false; strip.classList.remove('grabbing'); });
-strip.addEventListener('mouseup', ()=>{ isDown=false; strip.classList.remove('grabbing'); });
-strip.addEventListener('mousemove', e=>{ if(!isDown) return; e.preventDefault(); const x=e.pageX-strip.offsetLeft; const walk=(x-startX)*1.5; strip.scrollLeft=scrollLeft-walk; });
-
-// Nav buttons
-const SCROLL_AMT = 500;
-document.getElementById('stripLeft').addEventListener('click', ()=>{ strip.scrollBy({left:-SCROLL_AMT,behavior:'smooth'}); });
-document.getElementById('stripRight').addEventListener('click', ()=>{ strip.scrollBy({left:SCROLL_AMT,behavior:'smooth'}); });
-
-// Auto-parade toggle
-let autoInt = null;
-const autoBtn = document.getElementById('stripAuto');
-autoBtn.addEventListener('click', ()=>{
-  if(autoInt) {
-    clearInterval(autoInt);
-    autoInt=null;
-    autoBtn.textContent='⟳ auto-parade';
-  } else {
-    autoInt = setInterval(()=>{
-      if(strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 2) {
-        strip.scrollLeft=0;
-      } else {
-        strip.scrollBy({left:2,behavior:'auto'});
-      }
-    }, 16);
-    autoBtn.textContent='◼ pause';
-  }
-});
-
-// Lightbox
-let lbIdx=0;
-const lb=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg'), lbCap=document.getElementById('lbCap'), lbCounter=document.getElementById('lbCounter');
-function openLb(i){ lbIdx=i; updateLb(); lb.classList.add('open'); document.body.style.overflow='hidden'; }
-function closeLb(){ lb.classList.remove('open'); document.body.style.overflow=''; }
-function updateLb(){ lbImg.src=photos[lbIdx].src; lbCap.textContent=photos[lbIdx].caption; lbCounter.textContent=(lbIdx+1)+' / '+photos.length; }
-function stepLb(d){ lbIdx=(lbIdx+d+photos.length)%photos.length; updateLb(); }
-document.getElementById('lbClose').addEventListener('click',closeLb);
-document.getElementById('lbPrev').addEventListener('click',()=>stepLb(-1));
-document.getElementById('lbNext').addEventListener('click',()=>stepLb(1));
-lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
-document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')stepLb(-1);if(e.key==='ArrowRight')stepLb(1);});
-
-// Audio library
-const tracks = [
-  {num:'01',title:'Time Board Mother Control',sub:'Reactor · Live at Hectolitre · 31 May 2026',dur:'1:00:00',active:true},
-  {num:'02',title:'Ambient Field Recording',sub:'Zoom Recorder · Hectolitre Studio · 2026',dur:'~35:00',active:false},
-  {num:'03',title:'God Bless USA (audio extract)',sub:'daqhris · Venice Exhibition · 2026',dur:'12:40',active:false},
-  {num:'04',title:'Hectolitre Web Publication #1',sub:'hectolitre.space · Sound Archive',dur:'—',active:false},
-  {num:'05',title:'Hectolitre Web Publication #2',sub:'hectolitre.space · Sound Archive',dur:'—',active:false},
-  {num:'06',title:'Hectolitre Web Publication #3',sub:'hectolitre.space · Sound Archive',dur:'—',active:false},
-  {num:'07',title:'Hectolitre Web Publication #4',sub:'hectolitre.space · Sound Archive',dur:'—',active:false},
-  {num:'08',title:'Hectolitre Web Publication #5',sub:'hectolitre.space · Sound Archive',dur:'—',active:false},
-];
-const libEl=document.getElementById('audioLib');
-tracks.forEach((t,i)=>{
-  const el=document.createElement('div');
-  el.className='lib-item'+(t.active?' active':'');
-  el.innerHTML=`<span class="lib-num">${t.num}</span><div class="lib-info"><div class="lib-title">${t.title}</div><div class="lib-sub">${t.sub}</div></div><span class="lib-dur">${t.dur}</span><div class="lib-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>`;
-  el.addEventListener('click',()=>{document.querySelectorAll('.lib-item').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.getElementById('pbTitle').textContent=t.title;});
-  libEl.appendChild(el);
-});
-
-// VU meter
-const vuHero=document.getElementById('vuHero');
-const heroBars=[];
-for(let i=0;i<48;i++){const b=document.createElement('div');b.className='vu-bar';b.style.flex='1';vuHero.appendChild(b);heroBars.push(b);}
-
-let playing=false,elapsed=0,lastTs,animId,vuInt;
-function fmt(s){const m=Math.floor(s/60);const ss=Math.floor(s%60);return m+':'+(ss<10?'0':'')+ss;}
-function tickAnim(ts){if(!lastTs)lastTs=ts;const dt=(ts-lastTs)/1000;lastTs=ts;elapsed=Math.min(elapsed+dt,3600);document.getElementById('progFill').style.width=(elapsed/3600*100).toFixed(2)+'%';document.getElementById('pbElapsed').textContent=fmt(elapsed);if(elapsed<3600&&playing)animId=requestAnimationFrame(tickAnim);}
-function animVU(){heroBars.forEach((b,i)=>{const v=Math.abs(Math.sin(Date.now()/700+i*.35))*.7+Math.random()*.3;const h=Math.round(v*24)+2;b.style.height=h+'px';b.style.background=i<36?(h>18?'var(--accent)':h>10?'var(--accent-dim)':'var(--dim)'):(h>18?'var(--red)':'var(--dim)');}); }
-const playBtn=document.getElementById('playBtn');
-playBtn.addEventListener('click',()=>{playing=!playing;playBtn.classList.toggle('playing',playing);if(playing){lastTs=null;animId=requestAnimationFrame(tickAnim);vuInt=setInterval(animVU,80);}else{cancelAnimationFrame(animId);clearInterval(vuInt);heroBars.forEach(b=>{b.style.height='2px';b.style.background='var(--dim)';});}});
-</script>
+  <script>
+    window.SITE_BASE = "";
+  </script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/render-archive.js"></script>
+  <script>
+    (async function () {
+      await RadioHecto.initChrome("index.html");
+      const site = await RadioHecto.fetchJSON("data/site.json").catch(() => null);
+      if (site?.tickerPrefix?.length) RadioHecto.renderTicker(site.tickerPrefix);
+      renderBroadcastGrid({ mountId: "current-broadcast", filter: "current", emptyText: "No live broadcast right now — check the archive." });
+      renderBroadcastGrid({ mountId: "archive-preview", filter: "archived", emptyText: "This is the first transmission — the archive will grow from here." });
+    })();
+  </script>
 </body>
 </html>
