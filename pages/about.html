@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — Radio Hectolitre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+
+  <div id="site-nav-mount"></div>
+
+  <header class="page-hero">
+    <div class="page-hero-eyebrow">About</div>
+    <h1 class="page-hero-title">Radio Hectolitre</h1>
+  </header>
+
+  <main class="about-body">
+    <!-- TODO: this section is structural scaffolding, not final copy —
+         expand with the real story of the project, the space, and who's involved. -->
+    <p>
+      Radio Hectolitre is a project by daqhris, resident at Hectolitre, an artists-run space in Brussels.
+      It broadcasts live performances happening in the space and publishes documentation and recordings afterwards.
+    </p>
+
+    <h2>Format</h2>
+    <p>
+      Each broadcast page combines a live stream link, a listen shelf of recordings, photo documentation from the night,
+      spoken words or liner notes read during the performance, and a running audio library.
+    </p>
+
+    <h2>Infrastructure</h2>
+    <p>
+      Broadcasting infrastructure: AzuraCast (open source) · Hosted by FRP Radio.
+    </p>
+  </main>
+
+  <div id="site-footer-mount"></div>
+
+  <script>
+    window.SITE_BASE = "../";
+  </script>
+  <script src="../assets/js/app.js"></script>
+  <script>
+    RadioHecto.initChrome("pages/about.html");
+  </script>
+</body>
+</html>

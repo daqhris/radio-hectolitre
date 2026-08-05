@@ -1,6 +1,7 @@
 {
   "id": "2026-05-31",
   "slug": "2026-05-31",
+  "status": "current",
   "hero": {
     "eyebrowLeft": "Radio Hectolitre",
     "eyebrowRight": "Brussels Transmission",
@@ -8,123 +9,651 @@
     "dateLine": "31 May 2026",
     "timeLine": "20h",
     "venueLine": "Hectolitre, Rue de l'Hectolitre 3",
-    "shortDescription": "A broadcast page for a live artist transmission at Hectolitre."
+    "shortDescription": "Site-specific performance · Inaugural transmission of Radio Hectolitre",
+    "heroImage": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB.jpg"
   },
-
   "program": {
     "heading": "Sound, Electric, Windy Performance",
     "paragraphs": [
-      "Paste your program paragraph #1 here (plain text is fine).",
-      "Paste your program paragraph #2 here.",
-      "Paste your program paragraph #3 here."
+      "A site-specific performance unfolding inside the Reactor space at Hectolitre. Musicians, scattered through the architecture, move like unstable signals — appearing and disappearing between resonant corners while a “mother board” redirects and contaminates their sounds.",
+      "Feedback stretches across the rooms, whispers dissolve into fragile tones and circulate through hidden frequencies. The space itself answers back, transforming into a living surface of resonance and interference.",
+      "Broadcast live via FRP Radio — the inaugural transmission of Radio Hectolitre. The garden was open as a chill-out area after the performance. Documentation photography by Mladen Bundalo. Poster design by Bel McLaughlin."
     ],
     "tags": [
       "Live broadcast",
       "Recording available",
-      "Artists at Hectolitre",
-      "Improvisation"
+      "Sound performance",
+      "Collective",
+      "Improvisation",
+      "Flute · Clarinet · Voice · Electronics",
+      "AzuraCast",
+      "Brussels"
     ]
   },
-
   "live": {
     "liveLabel": "Live stream",
-    "liveStreamUrl": "https://YOUR_STREAM_PROVIDER_URL_HERE"
+    "liveStreamUrl": "https://frpradio.rs/public/frpradio"
   },
-
   "listen": {
-    "primaryEmbedType": "soundcloud",
-    "primarySoundcloudEmbedUrl": "https://w.soundcloud.com/player/?url=PASTE_TRACK_URL_HERE",
-    "additionalEmbeds": [
-      {
-        "type": "soundcloud",
-        "title": "Interview / set (optional)",
-        "embedUrl": "https://w.soundcloud.com/player/?url=PASTE_ANOTHER_TRACK_URL_HERE"
-      }
-    ],
-    "librarySubtitle": "Curated listen shelf"
+    "librarySubtitle": "Curated listen shelf · Soundcloud now, local audio later"
   },
-
-  "photos": [
-    {
-      "src": "/assets/img/photos/2026-05-31/01.jpg",
-      "alt": "Caption for photo 01",
-      "caption": "Short caption shown under the photo (optional)."
-    },
-    {
-      "src": "/assets/img/photos/2026-05-31/02.jpg",
-      "alt": "Caption for photo 02",
-      "caption": "Short caption shown under the photo (optional)."
-    },
-    {
-      "src": "/assets/img/photos/2026-05-31/03.jpg",
-      "alt": "Caption for photo 03",
-      "caption": "Short caption shown under the photo (optional)."
-    }
-  ],
-
   "tracks": [
     {
       "num": "01",
       "title": "Time Board Mother Control",
-      "sub": "Performer · Hectolitre · 31 May 2026",
+      "sub": "Reactor · Live at Hectolitre · 31 May 2026",
       "dur": "1:00:00",
       "active": true,
       "listen": {
         "type": "soundcloud",
-        "embedUrl": "https://w.soundcloud.com/player/?url=PASTE_TRACK_URL_HERE"
+        "embedUrl": "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-816404246&color=%23c4ef3c&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
       }
     },
     {
       "num": "02",
-      "title": "Interview: Hectolitre biennale piece (example)",
-      "sub": "Voice · Interview · 31 May 2026",
-      "dur": "0:38:12",
+      "title": "Ambient Field Recording",
+      "sub": "Zoom Recorder · Hectolitre Studio · 2026",
+      "dur": "~35:00",
       "active": false,
-      "listen": {
-        "type": "soundcloud",
-        "embedUrl": "https://w.soundcloud.com/player/?url=PASTE_ANOTHER_TRACK_URL_HERE"
-      }
+      "listen": null
     },
     {
       "num": "03",
-      "title": "Concert fragment (example)",
-      "sub": "Ensemble · Live recording · 31 May 2026",
-      "dur": "0:55:03",
+      "title": "God Bless USA (audio extract)",
+      "sub": "daqhris · Venice Exhibition · 2026",
+      "dur": "12:40",
       "active": false,
-      "listen": {
-        "type": "soundcloud",
-        "embedUrl": "https://w.soundcloud.com/player/?url=PASTE_ANOTHER_TRACK_URL_HERE"
-      }
-    }
-  ],
-
-  "spokenWords": [
-    {
-      "attribution": "Chris-Armel Iradukunda (daqhris)",
-      "text": "Paste the first spoken-words paragraph here. Keep it readable on a small screen.",
-      "links": [
-        { "label": "Related note", "href": "https://example.com" }
-      ]
+      "listen": null
     },
     {
-      "attribution": "Guest / artist name (optional)",
-      "text": "Second spoken-words block…",
-      "links": []
+      "num": "04",
+      "title": "Hectolitre Web Publication #1",
+      "sub": "hectolitre.space · Sound Archive",
+      "dur": "—",
+      "active": false,
+      "listen": null
+    },
+    {
+      "num": "05",
+      "title": "Hectolitre Web Publication #2",
+      "sub": "hectolitre.space · Sound Archive",
+      "dur": "—",
+      "active": false,
+      "listen": null
+    },
+    {
+      "num": "06",
+      "title": "Hectolitre Web Publication #3",
+      "sub": "hectolitre.space · Sound Archive",
+      "dur": "—",
+      "active": false,
+      "listen": null
+    },
+    {
+      "num": "07",
+      "title": "Hectolitre Web Publication #4",
+      "sub": "hectolitre.space · Sound Archive",
+      "dur": "—",
+      "active": false,
+      "listen": null
+    },
+    {
+      "num": "08",
+      "title": "Hectolitre Web Publication #5",
+      "sub": "hectolitre.space · Sound Archive",
+      "dur": "—",
+      "active": false,
+      "listen": null
     }
   ],
-
+  "spokenWords": [
+    {
+      "attribution": "Chris-Armel Iradukunda (daqhris) — voiced during the performance",
+      "variant": "default",
+      "text": "Time Board Mother Control has booked a timeslot for a collective toast to an artists-run space where residents watered with sweat a dry ground until growing inter-national wings and flying information in formation towards Italy’s 61st Venice Biennale.",
+      "links": []
+    },
+    {
+      "attribution": "Refaat Al-Areer — “If I Must Die, Let It Be a Tale” — read aloud in the space",
+      "variant": "highlight",
+      "text": "During the performance, daqhris read aloud “If I Must Die, Let It Be a Tale” by Refaat Al-Areer (1979–2023), Palestinian poet and professor, killed in an Israeli airstrike in Gaza in December 2023. The poem was written days before his death and circulated across the world as both elegy and demand.",
+      "note": "Two artists — one alive, one no longer — both physically absent from the world’s most attended art fair and presently exhibiting their works. The poem was not background. It was a reason to be in the room.",
+      "links": [
+        {
+          "label": "Read the poem ↗",
+          "href": "https://poets.org/poem/if-i-must-die-let-it-be-tale"
+        },
+        {
+          "label": "About the Palestinian poet ↗",
+          "href": "https://poets.org/poem/if-i-must-die-let-it-be-tale"
+        },
+        {
+          "label": "Solidarity Burundi Pavilion (Venice) ↗",
+          "href": "https://daqhris.com/god-bless-usa/pavilion.html"
+        }
+      ]
+    }
+  ],
+  "photos": [
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 01 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "01 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_1.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 02 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "02 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_2.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 03 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "03 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_3.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 04 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "04 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_4.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 05 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "05 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_5.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 06 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "06 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_6.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 07 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "07 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_7.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 08 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "08 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_8.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 09 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "09 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_9.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 10 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "10 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_10.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 11 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "11 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_11.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 12 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "12 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_12.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 13 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "13 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_13.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 14 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "14 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_14.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 15 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "15 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_15.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 16 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "16 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_16.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 17 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "17 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_17.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 18 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "18 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_18.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 19 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "19 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_19.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 20 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "20 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_20.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 21 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "21 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_21.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 22 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "22 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_22.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 23 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "23 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_23.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 24 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "24 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_24.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 25 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "25 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_25.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 26 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "26 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_26.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 27 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "27 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_27.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 28 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "28 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_28.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 29 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "29 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_29.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 30 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "30 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_30.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 31 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "31 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_31.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 32 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "32 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_32.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 33 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "33 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_33.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 34 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "34 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_34.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 35 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "35 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_35.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 36 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "36 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_36.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 37 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "37 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_37.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 38 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "38 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_38.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 39 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "39 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_39.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 40 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "40 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_40.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 41 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "41 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_41.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 42 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "42 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_42.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 43 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "43 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_43.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 44 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "44 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_44.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 45 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "45 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_45.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 46 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "46 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_46.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 47 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "47 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_47.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 48 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "48 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_48.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 49 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "49 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_49.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 50 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "50 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_50.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 51 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "51 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_51.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 52 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "52 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_52.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 53 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "53 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_53.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 54 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "54 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_54.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 55 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "55 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_55.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 56 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "56 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_56.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 57 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "57 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_57.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 58 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "58 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_58.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 59 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "59 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_59.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 60 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "60 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_60.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 61 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "61 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_61.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 62 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "62 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_62.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 63 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "63 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_63.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 64 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "64 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_68.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 65 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "65 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_69.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 66 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "66 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_70.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 67 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "67 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_71.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 68 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "68 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_72.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 69 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "69 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_73.jpg",
+      "w": 2500,
+      "h": 1670,
+      "alt": "Documentation photo 70 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "70 / 71 — Reactor, Hectolitre"
+    },
+    {
+      "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB_74.jpg",
+      "w": 1670,
+      "h": 2500,
+      "alt": "Documentation photo 71 — Time Board Mother Control, Hectolitre, 31 May 2026",
+      "caption": "71 / 71 — Reactor, Hectolitre"
+    }
+  ],
   "ticker": [
     "Radio Hectolitre",
     "Brussels Transmission",
     "Time Board Mother Control",
     "31 May 2026 · 20h00",
-    "Reactor at Hectolitre"
+    "Reactor at Hectolitre",
+    "Musicians scattered through the architecture",
+    "Feedback stretches across the rooms",
+    "The space itself answers back",
+    "Refaat Al-Areer · If I Must Die, Let It Be a Tale",
+    "Photography · Mladen Bundalo",
+    "Poster · Bel McLaughlin",
+    "daqhris.com",
+    "Powered by AzuraCast",
+    "50.8503°N 4.3517°E",
+    "hectolitre.space"
   ],
-
   "credits": {
     "madeFor": "Hectolitre",
-    "producer": "Paste name(s)",
-    "design": "Paste name(s)",
-    "infrastructure": "Paste streaming provider / stack used"
+    "producer": "daqhris (Chris-Armel Iradukunda)",
+    "design": "Poster design by Bel McLaughlin · Documentation photography by Mladen Bundalo",
+    "infrastructure": "AzuraCast (open source) · Hosted by FRP Radio"
   }
 }
