@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Radio Hectolitre — 31 May 2026</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+
+<body>
+  <header class="hero">
+    <div class="hero-eyebrows">
+      <span id="hero-eyebrow-left"></span>
+      <span id="hero-eyebrow-right"></span>
+    </div>
+
+    <h1 id="hero-title"></h1>
+
+    <div class="hero-meta">
+      <div id="hero-date"></div>
+      <div id="hero-time"></div>
+      <div id="hero-venue"></div>
+    </div>
+
+    <p id="hero-short-description"></p>
+  </header>
+
+  <div class="sticky-player">
+    <button id="live-stream-button" type="button">Live</button>
+
+    <div class="now-playing">
+      <div id="active-track-title"></div>
+      <div id="active-track-sub"></div>
+    </div>
+
+    <div class="vu-meter" aria-hidden="true">
+      <!-- Your existing VU meter markup/animation can live here -->
+    </div>
+  </div>
+
+  <main>
+    <section class="program">
+      <h2 id="program-heading"></h2>
+      <div id="program-paragraphs"></div>
+      <div id="program-tags"></div>
+    </section>
+
+    <section class="listen">
+      <h2>Listen</h2>
+
+      <div id="listen-embed"></div>
+
+      <aside class="track-library">
+        <h3>Track library</h3>
+        <div id="track-library"></div>
+      </aside>
+    </section>
+
+    <section class="spoken-words">
+      <h2>Spoken words / liner notes</h2>
+      <div id="spoken-words"></div>
+    </section>
+
+    <section class="photos">
+      <h2>Documentation</h2>
+      <div id="photo-strip" class="photo-strip"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="ticker">
+      <div id="ticker-track"></div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox-modal" class="lightbox-modal" style="display:none;">
+    <div class="lightbox-content">
+      <button id="lightbox-close" type="button">Close</button>
+      <img id="lightbox-img" alt="" />
+      <div id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    window.BROADCAST_ID = "2026-05-31";
+  </script>
+  <script src="/assets/js/render-page.js"></script>
+</body>
+</html>

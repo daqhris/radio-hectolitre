@@ -1,0 +1,13 @@
+{
+  "siteName": "Radio Hectolitre",
+  "basePath": "/",
+  "defaultLiveLabel": "Live stream",
+  "footer": {
+    "aboutLine": "Artists-run transmissions and recordings from Hectolitre.",
+    "links": [
+      { "label": "About", "href": "/about.html" },
+      { "label": "Archive", "href": "/archive.html" }
+    ]
+  },
+  "tickerPrefix": ["Radio Hectolitre"]
+}

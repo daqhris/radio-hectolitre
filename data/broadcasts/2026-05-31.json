@@ -1,0 +1,130 @@
+{
+  "id": "2026-05-31",
+  "slug": "2026-05-31",
+  "hero": {
+    "eyebrowLeft": "Radio Hectolitre",
+    "eyebrowRight": "Brussels Transmission",
+    "title": "Time Board Mother Control",
+    "dateLine": "31 May 2026",
+    "timeLine": "20h",
+    "venueLine": "Hectolitre, Rue de l'Hectolitre 3",
+    "shortDescription": "A broadcast page for a live artist transmission at Hectolitre."
+  },
+
+  "program": {
+    "heading": "Sound, Electric, Windy Performance",
+    "paragraphs": [
+      "Paste your program paragraph #1 here (plain text is fine).",
+      "Paste your program paragraph #2 here.",
+      "Paste your program paragraph #3 here."
+    ],
+    "tags": [
+      "Live broadcast",
+      "Recording available",
+      "Artists at Hectolitre",
+      "Improvisation"
+    ]
+  },
+
+  "live": {
+    "liveLabel": "Live stream",
+    "liveStreamUrl": "https://YOUR_STREAM_PROVIDER_URL_HERE"
+  },
+
+  "listen": {
+    "primaryEmbedType": "soundcloud",
+    "primarySoundcloudEmbedUrl": "https://w.soundcloud.com/player/?url=PASTE_TRACK_URL_HERE",
+    "additionalEmbeds": [
+      {
+        "type": "soundcloud",
+        "title": "Interview / set (optional)",
+        "embedUrl": "https://w.soundcloud.com/player/?url=PASTE_ANOTHER_TRACK_URL_HERE"
+      }
+    ],
+    "librarySubtitle": "Curated listen shelf"
+  },
+
+  "photos": [
+    {
+      "src": "/assets/img/photos/2026-05-31/01.jpg",
+      "alt": "Caption for photo 01",
+      "caption": "Short caption shown under the photo (optional)."
+    },
+    {
+      "src": "/assets/img/photos/2026-05-31/02.jpg",
+      "alt": "Caption for photo 02",
+      "caption": "Short caption shown under the photo (optional)."
+    },
+    {
+      "src": "/assets/img/photos/2026-05-31/03.jpg",
+      "alt": "Caption for photo 03",
+      "caption": "Short caption shown under the photo (optional)."
+    }
+  ],
+
+  "tracks": [
+    {
+      "num": "01",
+      "title": "Time Board Mother Control",
+      "sub": "Performer · Hectolitre · 31 May 2026",
+      "dur": "1:00:00",
+      "active": true,
+      "listen": {
+        "type": "soundcloud",
+        "embedUrl": "https://w.soundcloud.com/player/?url=PASTE_TRACK_URL_HERE"
+      }
+    },
+    {
+      "num": "02",
+      "title": "Interview: Hectolitre biennale piece (example)",
+      "sub": "Voice · Interview · 31 May 2026",
+      "dur": "0:38:12",
+      "active": false,
+      "listen": {
+        "type": "soundcloud",
+        "embedUrl": "https://w.soundcloud.com/player/?url=PASTE_ANOTHER_TRACK_URL_HERE"
+      }
+    },
+    {
+      "num": "03",
+      "title": "Concert fragment (example)",
+      "sub": "Ensemble · Live recording · 31 May 2026",
+      "dur": "0:55:03",
+      "active": false,
+      "listen": {
+        "type": "soundcloud",
+        "embedUrl": "https://w.soundcloud.com/player/?url=PASTE_ANOTHER_TRACK_URL_HERE"
+      }
+    }
+  ],
+
+  "spokenWords": [
+    {
+      "attribution": "Chris-Armel Iradukunda (daqhris)",
+      "text": "Paste the first spoken-words paragraph here. Keep it readable on a small screen.",
+      "links": [
+        { "label": "Related note", "href": "https://example.com" }
+      ]
+    },
+    {
+      "attribution": "Guest / artist name (optional)",
+      "text": "Second spoken-words block…",
+      "links": []
+    }
+  ],
+
+  "ticker": [
+    "Radio Hectolitre",
+    "Brussels Transmission",
+    "Time Board Mother Control",
+    "31 May 2026 · 20h00",
+    "Reactor at Hectolitre"
+  ],
+
+  "credits": {
+    "madeFor": "Hectolitre",
+    "producer": "Paste name(s)",
+    "design": "Paste name(s)",
+    "infrastructure": "Paste streaming provider / stack used"
+  }
+}
