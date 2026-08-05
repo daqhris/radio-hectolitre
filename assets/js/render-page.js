@@ -79,16 +79,28 @@ function renderTicker() {
  */
 function renderPhotos() {
   const b = state.broadcast;
-  if (!b?.photos?.length) return;
-
   const strip = $("photo-strip");
-  if (strip) {
-    clearChildren(strip);
-    for (const p of b.photos) {
-      const img = createEl("img", { src: p.src, alt: p.alt || "", loading: "lazy" });
-      img.addEventListener("click", () => openLightbox(p));
-      strip.appendChild(img);
-    }
+  if (!strip) return;
+
+  clearChildren(strip);
+
+  if (!b?.photos?.length) {
+    strip.appendChild(createEl("div", { class: "empty-state" }, ["No photos available."]));
+    return;
+  }
+
+  for (const p of b.photos) {
+    const item = createEl("div", { class: "strip-item" }, []);
+    const img = createEl("img", { src: p.src, alt: p.alt || "", loading: "lazy" }, []);
+
+    const captionText = p.caption || p.alt || "";
+    const caption = createEl("div", { class: "strip-caption" }, [captionText]);
+
+    img.addEventListener("click", () => openLightbox(p));
+    item.appendChild(img);
+    if (captionText) item.appendChild(caption);
+
+    strip.appendChild(item);
   }
 }
 
@@ -300,7 +312,7 @@ async function loadBroadcastById(broadcastId) {
   return await res.json();
 }
 
-async function initPage() {
+export async function initBroadcastPage() {
   // Expected: the HTML page sets window.BROADCAST_ID
   const broadcastId = window.BROADCAST_ID;
   if (!broadcastId) throw new Error("Missing window.BROADCAST_ID in page.");
@@ -323,12 +335,3 @@ async function initPage() {
   renderTrackLibrary();
   renderHeroLiveButton();
 }
-
-// Boot automatically if included with <script type="module"> or normal <script>.
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initPage);
-} else {
-  initPage();
-}
-
-export {};

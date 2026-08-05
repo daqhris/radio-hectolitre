@@ -1,0 +1,50 @@
+:root{
+  --bg: #0b0b0b;
+  --fg: #f3f3f3;
+  --muted: rgba(255,255,255,.65);
+  --accent: #b9ff5a;
+  --card: rgba(255,255,255,.06);
+}
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.ticker-item{ padding: 0 12px; white-space: nowrap; }
+.empty-state{ padding: 12px; color: var(--muted); }
+
+.track-item{
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.12);
+  color: var(--fg);
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.track-item.is-active{
+  border-color: var(--accent);
+  background: rgba(185,255,90,.10);
+}
+.track-label{ display: flex; flex-direction: column; gap: 4px; }
+.track-title{ font-weight: 650; }
+.track-sub, .track-dur{ color: var(--muted); font-size: .92em; }
+
+#lightbox-modal{
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  z-index: 1000;
+}
+#lightbox-modal img{
+  display: block;
+  max-width: min(90vw, 1100px);
+  max-height: 85vh;
+  margin: 5vh auto 0;
+}
