@@ -6,13 +6,13 @@
 
   "nav": [
     { "label": "Home", "href": "index.html" },
-    { "label": "Broadcasts", "href": "pages/archive.html" },
-    { "label": "Interviews", "href": "pages/episodes.html" },
+    { "label": "Broadcast", "href": "pages/archive.html" },
+    { "label": "Interview", "href": "pages/episodes.html" },
     { "label": "About", "href": "pages/about.html" }
   ],
 
   "footer": {
-    "aboutLine": "Artists-run transmissions and recordings from Hectolitre, Brussels.",
+    "aboutLine": "Artists-run transmissions and audio recordings from Hectolitre, Brussels.",
     "links": [
       { "label": "hectolitre.space", "href": "https://www.hectolitre.space" },
       { "label": "Web publications catalogue", "href": "https://www.hectolitre.space/web-publications.html" },
