@@ -1,13 +1,13 @@
 {
   "siteName": "Radio Hectolitre",
-  "tagline": "Brussels Transmission",
+  "tagline": "Brussels Digital Arts Web Audio Transmissions",
   "defaultLiveLabel": "▶ Live stream",
   "liveStreamUrl": "https://frpradio.rs/public/frpradio",
 
   "nav": [
     { "label": "Home", "href": "index.html" },
-    { "label": "Archive", "href": "pages/archive.html" },
-    { "label": "Episodes", "href": "pages/episodes.html" },
+    { "label": "Broadcasts", "href": "pages/archive.html" },
+    { "label": "Interviews", "href": "pages/episodes.html" },
     { "label": "About", "href": "pages/about.html" }
   ],
 
@@ -17,10 +17,9 @@
       { "label": "hectolitre.space", "href": "https://www.hectolitre.space" },
       { "label": "Web publications catalogue", "href": "https://www.hectolitre.space/web-publications.html" },
       { "label": "Soundcloud archive", "href": "https://soundcloud.com/user-816404246" },
-      { "label": "Live stream (FRP Radio)", "href": "https://frpradio.rs/public/frpradio" },
       { "label": "daqhris.com", "href": "https://daqhris.com" }
     ],
-    "credit": "Radio Hectolitre is a project by daqhris, resident at Hectolitre, Brussels. Broadcasting infrastructure: AzuraCast (open source) · Hosted by FRP Radio."
+    "credit": "Radio Hectolitre is an art project in-construction by Chris A. Iradukunda (daqhris), resident at Hectolitre where the sound works originate."
   },
 
   "tickerPrefix": ["Radio Hectolitre", "hectolitre.space", "50.8503°N 4.3517°E"]
