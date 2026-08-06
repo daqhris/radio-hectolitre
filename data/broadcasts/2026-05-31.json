@@ -10,7 +10,7 @@
     "timeLine": "20h",
     "venueLine": "Hectolitre, Rue de l'Hectolitre 3",
     "shortDescription": "Site-specific performance · Inaugural transmission of Radio Hectolitre",
-    "heroImage": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB.jpg"
+    "heroImage": "assets/img/posters/2026-05-31/IMG_2134.png"
   },
   "program": {
     "heading": "Sound, Electric, Windy Performance",
@@ -31,7 +31,7 @@
     ]
   },
   "live": {
-    "liveLabel": "Live stream",
+    "liveLabel": "Listen",
     "liveStreamUrl": "https://frpradio.rs/public/frpradio"
   },
   "listen": {

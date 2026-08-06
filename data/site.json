@@ -1,7 +1,7 @@
 {
   "siteName": "Radio Hectolitre",
   "tagline": "Brussels Digital Arts Web Audio Transmissions",
-  "defaultLiveLabel": "▶ Live stream",
+  "defaultLiveLabel": "▶ Play Radio",
   "liveStreamUrl": "https://frpradio.rs/public/frpradio",
 
   "nav": [
@@ -16,8 +16,7 @@
     "links": [
       { "label": "hectolitre.space", "href": "https://www.hectolitre.space" },
       { "label": "Web publications catalogue", "href": "https://www.hectolitre.space/web-publications.html" },
-      { "label": "Soundcloud archive", "href": "https://soundcloud.com/user-816404246" },
-      { "label": "daqhris.com", "href": "https://daqhris.com" }
+      { "label": "Soundcloud archive", "href": "https://soundcloud.com/user-816404246" }
     ],
     "credit": "Radio Hectolitre is an art project in-construction by Chris A. Iradukunda (daqhris), resident at Hectolitre where the sound works originate."
   },
