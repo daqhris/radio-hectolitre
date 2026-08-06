@@ -172,6 +172,27 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 #listen-embed .no-embed{font-size:11px;color:var(--muted);font-style:italic;padding:14px 0}
 
 /* ==========================================================================
+   FEATURE PAGES (episodes + standalone works like the Venice piece)
+   ========================================================================== */
+.feature-embed{margin-bottom:8px}
+.feature-embed iframe{border:none;width:100%;height:120px}
+.feature-embed audio{width:100%}
+.feature-embed .embed-caption{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:8px}
+.feature-embed .no-embed{font-size:11px;color:var(--muted);font-style:italic;padding:14px 0}
+.feature-synopsis p{font-size:12px;color:var(--muted);line-height:1.9;margin-bottom:14px;max-width:720px}
+.feature-credits{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.feature-credit-line{font-size:10px;color:var(--muted);letter-spacing:.5px}
+.feature-links{display:flex;flex-direction:column;gap:6px;margin-bottom:40px}
+.feature-links a{font-size:10px;color:var(--accent-dim);text-decoration:none;letter-spacing:1px;transition:color .2s}
+.feature-links a:hover{color:var(--accent)}
+.feature-back{display:inline-block;margin:8px 0 48px}
+
+/* ==========================================================================
+   TEASER GRID (used for "More from the archive")
+   ========================================================================== */
+#related-content-section{margin-bottom:8px}
+
+/* ==========================================================================
    ARCHIVE / HOME GRID
    ========================================================================== */
 .archive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);margin-bottom:48px}

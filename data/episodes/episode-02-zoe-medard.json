@@ -1,0 +1,31 @@
+{
+  "slug": "episode-02-zoe-medard",
+  "type": "episode",
+  "eyebrow": "Hectolitre.FM · Episode 02",
+  "title": "Episode 02 — Zoé Médard",
+  "subtitle": "Zoé Médard",
+  "dateLine": "21 Jan 2021",
+  "coverImage": "https://i1.sndcdn.com/artworks-yunEv5Dzzr0INHZI-0hLCUA-t1080x1080.jpg",
+  "synopsis": [
+    "A conversation with Zoé Médard, recorded for the Hectolitre.FM series. No further episode notes were published alongside the original recording — listen on SoundCloud for the full conversation."
+  ],
+  "embed": {
+    "type": "soundcloud",
+    "label": "Episode 02 — Zoé Médard",
+    "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-02-zoe-medard&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
+  },
+  "credits": [
+    "Hosted by Manon Tagand",
+    "Production: Hectolitre"
+  ],
+  "links": [
+    {
+      "label": "Listen on SoundCloud ↗",
+      "href": "https://soundcloud.com/user-816404246/episode-02-zoe-medard"
+    }
+  ],
+  "backLink": {
+    "label": "← All episodes",
+    "href": "pages/episodes.html"
+  }
+}

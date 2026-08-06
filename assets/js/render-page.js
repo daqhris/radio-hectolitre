@@ -388,6 +388,25 @@ function wirePlayButton() {
   });
 }
 
+/* ------------------------------------------------------- Related content
+   Optional "More from the archive" strip — points at episode/work pages
+   without pulling their content into the broadcast page itself. */
+
+function renderRelatedContent() {
+  const b = state.broadcast;
+  const section = $("related-content-section");
+  const mount = $("related-content");
+  if (!mount) return;
+
+  if (!b?.relatedContent?.length) {
+    if (section) section.style.display = "none";
+    return;
+  }
+
+  clearChildren(mount);
+  mount.appendChild(RadioHecto.buildCardGrid(b.relatedContent));
+}
+
 /* ------------------------------------------------------------------ Init */
 
 async function loadBroadcastById(broadcastId) {
@@ -412,6 +431,7 @@ async function initPage() {
   renderSpokenWords();
   renderTrackLibrary();
   renderHeroLiveButton();
+  renderRelatedContent();
 }
 
 if (document.readyState === "loading") {

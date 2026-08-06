@@ -1,0 +1,32 @@
+{
+  "slug": "episode-08-martina-petrovic",
+  "type": "episode",
+  "eyebrow": "Hectolitre.FM · Episode 08",
+  "title": "Episode 08 — Martina Petrović",
+  "subtitle": "Martina Petrović",
+  "dateLine": "17 Feb 2023",
+  "coverImage": "https://i1.sndcdn.com/artworks-eMytp9K27cnC5TwN-fteKTQ-t1080x1080.jpg",
+  "synopsis": [
+    "Martina Petrović discusses her project “The Last Straw” and her collective “The School of Love,” touching on being an artist in diaspora in Brussels, Balkan ritual, and cycles of grief.",
+    "The conversation turns to what it means to live inside an art space, as Hectolitre is."
+  ],
+  "embed": {
+    "type": "soundcloud",
+    "label": "Episode 08 — Martina Petrović",
+    "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fmartina&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
+  },
+  "credits": [
+    "Producer: Mladen Bundalo",
+    "Production: Hectolitre asbl"
+  ],
+  "links": [
+    {
+      "label": "Listen on SoundCloud ↗",
+      "href": "https://soundcloud.com/user-816404246/martina"
+    }
+  ],
+  "backLink": {
+    "label": "← All episodes",
+    "href": "pages/episodes.html"
+  }
+}

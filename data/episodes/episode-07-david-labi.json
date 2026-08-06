@@ -1,0 +1,40 @@
+{
+  "slug": "episode-07-david-labi",
+  "type": "episode",
+  "eyebrow": "Hectolitre.FM · Episode 07",
+  "title": "Episode 07 — David Labi",
+  "subtitle": "David Labi",
+  "dateLine": "30 Jun 2022",
+  "coverImage": "https://i1.sndcdn.com/artworks-msjvoPIe5KXnGt4H-xlYiFQ-t1080x1080.jpg",
+  "synopsis": [
+    "David Labi is a London-born, Brussels-based storyteller and founder of Good Point, an agency helping cause-driven organisations tell better stories.",
+    "At the time of recording he was developing “Pieces of a Man,” a one-man show about his late father, a Holocaust survivor, exploring fatherhood, trauma, identity and joy — alongside a related workshop on parental storytelling."
+  ],
+  "embed": {
+    "type": "soundcloud",
+    "label": "Episode 07 — David Labi",
+    "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-7-david-labi&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
+  },
+  "credits": [
+    "Hosted by Manon Tagand",
+    "Production: Hectolitre"
+  ],
+  "links": [
+    {
+      "label": "Listen on SoundCloud ↗",
+      "href": "https://soundcloud.com/user-816404246/episode-7-david-labi"
+    },
+    {
+      "label": "goodpointagency.com ↗",
+      "href": "https://goodpointagency.com/"
+    },
+    {
+      "label": "davidlabi.com ↗",
+      "href": "https://www.davidlabi.com/"
+    }
+  ],
+  "backLink": {
+    "label": "← All episodes",
+    "href": "pages/episodes.html"
+  }
+}

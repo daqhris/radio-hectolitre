@@ -35,7 +35,7 @@
     "liveStreamUrl": "https://frpradio.rs/public/frpradio"
   },
   "listen": {
-    "librarySubtitle": "Curated listen shelf · Soundcloud now, local audio later"
+    "librarySubtitle": "Live recording + ambient field recording from the night"
   },
   "tracks": [
     {
@@ -54,54 +54,6 @@
       "title": "Ambient Field Recording",
       "sub": "Zoom Recorder · Hectolitre Studio · 2026",
       "dur": "~35:00",
-      "active": false,
-      "listen": null
-    },
-    {
-      "num": "03",
-      "title": "God Bless USA (audio extract)",
-      "sub": "daqhris · Venice Exhibition · 2026",
-      "dur": "12:40",
-      "active": false,
-      "listen": null
-    },
-    {
-      "num": "04",
-      "title": "Hectolitre Web Publication #1",
-      "sub": "hectolitre.space · Sound Archive",
-      "dur": "—",
-      "active": false,
-      "listen": null
-    },
-    {
-      "num": "05",
-      "title": "Hectolitre Web Publication #2",
-      "sub": "hectolitre.space · Sound Archive",
-      "dur": "—",
-      "active": false,
-      "listen": null
-    },
-    {
-      "num": "06",
-      "title": "Hectolitre Web Publication #3",
-      "sub": "hectolitre.space · Sound Archive",
-      "dur": "—",
-      "active": false,
-      "listen": null
-    },
-    {
-      "num": "07",
-      "title": "Hectolitre Web Publication #4",
-      "sub": "hectolitre.space · Sound Archive",
-      "dur": "—",
-      "active": false,
-      "listen": null
-    },
-    {
-      "num": "08",
-      "title": "Hectolitre Web Publication #5",
-      "sub": "hectolitre.space · Sound Archive",
-      "dur": "—",
       "active": false,
       "listen": null
     }
@@ -655,5 +607,21 @@
     "producer": "daqhris (Chris-Armel Iradukunda)",
     "design": "Poster design by Bel McLaughlin · Documentation photography by Mladen Bundalo",
     "infrastructure": "AzuraCast (open source) · Hosted by FRP Radio"
-  }
+  },
+  "relatedContent": [
+    {
+      "href": "pages/episodes.html",
+      "poster": "https://i1.sndcdn.com/artworks-yMVY6LI6zzwA7sRF-e6UEQQ-t1080x1080.jpg",
+      "dateLine": "9 episodes",
+      "title": "Hectolitre.FM",
+      "summary": "The interview series — trailer through episode 08, guests from Hectolitre's residency."
+    },
+    {
+      "href": "pages/works/god-bless-usa.html",
+      "poster": "https://daqhris.com/god-bless-usa/og-image.png",
+      "dateLine": "Venice Biennale 2026",
+      "title": "God Bless The United States Of Aliens",
+      "summary": "An AI-voiced ceremony in fifteen scenes — a guest work in the Pavilion of Bosnia and Herzegovina."
+    }
+  ]
 }

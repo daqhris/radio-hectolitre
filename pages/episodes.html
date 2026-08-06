@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Episodes — Radio Hectolitre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+
+  <div id="site-nav-mount"></div>
+
+  <header class="page-hero">
+    <div class="page-hero-eyebrow">Hectolitre.FM</div>
+    <h1 class="page-hero-title">Episodes</h1>
+    <p class="page-hero-sub">A micro-podcast giving voice to the residents and guests of Hectolitre — from the trailer through episode 08.</p>
+  </header>
+
+  <main class="page">
+    <div id="episode-grid"></div>
+  </main>
+
+  <div id="site-footer-mount"></div>
+
+  <script>
+    window.SITE_BASE = "../";
+  </script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/render-archive.js"></script>
+  <script>
+    (async function () {
+      await RadioHecto.initChrome("pages/episodes.html");
+      renderEpisodeGrid({ mountId: "episode-grid", emptyText: "No episodes published yet." });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "slug": "god-bless-usa",
+  "type": "work",
+  "eyebrow": "Guest work · 61st Venice Biennale, 2026",
+  "title": "God Bless The United States Of Aliens",
+  "subtitle": "An AI-voiced ceremony in fifteen scenes",
+  "dateLine": "Palazzo Malipiero, Venice · 9 May – 22 Nov 2026",
+  "coverImage": "https://daqhris.com/god-bless-usa/og-image.png",
+  "synopsis": [
+    "An eighteen-minute non-looping ceremony broken into fifteen scenes, alternating a church leader's address with a four-voice chorus and the interior monologue of a praying alien — built from a 2024 short story and rendered with synthesized voices, field recordings and cathedral reverb.",
+    "Presented as a guest work within Domus Diasporica by Mladen Bundalo, part of the Pavilion of Bosnia and Herzegovina at the 61st International Art Exhibition — La Biennale di Venezia (In Minor Keys, curated by Koyo Kouoh). Commissioned by Sarita Vujković and curated by Isidora Živković, on view at Palazzo Malipiero, San Marco, from 9 May to 22 November 2026.",
+    "Co-directed by Chris-Armel Iradukunda (daqhris) and Claude Opus 4.7, and made at Hectolitre, Brussels, during the Built with Opus 4.7 hackathon."
+  ],
+  "embed": {
+    "type": "audio",
+    "src": "https://daqhris.com/god-bless-usa/assets/audio/trailer.opus.ogg",
+    "label": "Trailer — about one minute, cut from the full ceremony"
+  },
+  "credits": [
+    "Source text: USALIEN (2024), permanently archived on Arweave",
+    "Voices: Kokoro-82M (© hexgrad, Apache-2.0)",
+    "Performance & text: CC BY-NC-ND 4.0 · Code: EUPL-1.2"
+  ],
+  "links": [
+    { "label": "Listen to the full ceremony ↗", "href": "https://daqhris.com/god-bless-usa/" },
+    { "label": "Scene by scene ↗", "href": "https://daqhris.com/god-bless-usa/preview.html" },
+    { "label": "Pavilion ↗", "href": "https://daqhris.com/god-bless-usa/pavilion.html" },
+    { "label": "Press kit ↗", "href": "https://daqhris.com/god-bless-usa/submission.html" }
+  ],
+  "backLink": { "label": "← Back to the broadcast", "href": "pages/broadcasts/2026-05-31.html" }
+}

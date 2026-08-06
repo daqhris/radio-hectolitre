@@ -1,0 +1,76 @@
+{
+  "episodes": [
+    {
+      "slug": "trailer",
+      "title": "Trailer",
+      "dateLine": "10 Dec 2020",
+      "poster": "https://i1.sndcdn.com/artworks-yMVY6LI6zzwA7sRF-e6UEQQ-t1080x1080.jpg",
+      "href": "pages/episodes/trailer.html",
+      "summary": "An introduction to the Hectolitre.FM interview series."
+    },
+    {
+      "slug": "episode-01-sofhie-mavroudis",
+      "title": "Episode 01 — Sofhie Mavroudis",
+      "dateLine": "14 Dec 2020",
+      "poster": "https://i1.sndcdn.com/artworks-4o9g5sVekj3Cng8Y-TuxB2Q-t1080x1080.jpg",
+      "href": "pages/episodes/episode-01-sofhie-mavroudis.html",
+      "summary": "The series opener meets visual artist Sofhie Mavroudis."
+    },
+    {
+      "slug": "episode-02-zoe-medard",
+      "title": "Episode 02 — Zoé Médard",
+      "dateLine": "21 Jan 2021",
+      "poster": "https://i1.sndcdn.com/artworks-yunEv5Dzzr0INHZI-0hLCUA-t1080x1080.jpg",
+      "href": "pages/episodes/episode-02-zoe-medard.html",
+      "summary": "A conversation with Zoé Médard, recorded for Hectolitre.FM."
+    },
+    {
+      "slug": "episode-03-pierre-louis-cassou",
+      "title": "Episode 03 — Pierre-Louis Cassou",
+      "dateLine": "12 Apr 2021",
+      "poster": "https://i1.sndcdn.com/artworks-IahOUomSWgue0yzN-dxo5WA-t1080x1080.jpg",
+      "href": "pages/episodes/episode-03-pierre-louis-cassou.html",
+      "summary": "Meeting Pierre-Louis Cassou, one of Hectolitre's longest-standing members."
+    },
+    {
+      "slug": "episode-04-oscar-cassamajor",
+      "title": "Episode 04 — Oscar Cassamajor",
+      "dateLine": "3 Jun 2021",
+      "poster": "https://i1.sndcdn.com/artworks-uBJz7yQG546qw3kr-AFynJA-t1080x1080.jpg",
+      "href": "pages/episodes/episode-04-oscar-cassamajor.html",
+      "summary": "Oscar Cassamajor on parkour, cultural mediation, and growing fruit trees in the city."
+    },
+    {
+      "slug": "episode-05-naama-freedman",
+      "title": "Episode 05 — Naama Freedman",
+      "dateLine": "18 Sep 2021",
+      "poster": "https://i1.sndcdn.com/artworks-dLMvxo7wfAldzHlD-EdLnAw-t1080x1080.jpg",
+      "href": "pages/episodes/episode-05-naama-freedman.html",
+      "summary": "Israeli artist Naama Freedman on her Hectolitre residency and radio-art piece."
+    },
+    {
+      "slug": "episode-06-ksenia-anokhina",
+      "title": "Episode 06 — Ksenia Anokhina",
+      "dateLine": "2 Jan 2022",
+      "poster": "https://i1.sndcdn.com/artworks-xz7yT66mGk7lODlE-yohphA-t1080x1080.jpg",
+      "href": "pages/episodes/episode-06-ksenia-anokhina.html",
+      "summary": "Ksenia Anokhina on technology, power and bureaucracy, during a three-month Hectolitre residency."
+    },
+    {
+      "slug": "episode-07-david-labi",
+      "title": "Episode 07 — David Labi",
+      "dateLine": "30 Jun 2022",
+      "poster": "https://i1.sndcdn.com/artworks-msjvoPIe5KXnGt4H-xlYiFQ-t1080x1080.jpg",
+      "href": "pages/episodes/episode-07-david-labi.html",
+      "summary": "David Labi on ethical storytelling and a one-man show about his father."
+    },
+    {
+      "slug": "episode-08-martina-petrovic",
+      "title": "Episode 08 — Martina Petrović",
+      "dateLine": "17 Feb 2023",
+      "poster": "https://i1.sndcdn.com/artworks-eMytp9K27cnC5TwN-fteKTQ-t1080x1080.jpg",
+      "href": "pages/episodes/episode-08-martina-petrovic.html",
+      "summary": "Martina Petrović on diaspora, ritual and grief, and life inside an art space."
+    }
+  ]
+}

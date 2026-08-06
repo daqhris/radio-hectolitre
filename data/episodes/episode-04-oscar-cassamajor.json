@@ -1,0 +1,36 @@
+{
+  "slug": "episode-04-oscar-cassamajor",
+  "type": "episode",
+  "eyebrow": "Hectolitre.FM · Episode 04",
+  "title": "Episode 04 — Oscar Cassamajor",
+  "subtitle": "Oscar Cassamajor",
+  "dateLine": "3 Jun 2021",
+  "coverImage": "https://i1.sndcdn.com/artworks-uBJz7yQG546qw3kr-AFynJA-t1080x1080.jpg",
+  "synopsis": [
+    "Oscar Cassamajor, artist in Residence of Reflection at Hectolitre, talks about his background in professional parkour, the tension between being an artist and a cultural mediator at once, and where art sits in society.",
+    "The conversation turns to his concept for growing fruit trees in the city — recorded May 2021."
+  ],
+  "embed": {
+    "type": "soundcloud",
+    "label": "Episode 04 — Oscar Cassamajor",
+    "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-04-oscar-cassamajor&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
+  },
+  "credits": [
+    "Interview by Mladen Bundalo",
+    "Production: Hectolitre · May 2021"
+  ],
+  "links": [
+    {
+      "label": "Listen on SoundCloud ↗",
+      "href": "https://soundcloud.com/user-816404246/episode-04-oscar-cassamajor"
+    },
+    {
+      "label": "wdky.net ↗",
+      "href": "https://www.wdky.net/"
+    }
+  ],
+  "backLink": {
+    "label": "← All episodes",
+    "href": "pages/episodes.html"
+  }
+}

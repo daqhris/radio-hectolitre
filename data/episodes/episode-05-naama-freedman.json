@@ -1,0 +1,32 @@
+{
+  "slug": "episode-05-naama-freedman",
+  "type": "episode",
+  "eyebrow": "Hectolitre.FM · Episode 05",
+  "title": "Episode 05 — Naama Freedman",
+  "subtitle": "Naama Freedman",
+  "dateLine": "18 Sep 2021",
+  "coverImage": "https://i1.sndcdn.com/artworks-dLMvxo7wfAldzHlD-EdLnAw-t1080x1080.jpg",
+  "synopsis": [
+    "Naama Freedman is an Israeli artist, musician, performer and DJ based in Hamburg, working across video, film, installation and performance — often weaving historical reference and spoken text into questions of intimacy, control and violence.",
+    "During her residency she developed a radio-art piece, “Little Miss Freedman’s Variety Show,” blending storytelling, poetry and live music into an aural journey through the history and character of Brussels’ Marolles neighbourhood."
+  ],
+  "embed": {
+    "type": "soundcloud",
+    "label": "Episode 05 — Naama Freedman",
+    "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-05-naama-freedman&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
+  },
+  "credits": [
+    "Hosted by Manon Tagand",
+    "Production: Hectolitre"
+  ],
+  "links": [
+    {
+      "label": "Listen on SoundCloud ↗",
+      "href": "https://soundcloud.com/user-816404246/episode-05-naama-freedman"
+    }
+  ],
+  "backLink": {
+    "label": "← All episodes",
+    "href": "pages/episodes.html"
+  }
+}

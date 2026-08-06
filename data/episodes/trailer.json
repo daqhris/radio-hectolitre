@@ -1,0 +1,32 @@
+{
+  "slug": "trailer",
+  "type": "episode",
+  "eyebrow": "Hectolitre.FM · Trailer",
+  "title": "Trailer",
+  "subtitle": "An introduction to the series",
+  "dateLine": "10 Dec 2020",
+  "coverImage": "https://i1.sndcdn.com/artworks-yMVY6LI6zzwA7sRF-e6UEQQ-t1080x1080.jpg",
+  "synopsis": [
+    "Hectolitre.FM is a micro-podcast giving voice to the people who animate Hectolitre — a genre-crossing space in Brussels that has been an antique shop, a swingers’ club, and is now home to resident artists, exhibitions, performances, readings and screenings.",
+    "Hosted by Manon Tagand, who discovered the space in September 2019 shortly after moving to Brussels for her studies, the series sets out to meet the people who keep it running."
+  ],
+  "embed": {
+    "type": "soundcloud",
+    "label": "Trailer",
+    "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fhectolitrefm-trailer&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
+  },
+  "credits": [
+    "Hosted by Manon Tagand",
+    "Production: Hectolitre"
+  ],
+  "links": [
+    {
+      "label": "Listen on SoundCloud ↗",
+      "href": "https://soundcloud.com/user-816404246/hectolitrefm-trailer"
+    }
+  ],
+  "backLink": {
+    "label": "← All episodes",
+    "href": "pages/episodes.html"
+  }
+}

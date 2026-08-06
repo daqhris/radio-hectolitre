@@ -126,6 +126,42 @@ const RadioHecto = (function () {
     }
   }
 
+  /**
+   * Shared card-grid builder used by the broadcast archive, the episode
+   * index, and a broadcast page's "More from the archive" section — one
+   * card shape everywhere instead of three separate implementations.
+   * @param {Array<{href:string, poster?:string, badge?:string, dateLine?:string, title:string, summary?:string}>} items
+   */
+  function buildCardGrid(items, emptyText) {
+    if (!items?.length) {
+      return createEl("div", { class: "archive-empty" }, [emptyText || "Nothing here yet."]);
+    }
+    const grid = createEl("div", { class: "archive-grid" }, []);
+    for (const item of items) {
+      const card = createEl("a", { class: "archive-card", href: withBase(item.href) }, []);
+
+      const img = createEl("div", { class: "archive-card-img" }, []);
+      if (item.poster) img.style.backgroundImage = `url('${/^https?:\/\//i.test(item.poster) ? item.poster : withBase(item.poster)}')`;
+      if (item.badge) {
+        img.appendChild(createEl("span", { class: "archive-card-status" }, [
+          createEl("span", { class: "live-dot" }, []),
+          item.badge,
+        ]));
+      }
+      card.appendChild(img);
+
+      const body = createEl("div", { class: "archive-card-body" }, [
+        createEl("div", { class: "archive-card-date" }, [item.dateLine || ""]),
+        createEl("div", { class: "archive-card-title" }, [item.title || ""]),
+        createEl("div", { class: "archive-card-summary" }, [item.summary || ""]),
+      ]);
+      card.appendChild(body);
+
+      grid.appendChild(card);
+    }
+    return grid;
+  }
+
   async function initChrome(activePath) {
     try {
       const site = await fetchJSON("data/site.json");
@@ -138,5 +174,5 @@ const RadioHecto = (function () {
     }
   }
 
-  return { withBase, $, clearChildren, createEl, fetchJSON, renderNav, renderFooter, renderTicker, initChrome };
+  return { withBase, $, clearChildren, createEl, fetchJSON, renderNav, renderFooter, renderTicker, buildCardGrid, initChrome };
 })();

@@ -1,0 +1,32 @@
+{
+  "slug": "episode-06-ksenia-anokhina",
+  "type": "episode",
+  "eyebrow": "Hectolitre.FM · Episode 06",
+  "title": "Episode 06 — Ksenia Anokhina",
+  "subtitle": "Ksenia Anokhina",
+  "dateLine": "2 Jan 2022",
+  "coverImage": "https://i1.sndcdn.com/artworks-xz7yT66mGk7lODlE-yohphA-t1080x1080.jpg",
+  "synopsis": [
+    "Ksenia Anokhina’s work looks at the relationship between new technologies, power and bureaucracy — their codes and patterns, and their ethical weight on individual and social life.",
+    "Moscow-born and based in the Netherlands for her studies, she spent three months at Hectolitre collaborating with Deborah Levy and Claire Williams on an ongoing research project."
+  ],
+  "embed": {
+    "type": "soundcloud",
+    "label": "Episode 06 — Ksenia Anokhina",
+    "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-06-ksenia-anokhina&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
+  },
+  "credits": [
+    "Hosted by Manon Tagand",
+    "Production: Hectolitre"
+  ],
+  "links": [
+    {
+      "label": "Listen on SoundCloud ↗",
+      "href": "https://soundcloud.com/user-816404246/episode-06-ksenia-anokhina"
+    }
+  ],
+  "backLink": {
+    "label": "← All episodes",
+    "href": "pages/episodes.html"
+  }
+}

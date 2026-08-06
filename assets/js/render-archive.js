@@ -1,16 +1,15 @@
-// Renders a grid of broadcast cards from data/broadcasts/index.json.
-// Used by root index.html (home) and pages/archive.html (full archive).
-// Depends on assets/js/app.js being loaded first (RadioHecto namespace)
-// and window.SITE_BASE being set by the page.
+// Renders card grids from an index.json — broadcasts on the homepage /
+// archive page, episodes on the episodes index. Shared card markup lives
+// in RadioHecto.buildCardGrid (app.js).
 
-const { $, clearChildren, createEl, fetchJSON, withBase } = RadioHecto;
+const { $, clearChildren, fetchJSON, buildCardGrid } = RadioHecto;
 
 /**
  * @param {object} opts
- * @param {string} opts.mountId   - container element id
- * @param {"current"|"archived"|"all"} opts.filter - "current" = live/featured broadcast only,
- *   "archived" = everything except the current one, "all" = every broadcast (archive page)
- * @param {string} [opts.emptyText] - message shown when the filtered list is empty
+ * @param {string} opts.mountId
+ * @param {"current"|"archived"|"all"} opts.filter - "current" = live/featured only,
+ *   "archived" = everything except current, "all" = everything (archive page)
+ * @param {string} [opts.emptyText]
  */
 async function renderBroadcastGrid(opts) {
   const mount = $(opts.mountId);
@@ -21,48 +20,53 @@ async function renderBroadcastGrid(opts) {
     data = await fetchJSON("data/broadcasts/index.json");
   } catch (err) {
     console.error("Failed to load broadcasts index:", err);
-    mount.appendChild(createEl("div", { class: "archive-empty" }, ["Broadcasts could not be loaded."]));
+    mount.appendChild(buildCardGrid([], "Broadcasts could not be loaded."));
     return;
   }
 
   let broadcasts = data.broadcasts || [];
-  if (opts.filter === "current") {
-    broadcasts = broadcasts.filter((b) => b.status === "current");
-  } else if (opts.filter === "archived") {
-    broadcasts = broadcasts.filter((b) => b.status !== "current");
-  }
+  if (opts.filter === "current") broadcasts = broadcasts.filter((b) => b.status === "current");
+  else if (opts.filter === "archived") broadcasts = broadcasts.filter((b) => b.status !== "current");
+
+  const items = broadcasts.map((b) => ({
+    href: b.href,
+    poster: b.poster,
+    badge: b.status === "current" ? "Current" : null,
+    dateLine: b.dateLine,
+    title: b.title,
+    summary: b.summary,
+  }));
 
   clearChildren(mount);
+  mount.appendChild(buildCardGrid(items, opts.emptyText));
+}
 
-  if (!broadcasts.length) {
-    mount.appendChild(createEl("div", { class: "archive-empty" }, [opts.emptyText || "No broadcasts published yet — check back soon."]));
+/**
+ * @param {object} opts
+ * @param {string} opts.mountId
+ * @param {string} [opts.emptyText]
+ */
+async function renderEpisodeGrid(opts) {
+  const mount = $(opts.mountId);
+  if (!mount) return;
+
+  let data;
+  try {
+    data = await fetchJSON("data/episodes/index.json");
+  } catch (err) {
+    console.error("Failed to load episodes index:", err);
+    mount.appendChild(buildCardGrid([], "Episodes could not be loaded."));
     return;
   }
 
-  const grid = createEl("div", { class: "archive-grid" }, []);
+  const items = (data.episodes || []).map((e) => ({
+    href: e.href,
+    poster: e.poster,
+    dateLine: e.dateLine,
+    title: e.title,
+    summary: e.summary,
+  }));
 
-  for (const b of broadcasts) {
-    const card = createEl("a", { class: "archive-card", href: withBase(b.href) }, []);
-
-    const img = createEl("div", { class: "archive-card-img" }, []);
-    if (b.poster) img.style.backgroundImage = `url('${withBase(b.poster)}')`;
-    if (b.status === "current") {
-      img.appendChild(createEl("span", { class: "archive-card-status" }, [
-        createEl("span", { class: "live-dot" }, []),
-        "Current",
-      ]));
-    }
-    card.appendChild(img);
-
-    const body = createEl("div", { class: "archive-card-body" }, [
-      createEl("div", { class: "archive-card-date" }, [b.dateLine || ""]),
-      createEl("div", { class: "archive-card-title" }, [b.title || ""]),
-      createEl("div", { class: "archive-card-summary" }, [b.summary || ""]),
-    ]);
-    card.appendChild(body);
-
-    grid.appendChild(card);
-  }
-
-  mount.appendChild(grid);
+  clearChildren(mount);
+  mount.appendChild(buildCardGrid(items, opts.emptyText));
 }

@@ -1,0 +1,31 @@
+{
+  "slug": "episode-01-sofhie-mavroudis",
+  "type": "episode",
+  "eyebrow": "Hectolitre.FM · Episode 01",
+  "title": "Episode 01 — Sofhie Mavroudis",
+  "subtitle": "Sofhie Mavroudis",
+  "dateLine": "14 Dec 2020",
+  "coverImage": "https://i1.sndcdn.com/artworks-4o9g5sVekj3Cng8Y-TuxB2Q-t1080x1080.jpg",
+  "synopsis": [
+    "The series opener meets Sofhie Mavroudis, a visual artist who has been part of the Hectolitre community since June 2020."
+  ],
+  "embed": {
+    "type": "soundcloud",
+    "label": "Episode 01 — Sofhie Mavroudis",
+    "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-01-sofhie-mavroudis&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
+  },
+  "credits": [
+    "Hosted by Manon Tagand",
+    "Production: Hectolitre"
+  ],
+  "links": [
+    {
+      "label": "Listen on SoundCloud ↗",
+      "href": "https://soundcloud.com/user-816404246/episode-01-sofhie-mavroudis"
+    }
+  ],
+  "backLink": {
+    "label": "← All episodes",
+    "href": "pages/episodes.html"
+  }
+}
