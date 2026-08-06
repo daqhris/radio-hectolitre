@@ -30,13 +30,11 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Your repo is already a static site:
-          # - /index.html is the homepage
-          # - /pages/* and /assets/* are served as-is
-          path: ./
-          # (Optional but often helpful to avoid uploading workflow noise)
-          # if supported in your action version, otherwise ignore:
-          # exclude: .github/**
+          path: |
+            ./index.html
+            ./pages
+            ./assets
+            ./data
 
       - name: Deploy to GitHub Pages
         id: deployment
