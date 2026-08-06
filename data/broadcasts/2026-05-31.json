@@ -26,7 +26,7 @@
       "Collective",
       "Improvisation",
       "Flute · Clarinet · Voice · Electronics",
-      "AzuraCast",
+      "FRP Radio",
       "Brussels"
     ]
   },
@@ -45,14 +45,14 @@
       "dur": "1:00:00",
       "active": true,
       "listen": {
-        "type": "soundcloud",
-        "embedUrl": "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-816404246&color=%23c4ef3c&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
+        "type": "",
+        "embedUrl": ""
       }
     },
     {
       "num": "02",
       "title": "Ambient Field Recording",
-      "sub": "Zoom Recorder · Hectolitre Studio · 2026",
+      "sub": "Zoom Recorder · Ambient Noise · Reactor",
       "dur": "~35:00",
       "active": false,
       "listen": null
@@ -597,8 +597,9 @@
     "Refaat Al-Areer · If I Must Die, Let It Be a Tale",
     "Photography · Mladen Bundalo",
     "Poster · Bel McLaughlin",
-    "daqhris.com",
-    "Powered by AzuraCast",
+    "Coding · Chris A. Iradukunda",
+    "Livestream · Nenad Pinter",
+    "Web Radio · FRP Radio",
     "50.8503°N 4.3517°E",
     "hectolitre.space"
   ],
@@ -606,7 +607,7 @@
     "madeFor": "Hectolitre",
     "producer": "daqhris (Chris-Armel Iradukunda)",
     "design": "Poster design by Bel McLaughlin · Documentation photography by Mladen Bundalo",
-    "infrastructure": "AzuraCast (open source) · Hosted by FRP Radio"
+    "infrastructure": "Broadcast with AzuraCast (open source) · Hosted by FRP Radio"
   },
   "relatedContent": [
     {
