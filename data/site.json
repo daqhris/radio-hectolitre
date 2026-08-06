@@ -19,7 +19,7 @@
       { "label": "Live stream (FRP Radio)", "href": "https://frpradio.rs/public/frpradio" },
       { "label": "daqhris.com", "href": "https://daqhris.com" }
     ],
-    "credit": "Radio Hectolitre is a project by daqhris, resident at Hectolitre, Brussels. Broadcasting infrastructure: AzuraCast (open source) · Hosted by FRP Radio."
+    "credit": "Radio Hectolitre is an open-source web project by Chris A. Iradukunda (daqhris), resident at Hectolitre where the broadcast sounds works originate. "
   },
 
   "tickerPrefix": ["Radio Hectolitre", "hectolitre.space", "50.8503°N 4.3517°E"]
