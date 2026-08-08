@@ -1,0 +1,117 @@
+{
+  "_readme": "This is the fixed program for the shared 'virtual station'. Every listener's browser independently computes (now - epoch) mod totalDuration to find the same playback position — no server, no live stream. durationSec values marked durationIsEstimate:true are placeholders, not measured — see docs/station-notes.md for why that's OK short-term and how to replace them with real numbers. Add new tracks by appending to this array; order is the program order.",
+  "epoch": "2026-01-01T00:00:00Z",
+  "tracks": [
+    {
+      "id": "work-god-bless-usa-trailer",
+      "kind": "Guest work",
+      "title": "God Bless The United States Of Aliens — Trailer",
+      "sub": "Venice Biennale 2026",
+      "type": "file",
+      "src": "https://daqhris.com/god-bless-usa/assets/audio/trailer.opus.ogg",
+      "durationSec": 60,
+      "durationIsEstimate": true,
+      "publishedAt": "2026-05-09",
+      "href": "pages/works/god-bless-usa.html"
+    },
+    {
+      "id": "ep-trailer",
+      "kind": "Interview",
+      "title": "Hectolitre.FM — Trailer",
+      "sub": "An introduction to the series",
+      "type": "soundcloud",
+      "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fhectolitrefm-trailer&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
+      "durationSec": 120,
+      "durationIsEstimate": true,
+      "href": "pages/episodes/trailer.html"
+    },
+    {
+      "id": "ep-01",
+      "kind": "Interview",
+      "title": "Episode 01 — Sofhie Mavroudis",
+      "sub": "Hectolitre.FM",
+      "type": "soundcloud",
+      "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-01-sofhie-mavroudis&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
+      "durationSec": 720,
+      "durationIsEstimate": true,
+      "href": "pages/episodes/episode-01-sofhie-mavroudis.html"
+    },
+    {
+      "id": "ep-02",
+      "kind": "Interview",
+      "title": "Episode 02 — Zoé Médard",
+      "sub": "Hectolitre.FM",
+      "type": "soundcloud",
+      "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-02-zoe-medard&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
+      "durationSec": 720,
+      "durationIsEstimate": true,
+      "href": "pages/episodes/episode-02-zoe-medard.html"
+    },
+    {
+      "id": "ep-03",
+      "kind": "Interview",
+      "title": "Episode 03 — Pierre-Louis Cassou",
+      "sub": "Hectolitre.FM",
+      "type": "soundcloud",
+      "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-3-pierre-louis-cassou&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
+      "durationSec": 720,
+      "durationIsEstimate": true,
+      "href": "pages/episodes/episode-03-pierre-louis-cassou.html"
+    },
+    {
+      "id": "ep-04",
+      "kind": "Interview",
+      "title": "Episode 04 — Oscar Cassamajor",
+      "sub": "Hectolitre.FM",
+      "type": "soundcloud",
+      "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-04-oscar-cassamajor&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
+      "durationSec": 720,
+      "durationIsEstimate": true,
+      "href": "pages/episodes/episode-04-oscar-cassamajor.html"
+    },
+    {
+      "id": "ep-05",
+      "kind": "Interview",
+      "title": "Episode 05 — Naama Freedman",
+      "sub": "Hectolitre.FM",
+      "type": "soundcloud",
+      "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-05-naama-freedman&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
+      "durationSec": 720,
+      "durationIsEstimate": true,
+      "href": "pages/episodes/episode-05-naama-freedman.html"
+    },
+    {
+      "id": "ep-06",
+      "kind": "Interview",
+      "title": "Episode 06 — Ksenia Anokhina",
+      "sub": "Hectolitre.FM",
+      "type": "soundcloud",
+      "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-06-ksenia-anokhina&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
+      "durationSec": 720,
+      "durationIsEstimate": true,
+      "href": "pages/episodes/episode-06-ksenia-anokhina.html"
+    },
+    {
+      "id": "ep-07",
+      "kind": "Interview",
+      "title": "Episode 07 — David Labi",
+      "sub": "Hectolitre.FM",
+      "type": "soundcloud",
+      "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-7-david-labi&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
+      "durationSec": 720,
+      "durationIsEstimate": true,
+      "href": "pages/episodes/episode-07-david-labi.html"
+    },
+    {
+      "id": "ep-08",
+      "kind": "Interview",
+      "title": "Episode 08 — Martina Petrović",
+      "sub": "Hectolitre.FM",
+      "type": "soundcloud",
+      "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fmartina&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
+      "durationSec": 720,
+      "durationIsEstimate": true,
+      "href": "pages/episodes/episode-08-martina-petrovic.html"
+    }
+  ]
+}

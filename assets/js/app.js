@@ -167,6 +167,7 @@ const RadioHecto = (function () {
       const site = await fetchJSON("data/site.json");
       renderNav(site, activePath);
       renderFooter(site);
+      if (typeof window.initStationPlayer === "function") window.initStationPlayer(site);
       return site;
     } catch (err) {
       console.error("Site chrome failed to load:", err);

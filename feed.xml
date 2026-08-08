@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Radio Hectolitre</title>
+  <link>https://daqhris.com/radio-hectolitre/</link>
+  <atom:link href="https://daqhris.com/radio-hectolitre/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Artists-run broadcasting at Hectolitre, Brussels — self-hosted recordings and guest works, as they're published. SoundCloud-only episodes aren't included here yet; see https://soundcloud.com/user-816404246 for those.</description>
+  <language>en</language>
+  <itunes:author>Radio Hectolitre</itunes:author>
+  <itunes:explicit>false</itunes:explicit>
+  <itunes:category text="Arts"/>
+  <itunes:image href="https://daqhris.com/god-bless-usa/og-image.png"/>
+  <item>
+    <title>God Bless The United States Of Aliens — Trailer</title>
+    <link>https://daqhris.com/radio-hectolitre/pages/works/god-bless-usa.html</link>
+    <guid isPermaLink="false">radio-hectolitre-work-god-bless-usa-trailer</guid>
+    <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+    <description>Venice Biennale 2026</description>
+    <enclosure url="https://daqhris.com/god-bless-usa/assets/audio/trailer.opus.ogg" type="audio/ogg" length="0"/>
+    <itunes:duration>00:01:00</itunes:duration>
+  </item>
+</channel>
+</rss>

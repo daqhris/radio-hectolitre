@@ -240,3 +240,21 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .footer-links a{font-size:10px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color .2s}
 .footer-links a:hover{color:var(--accent)}
 .footer-credit{font-size:9px;color:var(--dim);letter-spacing:1px;margin-top:20px;line-height:1.9}
+
+/* ==========================================================================
+   STATION BAR — persistent, site-wide "virtual station" player.
+   Fixed to the viewport bottom on every page (mounted by assets/js/station.js).
+   ========================================================================== */
+.station-bar{position:fixed;left:0;right:0;bottom:0;z-index:200;display:flex;align-items:center;gap:14px;height:60px;padding:0 20px;background:rgba(10,10,8,.96);border-top:1px solid var(--border);backdrop-filter:blur(8px)}
+.station-bar-play{width:36px;height:36px;border-radius:50%;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .15s,background .2s}
+.station-bar-play:hover{background:#d8ff50;transform:scale(1.07)}
+.station-bar-play svg{width:12px;height:12px;fill:var(--bg)}
+.station-bar-play:not(.playing) .icon-pause{display:none}
+.station-bar-play.playing .icon-play{display:none}
+.station-info{flex:1;min-width:0;text-decoration:none;color:inherit;display:block}
+.station-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px;margin-bottom:2px}
+.station-title{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.station-sub{font-size:9px;color:var(--muted);letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.station-kind{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--accent-dim);border:1px solid var(--border2);padding:3px 8px;flex-shrink:0;white-space:nowrap}
+body.has-station-bar{padding-bottom:60px}
+@media (max-width:560px){.station-kind{display:none}.station-bar{gap:10px;padding:0 14px}}
