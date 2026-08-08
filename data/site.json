@@ -8,6 +8,7 @@
     { "label": "Home", "href": "index.html" },
     { "label": "Broadcast", "href": "pages/archive.html" },
     { "label": "Interview", "href": "pages/episodes.html" },
+    { "label": "Works", "href": "pages/works.html" },
     { "label": "About", "href": "pages/about.html" }
   ],
 

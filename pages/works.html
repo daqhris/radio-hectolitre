@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Guest works — Radio Hectolitre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+
+  <div id="site-nav-mount"></div>
+
+  <header class="page-hero">
+    <div class="page-hero-eyebrow">Guest works</div>
+    <h1 class="page-hero-title">Works from beyond Hectolitre</h1>
+    <p class="page-hero-sub">Sound and performance pieces by Hectolitre artists shown further afield — starting with a piece at the 61st Venice Biennale.</p>
+  </header>
+
+  <main class="page">
+    <div id="works-grid"></div>
+  </main>
+
+  <div id="site-footer-mount"></div>
+
+  <script>
+    window.SITE_BASE = "../";
+  </script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/render-archive.js"></script>
+  <script>
+    (async function () {
+      await RadioHecto.initChrome("pages/works.html");
+      renderWorksGrid({ mountId: "works-grid", emptyText: "No guest works published yet." });
+    })();
+  </script>
+</body>
+</html>

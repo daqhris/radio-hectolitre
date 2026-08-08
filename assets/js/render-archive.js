@@ -70,3 +70,33 @@ async function renderEpisodeGrid(opts) {
   clearChildren(mount);
   mount.appendChild(buildCardGrid(items, opts.emptyText));
 }
+
+/**
+ * @param {object} opts
+ * @param {string} opts.mountId
+ * @param {string} [opts.emptyText]
+ */
+async function renderWorksGrid(opts) {
+  const mount = $(opts.mountId);
+  if (!mount) return;
+
+  let data;
+  try {
+    data = await fetchJSON("data/works/index.json");
+  } catch (err) {
+    console.error("Failed to load works index:", err);
+    mount.appendChild(buildCardGrid([], "Works could not be loaded."));
+    return;
+  }
+
+  const items = (data.works || []).map((w) => ({
+    href: w.href,
+    poster: w.poster,
+    dateLine: w.dateLine,
+    title: w.title,
+    summary: w.summary,
+  }));
+
+  clearChildren(mount);
+  mount.appendChild(buildCardGrid(items, opts.emptyText));
+}
