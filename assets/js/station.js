@@ -185,16 +185,38 @@
     if (state.audioEl) state.audioEl.pause();
     ensureScWidgetApi(() => {
       if (!window.SC || !window.SC.Widget) return; // SDK failed to load — silently stay paused
-      const iframe = ensureScFrame();
-      iframe.src = track.embedUrl;
-      const widget = SC.Widget(iframe);
-      state.scWidget = widget;
-      widget.bind(SC.Widget.Events.READY, () => {
-        widget.seekTo(offsetMs);
-        widget.play();
-        widget.unbind(SC.Widget.Events.FINISH);
+
+      if (!state.scWidget) {
+        // First SoundCloud track this page load: create the iframe and the
+        // ONE widget wrapper we'll reuse for the rest of the session.
+        //
+        // Deliberately NOT creating a fresh SC.Widget(iframe) on every
+        // track change: each wrapper registers its own internal
+        // postMessage listener on the iframe that's never torn down by
+        // unbind() (unbind only removes the specific event callbacks you
+        // added, not the SDK's own listener). Re-wrapping the same iframe
+        // repeatedly means old wrappers keep reacting alongside the new
+        // one, which is what caused playback to break after a couple of
+        // track changes. One widget, bound once, and load() for every
+        // later track — the pattern SoundCloud's own docs use for exactly
+        // this "auto-advance a playlist" case.
+        const iframe = ensureScFrame();
+        iframe.src = track.embedUrl;
+        const widget = SC.Widget(iframe);
+        state.scWidget = widget;
+        widget.bind(SC.Widget.Events.READY, () => {
+          widget.seekTo(offsetMs);
+          widget.play();
+        });
         widget.bind(SC.Widget.Events.FINISH, advance);
-      });
+      } else {
+        state.scWidget.load(track.embedUrl, {
+          callback: () => {
+            state.scWidget.seekTo(offsetMs);
+            state.scWidget.play();
+          },
+        });
+      }
     });
   }
 
