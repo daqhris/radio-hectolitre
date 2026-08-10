@@ -1,8 +1,6 @@
 {
   "siteName": "Radio Hectolitre",
   "tagline": "Brussels Digital Arts Web Audio Transmissions",
-  "defaultLiveLabel": "▶ Play Radio",
-  "liveStreamUrl": "https://frpradio.rs/public/frpradio",
 
   "nav": [
     { "label": "Home", "href": "index.html" },
