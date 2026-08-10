@@ -33,7 +33,7 @@ async function renderBroadcastGrid(opts) {
   const items = broadcasts.map((b) => ({
     href: b.href,
     poster: b.poster,
-    badge: (showBadge && b.status === "current") ? "Current" : null,
+    badge: (showBadge && b.status === "current") ? "" : null,
     dateLine: b.dateLine,
     title: b.title,
     summary: b.summary,
