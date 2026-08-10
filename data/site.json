@@ -4,9 +4,9 @@
 
   "nav": [
     { "label": "Home", "href": "index.html" },
-    { "label": "Broadcast", "href": "pages/archive.html" },
-    { "label": "Interview", "href": "pages/episodes.html" },
-    { "label": "Works", "href": "pages/works.html" },
+    { "label": "Broadcasts", "href": "pages/archive.html" },
+    { "label": "Interviews", "href": "pages/episodes.html" },
+    { "label": "Soundworks", "href": "pages/works.html" },
     { "label": "About", "href": "pages/about.html" }
   ],
 
@@ -17,8 +17,8 @@
       { "label": "Web publications catalogue", "href": "https://www.hectolitre.space/web-publications.html" },
       { "label": "Soundcloud archive", "href": "https://soundcloud.com/user-816404246" }
     ],
-    "credit": "Radio Hectolitre is an art project in-construction by Chris A. Iradukunda (daqhris), resident at Hectolitre where the sound works originate."
+    "credit": "Radio Hectolitre is an art project in-construction by Chris A. Iradukunda (daqhris), artist-in-residence at Hectolitre where the sound works originate."
   },
 
-  "tickerPrefix": ["Radio Hectolitre", "hectolitre.space", "50.8503°N 4.3517°E"]
+  "tickerPrefix": ["Radio Hectolitre", "Brussels, Belgium", "radio.hectolitre.space", "50.8503°N 4.3517°E"]
 }
