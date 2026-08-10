@@ -53,7 +53,7 @@
       await RadioHecto.initChrome("index.html");
       const site = await RadioHecto.fetchJSON("data/site.json").catch(() => null);
       if (site?.tickerPrefix?.length) RadioHecto.renderTicker(site.tickerPrefix);
-      renderBroadcastGrid({ mountId: "archive-preview", filter: "all", emptyText: "This is the first transmission — the archive will grow from here." });
+      renderBroadcastGrid({ mountId: "archive-preview", filter: "all", showCurrentBadge: false, emptyText: "This is the first transmission — the archive will grow from here." });
       renderEpisodeGrid({ mountId: "episode-preview", emptyText: "No interviews published yet." });
       renderWorksGrid({ mountId: "works-preview", emptyText: "No guest works published yet." });
     })();

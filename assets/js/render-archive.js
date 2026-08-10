@@ -28,10 +28,12 @@ async function renderBroadcastGrid(opts) {
   if (opts.filter === "current") broadcasts = broadcasts.filter((b) => b.status === "current");
   else if (opts.filter === "archived") broadcasts = broadcasts.filter((b) => b.status !== "current");
 
+  const showBadge = opts.showCurrentBadge !== false;
+
   const items = broadcasts.map((b) => ({
     href: b.href,
     poster: b.poster,
-    badge: b.status === "current" ? "Current" : null,
+    badge: (showBadge && b.status === "current") ? "Current" : null,
     dateLine: b.dateLine,
     title: b.title,
     summary: b.summary,
