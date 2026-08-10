@@ -116,11 +116,14 @@ unreachable), most podcast apps still play the episode fine — `length`
 is metadata, not a requirement for playback — but it's worth checking
 your host allows `HEAD` requests if you want it populated.
 
-## Deliberately not built yet
+## Deliberately not built
 
-- **A "skip" control.** A shared station doesn't really have a "next" in
-  the way an on-demand playlist does — skipping would mean diverging from
-  the synced position. Left out for now rather than half-solved.
+- **A "skip" control.** This isn't a gap to fill in later — it's a
+  permanent design decision. A station has one frequency; a listener
+  tunes in or doesn't. There's no "next" without turning it into an
+  on-demand playlist, which is a different, already-covered thing (the
+  archive pages, `feed.xml`, `station.m3u`). Please don't add a skip
+  button here.
 - **Periodic resync while idle.** If a listener leaves the tab open past
   a track boundary, the next `ended`/`FINISH` event recomputes and
   resyncs automatically — but there's no separate timer forcing a
@@ -129,6 +132,91 @@ your host allows `HEAD` requests if you want it populated.
   original decorative `Math.sin()` loop, not driven by actual playback.
   Wiring it to a Web Audio `AnalyserNode` is a nice later upgrade, and
   would need CORS headers enabled on daqhris.com's audio files.
-- **Automatic duration probing.** `generate_feed.py` reads whatever's in
-  `queue.json`; it doesn't try to measure files itself. Could be added
-  with `ffprobe` or `mutagen` if useful later.
+
+## Playback robustness (why the SoundCloud path looks the way it does)
+
+The SoundCloud side of this went through two real bugs before landing
+where it is now, both from the same root cause: SoundCloud's Widget API
+can't be tested from a sandboxed/offline environment, so the fixes had to
+be verified against the *documented* behavior plus defensive redundancy,
+not against the real SDK running live. Both are worth understanding
+before touching `playSoundcloud()`/`attemptScStart()` again:
+
+**Bug 1 — playback broke after ~2 track changes.** The original code
+created a fresh `SC.Widget(iframe)` wrapper on every track. Each wrapper
+registers its own internal `postMessage` listener on the iframe that
+`unbind()` never tears down (`unbind()` only removes the specific
+callbacks *you* added). A few track changes in, multiple stale wrappers
+were all reacting to the same iframe's messages at once. Fixed by
+creating the widget wrapper exactly once and reusing it via `load()` for
+every later track — the pattern SoundCloud's own docs use for this exact
+"auto-advance a playlist" case.
+
+**Bug 2 — the fix for bug 1 introduced a new one:** the UI would update
+to show the next track "playing," but no audio played. Root cause: the
+code trusted `load()`'s `options.callback` as the *only* way to know a
+newly loaded track was ready to seek and play, and also never passed
+`auto_play` (which `load()`'s `options` documentedly accepts) — so if
+that callback didn't fire reliably, nothing ever called `.play()`, and
+the track just sat loaded-but-paused. Meanwhile the "now playing" UI had
+already updated optimistically the moment we *asked* the track to start,
+regardless of whether it actually did.
+
+Fixed with two changes, not one:
+1. **Redundant restart paths.** `READY` is bound once, permanently, and
+   its handler (`attemptScStart`) is idempotent — it reads whatever's
+   currently in `state.scPendingOffsetMs` rather than a value baked in at
+   bind time. If `load()`'s `callback` fires, that calls
+   `attemptScStart()`. If SoundCloud's SDK re-fires `READY` on reload
+   instead (plausible, unverified), the same persistent handler catches
+   that too. Both paths converge on the same function, so it doesn't
+   matter which one actually fires.
+2. **Honest UI state.** `state.playing` (the listener has the station on)
+   and `state.confirmed` (audio is *actually* audible right now, based on
+   a real `PLAY`/`playing` event) are now separate. The play/pause button
+   reflects the former; the live-dot dims to show "buffering" rather than
+   blinking as if audio were flowing when it isn't. If nothing confirms
+   within `WATCHDOG_MS` (6s), one retry, then — if that also fails —
+   `advance()` moves on rather than sitting there indefinitely showing
+   "playing" with no sound. This is failure recovery, not a listener-facing
+   skip control (see above) — the distinction matters, don't repurpose it
+   into one.
+
+If you're changing this code again: the honest thing to do, given the
+testing constraint, is keep the redundancy rather than trimming it back
+down to "whichever mechanism seems to be the real one" — there's no way
+to confirm which one actually fires in production SoundCloud without a
+live browser test, which you should do (tune in, let it run through at
+least 4-5 SoundCloud tracks) before considering this settled.
+
+## Automatic duration probing
+
+```
+python3 scripts/probe_durations.py           # measure + write changes
+python3 scripts/probe_durations.py --dry-run # report only
+```
+
+Requires `ffprobe` (part of ffmpeg) on `PATH`. For every `"type": "file"`
+track, downloads it to a temp file and measures the real duration,
+updating `durationSec` and clearing `durationIsEstimate` in `queue.json`.
+
+Downloads before probing rather than pointing `ffprobe` at the URL
+directly — testing turned up that `ffprobe` falls back to an unreliable
+bitrate-based estimate for Ogg files read live over HTTP (off by 5-6x on
+a real test file), because getting an Ogg file's real duration requires
+seeking to its last page, which doesn't reliably happen against a live
+HTTP stream. A local copy gives it full random access, so this is
+accurate regardless of container format — at the cost of downloading
+each file once per run, which is a fine trade for a handful of tracks.
+
+**SoundCloud tracks are out of scope for this script** — SoundCloud's
+oEmbed endpoint (the only unauthenticated way to query track info)
+doesn't return a duration field, confirmed against their own oEmbed docs.
+Getting a real SoundCloud duration still means checking the track's page
+manually. This matters less than it used to, though: `attemptScStart()`
+in `station.js` now calls the widget's own `getDuration()` once a track
+has actually loaded, and clamps the seek target against that real number
+rather than trusting `queue.json`'s estimate for the seek itself — so a
+wrong SoundCloud estimate mainly affects which track the wall-clock math
+picks as "current," not whether the seek within that track lands
+somewhere invalid.

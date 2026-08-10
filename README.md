@@ -110,6 +110,10 @@ homepage — it's a thin shell (see below) rather than a hand-authored page.
   (see "Podcast feed & playlist" below).
 - `scripts/generate_feed.py` — regenerates `feed.xml` and `station.m3u`
   from `data/station/queue.json`.
+- `scripts/probe_durations.py` — measures real durations for self-hosted
+  (`"type": "file"`) tracks via `ffprobe` and updates `queue.json` in
+  place. SoundCloud tracks are out of scope (see `docs/station-notes.md`
+  for why); those still need a manual duration check.
 - `docs/station-notes.md` — the station's sync algorithm explained, how to
   add content to the program, and why durations/enclosure sizes are
   currently estimates.
@@ -304,10 +308,10 @@ station, `feed.xml`, and `station.m3u` automatically.
   the trailer and links out to the full ~18-minute ceremony.
 - `pages/about.html` has structural copy only, pulled from the footer
   credits already in the codebase — it needs real "about" writing.
-- Every `durationSec` in `data/station/queue.json` is a round-number
-  placeholder (`durationIsEstimate: true`) — see `docs/station-notes.md`
-  for what an estimate being wrong actually costs (small, self-correcting)
-  and how to replace them with real values.
+- Self-hosted track durations can be measured automatically with
+  `python3 scripts/probe_durations.py` (see `docs/station-notes.md`).
+  SoundCloud track durations still need a manual check — no scriptable
+  way to get those without SoundCloud's authenticated API.
 - `feed.xml`'s `<enclosure length>` is currently `0` — the host returned
   an error on a HEAD request when the feed was last generated. See
   `docs/audio-hosting-guide.md` for how to diagnose and fix this (it's
@@ -316,16 +320,14 @@ station, `feed.xml`, and `station.m3u` automatically.
 
 ## Possible future direction
 
-- **Skip control on the station.** Deliberately left out for now — a
-  shared station doesn't really have a "next" without diverging from the
-  synced position for that listener. See `docs/station-notes.md`.
 - **Real audio-reactive VU meter.** The hero animation is still a
   decorative `Math.sin()` loop, not driven by actual playback. Wiring it
   to a Web Audio `AnalyserNode` off the station's `<audio>` element would
   need CORS headers enabled on the audio host.
-- **Automatic duration/size probing.** `generate_feed.py` reads whatever's
-  in `queue.json` and HEADs each URL for byte size; it doesn't measure
-  audio duration itself. Could be added with `ffprobe` if useful later.
 - **Per-broadcast sticky player parity.** Give the broadcast-page track
   player (`render-page.js`) the same Widget-API integration `station.js`
   has, for real progress/volume sync instead of just reloading the embed.
+
+Not a future direction, permanent policy: the station has no skip
+control. See `docs/station-notes.md` — a station has one frequency, and
+skipping has no equivalent in that metaphor.

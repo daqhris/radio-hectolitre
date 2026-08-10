@@ -52,8 +52,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .site-nav-live:hover{border-color:var(--accent);color:var(--accent)}
 @media(max-width:560px){.site-nav-links{gap:12px}}
 
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:none;display:inline-block}
-.station-bar .live-dot{animation:blink 1.3s ease-in-out infinite;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:blink 1.3s ease-in-out infinite;display:inline-block}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
 /* ==========================================================================
@@ -64,6 +63,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .hero-fade{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 25%,rgba(10,10,8,.65) 65%,var(--bg) 100%);z-index:1}
 .hero-content{position:relative;z-index:2;padding:32px 28px 36px;max-width:900px}
 .hero-eyebrows{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.hero-eyebrows::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);animation:blink 1.3s ease-in-out infinite;display:inline-block}
 .hero-title{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(40px,8vw,92px);line-height:.93;color:var(--text);letter-spacing:-1px;margin-bottom:14px}
 .hero-meta{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px}
 .hero-meta div{display:inline}
@@ -257,4 +257,5 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .station-sub{font-size:9px;color:var(--muted);letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .station-kind{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--accent-dim);border:1px solid var(--border2);padding:3px 8px;flex-shrink:0;white-space:nowrap}
 body.has-station-bar{padding-bottom:60px}
+.station-bar.is-buffering .live-dot{animation:none;opacity:.35}
 @media (max-width:560px){.station-kind{display:none}.station-bar{gap:10px;padding:0 14px}}
