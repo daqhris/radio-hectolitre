@@ -25,8 +25,6 @@
   </header>
 
   <main class="page">
-    <h2 class="sec-label">Currently transmitting</h2>
-    <div id="current-broadcast"></div>
 
     <h2 class="sec-label"><a href="pages/archive.html" style="color:inherit;text-decoration:none">Past broadcasts ↗</a></h2>
     <div id="archive-preview"></div>
@@ -55,8 +53,7 @@
       await RadioHecto.initChrome("index.html");
       const site = await RadioHecto.fetchJSON("data/site.json").catch(() => null);
       if (site?.tickerPrefix?.length) RadioHecto.renderTicker(site.tickerPrefix);
-      renderBroadcastGrid({ mountId: "current-broadcast", filter: "current", emptyText: "No live broadcast right now — check the archive." });
-      renderBroadcastGrid({ mountId: "archive-preview", filter: "archived", emptyText: "This is the first transmission — the archive will grow from here." });
+      renderBroadcastGrid({ mountId: "archive-preview", filter: "all", emptyText: "This is the first transmission — the archive will grow from here." });
       renderEpisodeGrid({ mountId: "episode-preview", emptyText: "No interviews published yet." });
       renderWorksGrid({ mountId: "works-preview", emptyText: "No guest works published yet." });
     })();
