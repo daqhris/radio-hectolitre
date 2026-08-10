@@ -18,6 +18,7 @@
 
   const WATCHDOG_MS = 6000; // how long to wait for confirmed audio before retrying
   const MAX_RETRIES = 1; // retries per track before giving up and advancing past it
+  const MAX_CONSECUTIVE_FAILURES = 3; // distinct tracks that can fail in a row before the station stops trying and waits for a manual retry
 
   const state = {
     queue: [],
@@ -34,6 +35,7 @@
     scPendingOffsetMsForFile: 0,
     watchdogTimer: null,
     retriesForCurrentTrack: 0,
+    consecutiveFailures: 0, // distinct tracks that have failed in a row this "on" session
   };
 
   /* ------------------------------------------------------------- Timing */
@@ -129,11 +131,13 @@
       setConfirmed(false);
       stopAll();
       clearWatchdog();
+      state.consecutiveFailures = 0;
     }
   }
 
   function setConfirmed(next) {
     state.confirmed = next;
+    if (next) state.consecutiveFailures = 0;
     const { bar } = els();
     if (bar) bar.classList.toggle("is-buffering", state.playing && !next);
   }
@@ -278,7 +282,15 @@
         widget.bind(SC.Widget.Events.PAUSE, () => setConfirmed(false));
         widget.bind(SC.Widget.Events.FINISH, advance);
       } else {
-        state.scWidget.load(track.embedUrl, {
+        // trackUrl, not embedUrl: load() expects a bare track URL and
+        // wraps it into a full w.soundcloud.com/player/?url=... request
+        // itself. embedUrl is ALREADY that full wrapped URL (it's what
+        // the initial iframe.src above needs) — passing it to load() too
+        // means the SDK wraps an already-wrapped URL, producing a
+        // doubled, 404ing request. Confirmed via a live console log
+        // showing exactly that doubled URL. This is why every second-
+        // and-later SoundCloud track was failing, not just one of them.
+        state.scWidget.load(track.trackUrl, {
           auto_play: true, // documented as an accepted load() option; belt-and-suspenders with the explicit play() below
           callback: () => attemptScStart(token),
         });
@@ -309,6 +321,17 @@
   // NOT a listener-facing "skip" — it's failure recovery for a track that
   // silently didn't start, so the station doesn't just sit there showing
   // "playing" with no sound indefinitely. One retry, then move on.
+  //
+  // That "move on" is bounded, deliberately. An earlier version of this
+  // called advance() unconditionally on giving up, which is fine for a
+  // one-off bad track — but if the actual cause is systemic (as it was:
+  // a URL-construction bug meant EVERY track failed the same way), that
+  // turns into a silent infinite loop, hammering the network every few
+  // seconds with no way out short of a page refresh. Confirmed live via
+  // a browser console showing exactly that. MAX_CONSECUTIVE_FAILURES
+  // caps it: after that many distinct tracks fail in a row, stop
+  // entirely rather than keep trying — better to be visibly stopped than
+  // invisibly stuck.
   function armWatchdog(token) {
     clearWatchdog();
     state.watchdogTimer = setTimeout(() => {
@@ -321,10 +344,31 @@
         else attemptScStart(token);
         armWatchdog(token);
       } else {
-        console.warn("Station: track still not confirmed playing after retry — advancing.");
-        advance();
+        state.consecutiveFailures++;
+        if (state.consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+          console.error(
+            "Station:", state.consecutiveFailures,
+            "tracks in a row failed to confirm playback — stopping rather than looping forever. Tap play to try again."
+          );
+          giveUp();
+        } else {
+          console.warn("Station: track still not confirmed playing after retry — advancing.");
+          advance();
+        }
       }
     }, WATCHDOG_MS);
+  }
+
+  // Stops the station and leaves it in a plainly "not playing" state
+  // after repeated failures, rather than silently spinning. Distinct
+  // from setPlaying(false): this also resets the failure counter and
+  // gives the listener a visible reason, so tapping play again is a
+  // genuinely fresh attempt, not an immediate re-trip of the breaker.
+  function giveUp() {
+    setPlaying(false);
+    const { title, sub } = els();
+    if (title) title.textContent = "Couldn't connect — tap play to try again";
+    if (sub) sub.textContent = "";
   }
 
   function playTrackAt(index, offsetMs) {
