@@ -1,0 +1,28 @@
+# Radio Hectolitre
+
+> Artists-run web radio documenting live broadcasts, an interview series, and guest works from Hectolitre, an artist space in Brussels. Includes a shared "virtual station" that plays the whole archive back in sync for every listener, without a live streaming server.
+
+Radio Hectolitre is a static, open-source website — no server, no build step, no framework. Content comes in three types, each with a lightweight index page and one detail page per item: broadcasts (live performances at Hectolitre), Hectolitre.FM (an interview series with residents), and guest works (standalone pieces shown elsewhere, e.g. at the Venice Biennale). The "station" is a client-side player that computes shared playback position from wall-clock time against a fixed program, so every listener hears the same thing at the same moment without a real streaming server.
+
+## Content
+
+- [Homepage](https://daqhris.com/radio-hectolitre/): Currently transmitting, past broadcasts, interviews, and guest works
+- [Past broadcasts](https://daqhris.com/radio-hectolitre/pages/archive.html): Every live transmission recorded at Hectolitre
+- [Hectolitre.FM](https://daqhris.com/radio-hectolitre/pages/episodes.html): The interview series, trailer through episode 08
+- [Guest works](https://daqhris.com/radio-hectolitre/pages/works.html): Standalone sound/performance pieces shown beyond Hectolitre
+- [About](https://daqhris.com/radio-hectolitre/pages/about.html): What Hectolitre and Radio Hectolitre are
+
+## Feeds
+
+- [Podcast RSS feed](https://daqhris.com/radio-hectolitre/feed.xml): Self-hosted audio only — SoundCloud-embedded episodes aren't included, since SoundCloud doesn't expose a redistributable file URL
+- [Station playlist (M3U)](https://daqhris.com/radio-hectolitre/station.m3u): Same scope as the RSS feed
+- [Hectolitre.FM on SoundCloud](https://soundcloud.com/user-816404246): All interview episodes, including the ones not in the RSS feed above
+
+## Source
+
+- [GitHub repository](https://github.com/daqhris/radio-hectolitre): Full source (MPL-2.0). The README documents the site's architecture, content JSON schemas, and the station's sync design in detail — the best starting point for understanding how the site works or adding content to it.
+
+## Optional
+
+- [docs/station-notes.md](https://github.com/daqhris/radio-hectolitre/blob/main/docs/station-notes.md): How the shared station's wall-clock sync works, and its known playback-robustness history
+- [docs/audio-hosting-guide.md](https://github.com/daqhris/radio-hectolitre/blob/main/docs/audio-hosting-guide.md): What audio hosting needs to support direct linking, for anyone adding self-hosted tracks
