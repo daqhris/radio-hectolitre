@@ -114,6 +114,9 @@ homepage — it's a thin shell (see below) rather than a hand-authored page.
   (`"type": "file"`) tracks via `ffprobe` and updates `queue.json` in
   place. SoundCloud tracks are out of scope (see `docs/station-notes.md`
   for why); those still need a manual duration check.
+- `scripts/set_duration.py` — safely enters a manually-checked duration
+  (`mm:ss`) into `queue.json` for one track, for the SoundCloud tracks
+  `probe_durations.py` can't reach. Validates before writing.
 - `docs/station-notes.md` — the station's sync algorithm explained, how to
   add content to the program, and why durations/enclosure sizes are
   currently estimates.

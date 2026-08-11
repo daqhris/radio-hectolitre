@@ -212,11 +212,23 @@ each file once per run, which is a fine trade for a handful of tracks.
 **SoundCloud tracks are out of scope for this script** — SoundCloud's
 oEmbed endpoint (the only unauthenticated way to query track info)
 doesn't return a duration field, confirmed against their own oEmbed docs.
-Getting a real SoundCloud duration still means checking the track's page
-manually. This matters less than it used to, though: `attemptScStart()`
-in `station.js` now calls the widget's own `getDuration()` once a track
-has actually loaded, and clamps the seek target against that real number
-rather than trusting `queue.json`'s estimate for the seek itself — so a
-wrong SoundCloud estimate mainly affects which track the wall-clock math
-picks as "current," not whether the seek within that track lands
-somewhere invalid.
+Confirmed again directly: fetching a track's page and checking every
+metadata field (`og:`, `twitter:`, meta tags) turns up nothing — the
+duration only renders once the page's JavaScript runs client-side, which
+nothing outside an actual browser can see. Real SoundCloud durations
+still mean checking the track's page manually and entering the value:
+
+```
+python3 scripts/set_duration.py --list          # see what's still estimated
+python3 scripts/set_duration.py ep-02 10:06      # mm:ss or h:mm:ss
+```
+
+Validates the track id and timecode before writing anything, so a typo
+reports an error instead of corrupting `queue.json`. This matters less
+than it used to, though: `attemptScStart()` in `station.js` now calls the
+widget's own `getDuration()` once a track has actually loaded, and clamps
+the seek target against that real number rather than trusting
+`queue.json`'s estimate for the seek itself — so a wrong SoundCloud
+estimate mainly affects which track the wall-clock math picks as
+"current," not whether the seek within that track lands somewhere
+invalid.

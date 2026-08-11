@@ -9,8 +9,8 @@
       "sub": "Venice Biennale 2026",
       "type": "file",
       "src": "https://daqhris.com/god-bless-usa/assets/audio/trailer.opus.ogg",
-      "durationSec": 60,
-      "durationIsEstimate": true,
+      "durationSec": 66,
+      "durationIsEstimate": false,
       "publishedAt": "2026-05-09",
       "href": "pages/works/god-bless-usa.html"
     },
@@ -22,8 +22,8 @@
       "type": "soundcloud",
       "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fhectolitrefm-trailer&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
       "trackUrl": "https://soundcloud.com/user-816404246/hectolitrefm-trailer",
-      "durationSec": 120,
-      "durationIsEstimate": true,
+      "durationSec": 52,
+      "durationIsEstimate": false,
       "href": "pages/episodes/trailer.html"
     },
     {
@@ -34,8 +34,8 @@
       "type": "soundcloud",
       "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-01-sofhie-mavroudis&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
       "trackUrl": "https://soundcloud.com/user-816404246/episode-01-sofhie-mavroudis",
-      "durationSec": 720,
-      "durationIsEstimate": true,
+      "durationSec": 701,
+      "durationIsEstimate": false,
       "href": "pages/episodes/episode-01-sofhie-mavroudis.html"
     },
     {
@@ -46,8 +46,8 @@
       "type": "soundcloud",
       "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-02-zoe-medard&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
       "trackUrl": "https://soundcloud.com/user-816404246/episode-02-zoe-medard",
-      "durationSec": 720,
-      "durationIsEstimate": true,
+      "durationSec": 606,
+      "durationIsEstimate": false,
       "href": "pages/episodes/episode-02-zoe-medard.html"
     },
     {
@@ -58,8 +58,8 @@
       "type": "soundcloud",
       "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-3-pierre-louis-cassou&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
       "trackUrl": "https://soundcloud.com/user-816404246/episode-3-pierre-louis-cassou",
-      "durationSec": 720,
-      "durationIsEstimate": true,
+      "durationSec": 862,
+      "durationIsEstimate": false,
       "href": "pages/episodes/episode-03-pierre-louis-cassou.html"
     },
     {
@@ -70,8 +70,8 @@
       "type": "soundcloud",
       "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-04-oscar-cassamajor&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
       "trackUrl": "https://soundcloud.com/user-816404246/episode-04-oscar-cassamajor",
-      "durationSec": 720,
-      "durationIsEstimate": true,
+      "durationSec": 1008,
+      "durationIsEstimate": false,
       "href": "pages/episodes/episode-04-oscar-cassamajor.html"
     },
     {
@@ -82,8 +82,8 @@
       "type": "soundcloud",
       "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-05-naama-freedman&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
       "trackUrl": "https://soundcloud.com/user-816404246/episode-05-naama-freedman",
-      "durationSec": 720,
-      "durationIsEstimate": true,
+      "durationSec": 913,
+      "durationIsEstimate": false,
       "href": "pages/episodes/episode-05-naama-freedman.html"
     },
     {
@@ -94,8 +94,8 @@
       "type": "soundcloud",
       "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-06-ksenia-anokhina&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
       "trackUrl": "https://soundcloud.com/user-816404246/episode-06-ksenia-anokhina",
-      "durationSec": 720,
-      "durationIsEstimate": true,
+      "durationSec": 956,
+      "durationIsEstimate": false,
       "href": "pages/episodes/episode-06-ksenia-anokhina.html"
     },
     {
@@ -106,8 +106,8 @@
       "type": "soundcloud",
       "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fepisode-7-david-labi&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
       "trackUrl": "https://soundcloud.com/user-816404246/episode-7-david-labi",
-      "durationSec": 720,
-      "durationIsEstimate": true,
+      "durationSec": 1511,
+      "durationIsEstimate": false,
       "href": "pages/episodes/episode-07-david-labi.html"
     },
     {
@@ -118,8 +118,8 @@
       "type": "soundcloud",
       "embedUrl": "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fuser-816404246%2Fmartina&color=%23c4ef3c&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false",
       "trackUrl": "https://soundcloud.com/user-816404246/martina",
-      "durationSec": 720,
-      "durationIsEstimate": true,
+      "durationSec": 1193,
+      "durationIsEstimate": false,
       "href": "pages/episodes/episode-08-martina-petrovic.html"
     }
   ]
