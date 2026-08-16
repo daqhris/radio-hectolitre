@@ -3,6 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script>
+    // Sets the day/night theme before first paint, so there's no flash of
+    // the wrong one. Stored choice wins; first-ever visit falls back to
+    // the OS/browser's prefers-color-scheme. Mirrors app.js's THEME_KEY —
+    // see docs/theme.md.
+    (function () {
+      var KEY = "rh-theme", t;
+      try { t = localStorage.getItem(KEY); } catch (err) {}
+      if (t !== "light" && t !== "dark") {
+        t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
   <title>Episode 01 — Sofhie Mavroudis — Radio Hectolitre</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">

@@ -11,6 +11,8 @@ Artists-run broadcasting at Hectolitre — web radio pages that combine:
   whole archive, played from a persistent bar on every page
 - a podcast **RSS feed** and **M3U playlist** for the self-hosted portion
   of the archive
+- a **day/night theme**, auto-detected on first visit and switchable from
+  the nav from then on
 
 ## Orientation for new contributors (human or agent)
 
@@ -83,8 +85,12 @@ homepage — it's a thin shell (see below) rather than a hand-authored page.
   `epoch` reference point. See "The shared station" below and
   `docs/station-notes.md` for the full explanation.
 - `assets/css/styles.css` — the only stylesheet. Every page shares it.
+  Every color is a CSS custom property, defined once per theme
+  (`:root`/`:root[data-theme="dark"]` and `:root[data-theme="light"]`) —
+  see `docs/theme.md` before adding a hardcoded color anywhere.
 - `assets/js/app.js` — shared site chrome: reads `site.json`, renders the
-  nav bar and footer into `#site-nav-mount` / `#site-footer-mount`, exposes
+  nav bar (including the day/night toggle — see `docs/theme.md`) and
+  footer into `#site-nav-mount` / `#site-footer-mount`, exposes
   `buildCardGrid()` (the one card-grid builder used by every archive/index
   grid on the site), and — if `station.js` has been loaded on the page —
   boots the station player as part of `initChrome()`.
@@ -120,6 +126,11 @@ homepage — it's a thin shell (see below) rather than a hand-authored page.
 - `docs/station-notes.md` — the station's sync algorithm explained, how to
   add content to the program, and why durations/enclosure sizes are
   currently estimates.
+- `docs/theme.md` — how the day/night theme is decided (stored choice,
+  else system preference) and kept flash-free on first paint across a
+  multi-page site with no shared layout, the two places that logic has to
+  stay in sync, and how to add a color token or a new page without
+  breaking either.
 - `docs/audio-hosting-guide.md` — what audio hosting needs to support
   (direct URLs, `HEAD`, byte-range, CORS) to work in `feed.xml`/
   `station.m3u`, and how to tell a bot-protection block from an actual

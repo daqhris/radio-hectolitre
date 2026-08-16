@@ -43,6 +43,68 @@ const RadioHecto = (function () {
     return res.json();
   }
 
+  /* ------------------------------------------------------ Day/night theme
+     The actual first-paint decision (stored choice, else system
+     prefers-color-scheme) happens in a tiny inline script in every page's
+     <head>, before this file even loads — see docs/theme.md — so there's
+     no flash of the wrong theme. This half just renders the nav toggle
+     and keeps localStorage in sync with whatever the visitor picks from
+     here on. Same storage key as the head script: keep them matched. */
+
+  const THEME_KEY = "rh-theme";
+
+  function getTheme() {
+    return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+  }
+
+  // Takes the button element directly rather than looking it up by id —
+  // called once from renderThemeToggle() before the button has been
+  // inserted into the document (getElementById would find nothing yet).
+  function updateThemeButton(btn) {
+    if (!btn) return;
+    const isLight = getTheme() === "light";
+    btn.setAttribute("aria-pressed", isLight ? "true" : "false");
+    btn.setAttribute("aria-label", isLight ? "Switch to night theme" : "Switch to day theme");
+  }
+
+  function setTheme(theme, btn) {
+    document.documentElement.setAttribute("data-theme", theme);
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch (err) {
+      // Private browsing / storage disabled: theme still applies for this
+      // page view, it just won't be remembered on the next one.
+    }
+    updateThemeButton(btn || $("theme-toggle"));
+  }
+
+  function renderThemeToggle() {
+    const btn = createEl("button", {
+      type: "button",
+      id: "theme-toggle",
+      class: "site-nav-theme",
+    }, []);
+    btn.innerHTML =
+      '<svg class="icon-sun" viewBox="0 0 16 16" aria-hidden="true">' +
+        '<circle cx="8" cy="8" r="3.4"/>' +
+        '<rect x="7.3" y="0.5" width="1.4" height="2.6" rx="0.7"/>' +
+        '<rect x="7.3" y="12.9" width="1.4" height="2.6" rx="0.7"/>' +
+        '<rect x="0.5" y="7.3" width="2.6" height="1.4" rx="0.7"/>' +
+        '<rect x="12.9" y="7.3" width="2.6" height="1.4" rx="0.7"/>' +
+        '<rect x="7.3" y="0.5" width="1.4" height="2.6" rx="0.7" transform="rotate(45 8 8)"/>' +
+        '<rect x="7.3" y="12.9" width="1.4" height="2.6" rx="0.7" transform="rotate(45 8 8)"/>' +
+        '<rect x="0.5" y="7.3" width="2.6" height="1.4" rx="0.7" transform="rotate(45 8 8)"/>' +
+        '<rect x="12.9" y="7.3" width="2.6" height="1.4" rx="0.7" transform="rotate(45 8 8)"/>' +
+      '</svg>' +
+      '<svg class="icon-moon" viewBox="0 0 16 16" aria-hidden="true">' +
+        '<circle cx="8" cy="8" r="6.5"/>' +
+        '<circle class="moon-cut" cx="10.6" cy="5.6" r="5.4"/>' +
+      '</svg>';
+    btn.addEventListener("click", () => setTheme(getTheme() === "light" ? "dark" : "light", btn));
+    updateThemeButton(btn);
+    return btn;
+  }
+
   function renderNav(site, activePath) {
     const mount = $("site-nav-mount");
     if (!mount || !site) return;
@@ -63,6 +125,8 @@ const RadioHecto = (function () {
       links.appendChild(a);
     }
     nav.appendChild(links);
+
+    nav.appendChild(renderThemeToggle());
 
     if (site.liveStreamUrl) {
       const live = createEl(

@@ -3,6 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script>
+    // Sets the day/night theme before first paint, so there's no flash of
+    // the wrong one. Stored choice wins; first-ever visit falls back to
+    // the OS/browser's prefers-color-scheme. Mirrors app.js's THEME_KEY —
+    // see docs/theme.md.
+    (function () {
+      var KEY = "rh-theme", t;
+      try { t = localStorage.getItem(KEY); } catch (err) {}
+      if (t !== "light" && t !== "dark") {
+        t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
   <title>Radio Hectolitre</title>
   <!-- GitHub Pages always serves the repo root as "/", so the real homepage
        lives at /index.html. This file exists only so /pages/index.html
