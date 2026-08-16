@@ -207,7 +207,7 @@ function renderTrackLibrary() {
       state.activeTrack = t;
       updateActiveTrackUI();
       renderActiveTrackPlayer();
-      setPlaying(false); // swapping tracks stops the ambient meter until Play is pressed again
+      setPlaying(false); // swapping tracks resets the play button until Play is pressed again
     });
 
     list.appendChild(item);
@@ -326,56 +326,30 @@ function renderHeroLiveButton() {
   btn.addEventListener("click", () => window.open(b.live.liveStreamUrl, "_blank", "noopener,noreferrer"));
 }
 
-/* ------------------------------------------------- Ambient VU + play btn
-   Two things happen on Play: a decorative VU animation runs in the hero
-   (kept from the original prototype — it's the site's visual signature),
-   and the active track's embed is (re)loaded so Play actually starts
-   audio rather than being purely cosmetic. */
+/* ---------------------------------------------------------- Play button
+   Toggles the button's own pressed state and, for a SoundCloud track,
+   reloads its embed with autoplay so Play has a real effect rather than
+   being purely cosmetic. (File-type tracks already get native
+   <audio controls> from renderActiveTrackPlayer() — nothing to wire here.)
 
-let heroBars = [];
-let vuInterval = null;
+   Previously this also drove a decorative Math.sin()-based VU animation
+   in the hero, unrelated to actual playback. Removed per project
+   decision — see README "Possible future direction": basic protocol
+   correctness (playback, feed, parity) takes priority over decorative
+   polish, and a meter that doesn't reflect real audio was judged not
+   worth keeping just to replace later with a real one. */
+
 let playing = false;
-
-function buildVUBars() {
-  const vuHero = $("vu-hero");
-  if (!vuHero) return;
-  clearChildren(vuHero);
-  heroBars = [];
-  for (let i = 0; i < 48; i++) {
-    const b = createEl("div", { class: "vu-bar" }, []);
-    vuHero.appendChild(b);
-    heroBars.push(b);
-  }
-}
-
-function animateVU() {
-  heroBars.forEach((b, i) => {
-    const v = Math.abs(Math.sin(Date.now() / 700 + i * 0.35)) * 0.7 + Math.random() * 0.3;
-    const h = Math.round(v * 24) + 2;
-    b.style.height = h + "px";
-    b.style.background = i < 36
-      ? (h > 18 ? "var(--accent)" : h > 10 ? "var(--accent-dim)" : "var(--dim)")
-      : (h > 18 ? "var(--red)" : "var(--dim)");
-  });
-}
 
 function setPlaying(next) {
   playing = next;
   const btn = $("play-button");
   if (btn) btn.classList.toggle("playing", playing);
-
-  if (playing) {
-    vuInterval = setInterval(animateVU, 80);
-  } else {
-    clearInterval(vuInterval);
-    heroBars.forEach((b) => { b.style.height = "2px"; b.style.background = "var(--dim)"; });
-  }
 }
 
 function wirePlayButton() {
   const btn = $("play-button");
   if (!btn) return;
-  buildVUBars();
   btn.addEventListener("click", () => {
     setPlaying(!playing);
     if (playing && state.activeTrack?.listen?.type === "soundcloud") {

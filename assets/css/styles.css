@@ -69,8 +69,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .hero-meta div{display:inline}
 .hero-meta div:not(:last-child)::after{content:'·';margin-left:8px;color:var(--dim)}
 .hero-short-description{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--muted);max-width:620px;margin-top:10px}
-.vu-hero{position:relative;z-index:2;padding:0 28px 20px;display:flex;gap:2px;height:28px;align-items:flex-end}
-.vu-bar{flex:1;background:var(--dim);border-radius:1px;min-height:2px;transition:height .07s ease}
 
 /* Compact hero used on non-broadcast pages (home/about/archive) */
 .page-hero{max-width:1100px;margin:0 auto;padding:56px 20px 24px}

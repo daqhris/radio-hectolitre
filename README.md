@@ -323,13 +323,17 @@ station, `feed.xml`, and `station.m3u` automatically.
 
 ## Possible future direction
 
-- **Real audio-reactive VU meter.** The hero animation is still a
-  decorative `Math.sin()` loop, not driven by actual playback. Wiring it
-  to a Web Audio `AnalyserNode` off the station's `<audio>` element would
-  need CORS headers enabled on the audio host.
 - **Per-broadcast sticky player parity.** Give the broadcast-page track
   player (`render-page.js`) the same Widget-API integration `station.js`
   has, for real progress/volume sync instead of just reloading the embed.
+  Deferred for now — see reasoning below.
+
+Not a future direction, decided against: the hero used to run a
+decorative `Math.sin()` VU-bar animation, unrelated to actual playback.
+Removed rather than made real — basic protocol correctness (playback,
+feed, per-broadcast parity above) takes priority over decorative polish,
+and a fake meter wasn't worth keeping around as a placeholder for a real
+one built later.
 
 Not a future direction, permanent policy: the station has no skip
 control. See `docs/station-notes.md` — a station has one frequency, and
