@@ -34,6 +34,22 @@ function renderEmbed(embed) {
     iframe.src = embed.embedUrl;
     iframe.allowFullscreen = true;
     wrap.appendChild(iframe);
+  } else if (embed.type === "bandcamp") {
+    // Bandcamp's own EmbeddedPlayer (v=2/size=large/tracklist=false), same
+    // 120px-tall compact strip as the SoundCloud embed above — deliberately
+    // NOT the tall tracklist=true layout, so it matches .feature-embed's
+    // fixed height without extra CSS. Bandcamp doesn't expose a public JS
+    // control API the way SoundCloud does (see docs/audio-hosting-guide.md),
+    // so this is display-only: no station.js integration, just the widget's
+    // own play button.
+    const iframe = createEl("iframe", {
+      title: embed.label || "Bandcamp player",
+      loading: "lazy",
+      seamless: "seamless",
+    });
+    iframe.src = embed.embedUrl;
+    wrap.appendChild(iframe);
+    if (embed.label) wrap.appendChild(createEl("div", { class: "embed-caption" }, [embed.label]));
   } else if (embed.type === "audio") {
     const audio = document.createElement("audio");
     audio.controls = true;

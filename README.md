@@ -277,7 +277,7 @@ Both content types share one shape, rendered by `render-feature.js`:
   "coverImage": "https://... or assets/img/...",
   "synopsis": ["paragraph one", "paragraph two"],
   "embed": {
-    "type": "soundcloud",        // or "audio" ({ src }) or "link" ({ href, label })
+    "type": "soundcloud",        // or "bandcamp" ({ embedUrl }), "audio" ({ src }), "link" ({ href, label })
     "embedUrl": "https://w.soundcloud.com/player/?url=..."
   },
   "credits": ["Hosted by ...", "Production: ..."],
@@ -291,9 +291,14 @@ to `data/episodes/index.json`, copy `pages/episodes/trailer.html` and
 update its two `window.FEATURE_DATA` / back-link values. A new guest work:
 same pattern, but add the index entry to `data/works/index.json` and copy
 `pages/works/god-bless-usa.html` instead. Either way, if the track has a
-real, self-hosted audio file (not just a SoundCloud embed), also add it to
-`data/station/queue.json` with `"type": "file"` to get it into the shared
-station, `feed.xml`, and `station.m3u` automatically.
+real, self-hosted audio file (not just a SoundCloud or Bandcamp embed),
+also add it to `data/station/queue.json` with `"type": "file"` to get it
+into the shared station, `feed.xml`, and `station.m3u` automatically. An
+embed-only work (SoundCloud or Bandcamp) can't join `queue.json` the same
+way SoundCloud episodes do: `station.js`'s shared-clock playback relies on
+SoundCloud's official Widget JS API for remote seek/play/pause, and
+Bandcamp doesn't expose an equivalent public control API — see
+`docs/audio-hosting-guide.md`.
 
 ## Adding a new broadcast
 

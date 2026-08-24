@@ -1,0 +1,30 @@
+{
+  "slug": "richiamare",
+  "type": "work",
+  "eyebrow": "Sound work · Canti Magnetici, 2025",
+  "title": "Richiamare",
+  "subtitle": "An improvisation built from the worn memory of J.S. Bach's French Suite No. 3 — four pieces on absence, precariousness and the pull to call something back.",
+  "dateLine": "Canti Magnetici · released 22 June 2025",
+  "coverImage": "https://f4.bcbits.com/img/a3989911578_5.jpg",
+  "synopsis": [
+    "\"Richiamare\" reaches back toward the past, treating absence and precariousness as something lived out in the present rather than simply remembered. Its four pieces circle Bach's French Suite No. 3 — a work Sampaolesi spent years living with as a student — not as a performance of the score, but as it now exists only in memory: worn down and reshaped over time, resurfacing changed, the way an object left in the sea comes back corroded into something else.",
+    "Recorded with Luca Piovesan, mixed by James Ginzburg and mastered by Giuseppe Ielasi, the record was released by Canti Magnetici as a single-sided C25 cassette, catalogue Canto 43.",
+    "Carlo Sampaolesi (b. 1997, Italy) is an accordionist and performer based in Brussels, and a resident artist at Hectolitre. His research into the instrument's timbral and spectral range has led to commissions and collaborations with composers including Francesca Verunelli, Dmitri Kourliandski, Gavin Bryars, Giulia Lorusso, Maurizio Azzan, Carlo Elia Praderio and Mattia Clera, and performances with ensembles including the Neue Vocalsolisten, mdi ensemble, FontanaMIX Ensemble, Opificio Sonoro, the Orchestra del Teatro La Fenice, Eutopia Ensemble and Dedalus Ensemble. He is also organiser and artistic director of the PNE.UMA Contemporary Accordion Festival."
+  ],
+  "embed": {
+    "type": "bandcamp",
+    "src": "https://cantimagnetici.bandcamp.com/album/richiamare",
+    "embedUrl": "https://bandcamp.com/EmbeddedPlayer/v=2/album=2023192122/size=large/tracklist=false/artwork=small/",
+    "label": "Richiamare — stream the album via Bandcamp"
+  },
+  "credits": [
+    "All four pieces composed and improvised by Carlo Sampaolesi",
+    "Recorded with Luca Piovesan · mixed by James Ginzburg · mastered by Giuseppe Ielasi",
+    "Released by Canti Magnetici, single-sided C25 · Canto 43"
+  ],
+  "links": [
+    { "label": "Listen on Bandcamp ↗", "href": "https://cantimagnetici.bandcamp.com/album/richiamare" },
+    { "label": "Canti Magnetici ↗", "href": "https://cantimagnetici.bandcamp.com/" }
+  ],
+  "backLink": { "label": "← Back to soundworks", "href": "pages/works.html" }
+}
