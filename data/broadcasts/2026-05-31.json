@@ -20,13 +20,14 @@
       "Broadcast live via FRP Radio — the inaugural transmission of Radio Hectolitre. The garden was open as a chill-out area after the performance. Documentation photography by Mladen Bundalo. Poster design by Bel McLaughlin."
     ],
     "tags": [
-      "Live broadcast",
-      "Recording available",
-      "Sound performance",
+      "Live Web Streaming",
+      "Recording Available",
+      "Sound Performance",
       "Collective",
       "Improvisation",
       "Flute · Clarinet · Voice · Electronics",
       "FRP Radio",
+      "Short Film",
       "Brussels"
     ]
   },
@@ -60,7 +61,7 @@
   ],
   "spokenWords": [
     {
-      "attribution": "Chris-Armel Iradukunda (daqhris) — voiced during the performance",
+      "attribution": "Chris-Armel — voiced during the performance",
       "variant": "default",
       "text": "Time Board Mother Control has booked a timeslot for a collective toast to an artists-run space where residents watered with sweat a dry ground until growing inter-national wings and flying information in formation towards Italy’s 61st Venice Biennale.",
       "links": []
@@ -600,13 +601,14 @@
     "Coding · Chris A. Iradukunda",
     "Livestream · Nenad Pinter",
     "Web Radio · FRP Radio",
+    "Short Film · Melín Vazquez",
     "50.8503°N 4.3517°E",
     "hectolitre.space"
   ],
   "credits": {
     "madeFor": "Hectolitre",
     "producer": "Hectolitre Artists",
-    "design": "Poster design by Bel McLaughlin · Documentation photography by Mladen Bundalo",
+    "design": "Poster design by Bel McLaughlin · Documentation photography by Mladen Bundalo · Web radio livestream by Nenad Pinter · Audiovisual short film by Melín Vazquez",
     "infrastructure": "Broadcast with AzuraCast (open source) · Hosted by FRP Radio"
   },
   "relatedContent": [
