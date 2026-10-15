@@ -8,6 +8,7 @@ const { $, clearChildren, createEl, fetchJSON, withBase } = RadioHecto;
 const state = {
   broadcast: null,
   activeTrack: null,
+  audioEl: null, // the active <audio> for a self-hosted (type "file") track, if any
   lightboxIndex: 0,
 };
 
@@ -231,6 +232,10 @@ function renderActiveTrackPlayer() {
   const playerWrap = $("listen-embed");
   if (!playerWrap) return;
 
+  if (state.audioEl) {
+    state.audioEl.pause();
+    state.audioEl = null;
+  }
   clearChildren(playerWrap);
 
   if (t?.listen?.type === "soundcloud") {
@@ -244,10 +249,37 @@ function renderActiveTrackPlayer() {
     iframe.allowFullscreen = true;
     playerWrap.appendChild(iframe);
   } else if (t?.listen?.type === "file") {
+    // Self-hosted recording. These are hour-long, 50–70 MB files, so
+    // preload="none" — nothing downloads until the listener presses play.
+    // <source type> lets the browser skip a format it can't decode instead
+    // of failing at load time; the inner text + download link are the
+    // fallback for browsers without <audio> support, and a plain way to
+    // save the file.
+    const url = withBase(t.listen.src);
     const audio = document.createElement("audio");
     audio.controls = true;
-    audio.src = withBase(t.listen.src);
+    audio.preload = "none";
+    audio.setAttribute("aria-label", t.title ? `Recording: ${t.title}` : "Recording");
+    const source = createEl("source", { src: url }, []);
+    if (t.listen.mime) source.setAttribute("type", t.listen.mime);
+    audio.appendChild(source);
+    audio.appendChild(
+      document.createTextNode("Your browser can't play this audio here — use the download link below.")
+    );
+    audio.addEventListener("play", () => {
+      setPlaying(true);
+      // One thing at a time: tune the shared station out when a recording starts.
+      window.__station?.stop?.();
+    });
+    audio.addEventListener("pause", () => setPlaying(false));
+    audio.addEventListener("ended", () => setPlaying(false));
+    state.audioEl = audio;
     playerWrap.appendChild(audio);
+
+    const dl = createEl("a", { class: "audio-download", href: url, download: "" }, [
+      `Download (${(t.listen.src.split(".").pop() || "audio").toUpperCase()}) ↓`,
+    ]);
+    playerWrap.appendChild(dl);
   } else {
     playerWrap.appendChild(createEl("div", { class: "no-embed" }, ["Recording not published yet for this track."]));
   }
@@ -351,6 +383,14 @@ function wirePlayButton() {
   const btn = $("play-button");
   if (!btn) return;
   btn.addEventListener("click", () => {
+    // File tracks: the button drives the real <audio> element; its
+    // play/pause events (wired in renderActiveTrackPlayer) keep the button's
+    // state in sync, including when the listener uses the native controls.
+    if (state.audioEl) {
+      if (state.audioEl.paused) state.audioEl.play().catch(() => setPlaying(false));
+      else state.audioEl.pause();
+      return;
+    }
     setPlaying(!playing);
     if (playing && state.activeTrack?.listen?.type === "soundcloud") {
       // Reload the embed with autoplay so Play has a real effect, not just decoration.
@@ -360,6 +400,19 @@ function wirePlayButton() {
       }
     }
   });
+
+  // The other half of "one thing at a time": if the shared station starts
+  // playing a file, pause the recording here. Media events don't bubble, so
+  // listen in the capture phase.
+  document.addEventListener(
+    "play",
+    (e) => {
+      if (e.target?.id === "station-audio" && state.audioEl && !state.audioEl.paused) {
+        state.audioEl.pause();
+      }
+    },
+    true
+  );
 }
 
 /* ------------------------------------------------------- Related content
