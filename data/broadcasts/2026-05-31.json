@@ -36,27 +36,32 @@
     "liveStreamUrl": "https://frpradio.rs/public/frpradio"
   },
   "listen": {
-    "librarySubtitle": "Live recording + ambient field recording from the night"
+    "librarySubtitle": "Official web radio recording + the Reactor space's ambient feedback recording"
   },
   "tracks": [
     {
       "num": "01",
       "title": "Time Board Mother Control",
-      "sub": "Reactor · Live at Hectolitre · 31 May 2026",
-      "dur": "1:00:00",
+      "sub": "Official web radio recording · Reactor · Live at Hectolitre · 31 May 2026",
+      "dur": "1:04:18",
       "active": true,
       "listen": {
-        "type": "",
-        "embedUrl": ""
+        "type": "file",
+        "src": "audio/Time-Board-Mother-Control_Web-Livestream.m4a",
+        "mime": "audio/mp4"
       }
     },
     {
       "num": "02",
       "title": "Ambient Field Recording",
-      "sub": "Zoom Recorder · Ambient Noise · Reactor",
-      "dur": "~35:00",
+      "sub": "Zoom recorder · Reactor space feedback · Ambient noise",
+      "dur": "1:02:45",
       "active": false,
-      "listen": null
+      "listen": {
+        "type": "file",
+        "src": "audio/Time-Board-Mother-Control_Ambient-Zoom.mp3",
+        "mime": "audio/mpeg"
+      }
     }
   ],
   "spokenWords": [

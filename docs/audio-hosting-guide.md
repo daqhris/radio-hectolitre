@@ -113,6 +113,41 @@ whichever one does:
   file** — confirm the audio is served as a static file, not generated
   through a handler that only implements `GET`.
 
+## Preparing long recordings (an hour or more) for the web
+
+A full-length recording is big, and two things about how the file is
+*packaged* — not its quality — decide whether it starts quickly and scrubs
+smoothly in a browser:
+
+- **MP4/M4A: put the index (`moov` atom) at the front.** Many recorders and
+  editors write it at the *end*. The browser then has to fetch the tail of
+  the file (a range request near the last byte) before it can play a single
+  second, which feels like a long pause on a phone. Check with
+  `ffprobe -v trace file.m4a 2>&1 | grep -m2 -E "type:'(moov|mdat)'"` — you
+  want `moov` listed before `mdat`.
+- **Strip embedded cover art.** A 2048×2048 PNG tucked into the tags adds
+  several MB to the file (and to that start-up fetch) for no benefit on this
+  site, which shows its own imagery.
+
+Both can be fixed *without re-encoding* (the audio stream stays bit-identical):
+
+```
+ffmpeg -i in.m4a -map 0:a -c copy -movflags +faststart out.m4a
+ffmpeg -i in.mp3 -map 0:a -c copy out.mp3        # drops the cover-art stream
+```
+
+Other things worth knowing before committing audio to the repo:
+
+- **Size limits.** GitHub warns on files over 50 MB and rejects files over
+  100 MB; do not use Git LFS for audio that is served from GitHub Pages
+  (Pages serves the LFS pointer text, not the audio). Past ~100 MB per file,
+  or if the combined audio gets large, host the files on object storage
+  (R2/S3) and point `listen.src` at the absolute URL.
+- **Every re-commit of a binary adds its full size to the repo history**, so
+  get the packaging right before the first commit where possible.
+- **Bandwidth.** GitHub Pages has a soft ~100 GB/month limit. A listener who
+  plays a whole 60 MB recording costs 60 MB, so a popular link can add up.
+
 ## While we're here: CORS, for anyone who wants audio-reactive visuals
 
 Not needed for RSS/M3U, but related: if you ever want a waveform or

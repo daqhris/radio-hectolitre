@@ -427,6 +427,12 @@
   }
 
   window.initStationPlayer = initStationPlayer;
-  // Exposed for tests / debugging only — not part of the page-author API.
-  window.__station = { computePosition, state };
+  // `stop` lets a page's own player (e.g. a broadcast recording) tune the
+  // station out when it starts, so two things never play at once. The rest
+  // is exposed for tests / debugging only — not part of the page-author API.
+  window.__station = {
+    computePosition,
+    state,
+    stop() { if (state.playing) setPlaying(false); },
+  };
 })();
