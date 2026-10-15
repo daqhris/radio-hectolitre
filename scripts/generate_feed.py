@@ -39,6 +39,13 @@ FEED_IMAGE = "https://daqhris.com/god-bless-usa/og-image.png"
 
 
 def content_length(url):
+    # Self-hosted on this site (e.g. assets/audio/<id>/file.m4a): the file is
+    # right here in the repo, so read its size from disk instead of asking the
+    # network. Works offline and sidesteps bot-protection blocking HEAD.
+    if url.startswith(SITE_URL):
+        local = os.path.join(ROOT, url[len(SITE_URL):])
+        if os.path.isfile(local):
+            return str(os.path.getsize(local))
     try:
         req = urllib.request.Request(url, method="HEAD")
         with urllib.request.urlopen(req, timeout=10) as resp:

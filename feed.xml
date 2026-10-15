@@ -19,5 +19,14 @@
     <enclosure url="https://daqhris.com/god-bless-usa/assets/audio/trailer.opus.ogg" type="audio/ogg" length="236215"/>
     <itunes:duration>00:01:06</itunes:duration>
   </item>
+  <item>
+    <title>Time Board Mother Control — Official web radio recording</title>
+    <link>https://daqhris.com/radio-hectolitre/pages/broadcasts/2026-05-31.html</link>
+    <guid isPermaLink="false">radio-hectolitre-broadcast-2026-05-31</guid>
+    <pubDate>Sun, 31 May 2026 00:00:00 GMT</pubDate>
+    <description>Reactor · Live at Hectolitre · 31 May 2026</description>
+    <enclosure url="https://daqhris.com/radio-hectolitre/assets/audio/2026-05-31/Time-Board-Mother-Control_Web-Livestream.m4a" type="audio/mp4" length="69814211"/>
+    <itunes:duration>01:04:18</itunes:duration>
+  </item>
 </channel>
 </rss>

@@ -125,6 +125,8 @@ smoothly in a browser:
   second, which feels like a long pause on a phone. Check with
   `ffprobe -v trace file.m4a 2>&1 | grep -m2 -E "type:'(moov|mdat)'"` — you
   want `moov` listed before `mdat`.
+  (This matters most for anything in the shared station: tuning in seeks to
+  an arbitrary offset, which needs the index before it can jump.)
 - **Strip embedded cover art.** A 2048×2048 PNG tucked into the tags adds
   several MB to the file (and to that start-up fetch) for no benefit on this
   site, which shows its own imagery.
