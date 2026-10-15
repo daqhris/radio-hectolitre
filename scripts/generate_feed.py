@@ -17,6 +17,7 @@ an offline/sandboxed environment.
 """
 import json
 import os
+import re
 import sys
 import urllib.request
 from datetime import datetime, timezone
@@ -52,7 +53,23 @@ def content_length(url):
             return resp.headers.get("Content-Length", "0")
     except Exception as err:
         print(f"  ! could not HEAD {url}: {err}", file=sys.stderr)
+        previous = previous_length(url)
+        if previous:
+            print(f"    keeping the length already in feed.xml: {previous}", file=sys.stderr)
+            return previous
         return "0"
+
+
+def previous_length(url):
+    """The <enclosure length> already recorded in feed.xml for this URL, if
+    any — so an unreachable host doesn't overwrite a known-good size with 0."""
+    try:
+        with open(FEED_PATH, encoding="utf-8") as f:
+            feed = f.read()
+    except OSError:
+        return None
+    m = re.search(r'<enclosure url="' + re.escape(escape(url)) + r'"[^>]*length="(\d+)"', feed)
+    return m.group(1) if m and m.group(1) != "0" else None
 
 
 def mime_for(url):
@@ -144,8 +161,11 @@ def main():
     if estimates:
         print(f"Note: duration is an ESTIMATE for: {', '.join(estimates)} — consider correcting in queue.json.")
 
+    # Build first, write second: opening FEED_PATH for writing truncates it,
+    # and build_feed() reads the old file to keep known-good enclosure lengths.
+    feed_xml = build_feed(file_tracks)
     with open(FEED_PATH, "w") as f:
-        f.write(build_feed(file_tracks))
+        f.write(feed_xml)
     print(f"Wrote {FEED_PATH} ({len(file_tracks)} item(s))")
 
     with open(M3U_PATH, "w") as f:
