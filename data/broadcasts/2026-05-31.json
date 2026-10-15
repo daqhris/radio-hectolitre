@@ -47,7 +47,7 @@
       "active": true,
       "listen": {
         "type": "file",
-        "src": "audio/Time-Board-Mother-Control_Web-Livestream.m4a",
+        "src": "assets/audio/2026-05-31/Time-Board-Mother-Control_Web-Livestream.m4a",
         "mime": "audio/mp4"
       }
     },
@@ -59,7 +59,7 @@
       "active": false,
       "listen": {
         "type": "file",
-        "src": "audio/Time-Board-Mother-Control_Ambient-Zoom.mp3",
+        "src": "assets/audio/2026-05-31/Time-Board-Mother-Control_Ambient-Zoom.mp3",
         "mime": "audio/mpeg"
       }
     }

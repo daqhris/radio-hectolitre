@@ -121,6 +121,18 @@
       "durationSec": 1193,
       "durationIsEstimate": false,
       "href": "pages/episodes/episode-08-martina-petrovic.html"
+    },
+    {
+      "id": "broadcast-2026-05-31",
+      "kind": "Broadcast",
+      "title": "Time Board Mother Control — Official web radio recording",
+      "sub": "Reactor · Live at Hectolitre · 31 May 2026",
+      "type": "file",
+      "src": "https://daqhris.com/radio-hectolitre/assets/audio/2026-05-31/Time-Board-Mother-Control_Web-Livestream.m4a",
+      "durationSec": 3858,
+      "durationIsEstimate": false,
+      "publishedAt": "2026-05-31",
+      "href": "pages/broadcasts/2026-05-31.html"
     }
   ]
 }

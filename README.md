@@ -227,12 +227,13 @@ below for what to check on the hosting side if that comes back empty.
     { "num": "01", "title": "...", "sub": "...", "dur": "1:00:00", "active": true,
       "listen": { "type": "soundcloud", "embedUrl": "https://w.soundcloud.com/player/?url=..." } },
     { "num": "02", "title": "...", "sub": "...", "dur": "1:02:45", "active": false,
-      "listen": { "type": "file", "src": "audio/<name>.mp3", "mime": "audio/mpeg" } }
+      "listen": { "type": "file", "src": "assets/audio/<id>/<name>.mp3", "mime": "audio/mpeg" } }
     // "file" = self-hosted audio: native <audio> player (preload="none"), a
     // download link, and the sticky Play button controls it. `src` is relative
-    // to the site root; `mime` is optional but recommended (audio/mp4 for
-    // .m4a, audio/mpeg for .mp3). Prepare long files first — see
-    // docs/audio-hosting-guide.md, "Preparing long recordings".
+    // to the site root; files live in assets/audio/<broadcast id>/. `mime` is
+    // optional but recommended (audio/mp4 for .m4a, audio/mpeg for .mp3).
+    // Prepare long files first — see docs/audio-hosting-guide.md,
+    // "Preparing long recordings".
     // `listen: null` = recording not published yet.
   ],
   "spokenWords": [
