@@ -122,6 +122,18 @@
   // `confirmed` is reflected as a dim/still vs. lit live-dot rather than
   // touching the play/pause button, which shouldn't flicker between
   // tracks.
+  // Mirrors "on air" into the tab's favicon (RadioHecto.setOnAir). Lights as
+  // soon as audio is confirmed; goes dark immediately when the listener stops,
+  // but waits a few seconds when audio merely drops between tracks, so the
+  // icon doesn't blink at every track change.
+  let onAirTimer = null;
+  function syncOnAir() {
+    clearTimeout(onAirTimer);
+    if (state.playing && state.confirmed) RadioHecto.setOnAir(true);
+    else if (!state.playing) RadioHecto.setOnAir(false);
+    else onAirTimer = setTimeout(() => RadioHecto.setOnAir(state.playing && state.confirmed), 3000);
+  }
+
   function setPlaying(next) {
     state.playing = next;
     const { btn, bar } = els();
@@ -133,6 +145,7 @@
       clearWatchdog();
       state.consecutiveFailures = 0;
     }
+    syncOnAir();
   }
 
   function setConfirmed(next) {
@@ -140,6 +153,7 @@
     if (next) state.consecutiveFailures = 0;
     const { bar } = els();
     if (bar) bar.classList.toggle("is-buffering", state.playing && !next);
+    syncOnAir();
   }
 
   /* ------------------------------------------------------- Playback: file */

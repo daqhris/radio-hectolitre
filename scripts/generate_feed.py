@@ -36,7 +36,7 @@ SITE_DESCRIPTION = (
     "and guest works, as they're published. SoundCloud-only episodes aren't "
     "included here yet; see https://soundcloud.com/user-816404246 for those."
 )
-FEED_IMAGE = "https://daqhris.com/god-bless-usa/og-image.png"
+FEED_IMAGE = "https://daqhris.com/radio-hectolitre/assets/img/podcast/radio-hectolitre-1500.jpg"
 
 
 def content_length(url):

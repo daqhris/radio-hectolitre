@@ -17,8 +17,11 @@ Artists-run broadcasting at Hectolitre — web radio pages that combine:
 ## Orientation for new contributors (human or agent)
 
 - No build step, no framework, no dependencies. Every `.html`/`.js`/`.json`
-  file is meant to be read directly — there's nothing compiled or
-  generated except `feed.xml` / `station.m3u` (see below).
+  file is meant to be read directly — there's nothing compiled. Three
+  things are *generated* by small scripts and must be re-run after content
+  changes: `feed.xml` / `station.m3u` (see below) and the social-preview
+  `<meta>` block inside every page's `<head>` (`scripts/sync_social_meta.py`,
+  see `docs/social-previews.md`).
 - Two documents to read before changing anything: this README (site
   structure and content schemas) and `docs/station-notes.md` (the
   station's sync logic and how to feed it new content). Skim both before
@@ -49,8 +52,7 @@ homepage — it's a thin shell (see below) rather than a hand-authored page.
 - `index.html` — homepage. Thin: mostly empty containers, populated by
   `render-archive.js` from `data/broadcasts/index.json`,
   `data/episodes/index.json`, and `data/works/index.json` — one labeled
-  section per content type (Currently transmitting, Past broadcasts,
-  Interviews, Guest works).
+  section per content type (Past web broadcasts, Interviews, Artist soundworks).
 - `pages/index.html` — a static redirect back to `/`, kept only so
   `/pages/index.html` resolves somewhere instead of 404ing (it mirrors the
   URL pattern of `/pages/about.html` and `/pages/archive.html`).
@@ -70,7 +72,9 @@ homepage — it's a thin shell (see below) rather than a hand-authored page.
   (`render-archive.js`'s `renderWorksGrid`, from `data/works/index.json`).
 - `pages/works/<slug>.html` — one page per standalone guest work (e.g. the
   Venice piece), same `render-feature.js` renderer, different manifest.
-- `data/site.json` — site-wide config: nav links, footer, live stream URL.
+- `data/site.json` — site-wide config: nav links, footer, ticker, and a
+  `social` block (site URL, default share image, per-hub-page descriptions)
+  read by `sync_social_meta.py`.
 - `data/broadcasts/index.json` — lightweight index of every broadcast, used
   to build the home/archive grids. Add an entry here whenever you add a broadcast.
 - `data/broadcasts/<id>.json` — full manifest for one broadcast (see schema below).
@@ -88,7 +92,8 @@ homepage — it's a thin shell (see below) rather than a hand-authored page.
   Every color is a CSS custom property, defined once per theme
   (`:root`/`:root[data-theme="dark"]` and `:root[data-theme="light"]`) —
   see `docs/theme.md` before adding a hardcoded color anywhere.
-- `assets/js/app.js` — shared site chrome: reads `site.json`, renders the
+- `assets/js/app.js` — shared site chrome (also hosts `setOnAir()`, which puts a
+  red "on air" dot on the tab's favicon while the station plays): reads `site.json`, renders the
   nav bar (including the day/night toggle — see `docs/theme.md`) and
   footer into `#site-nav-mount` / `#site-footer-mount`, exposes
   `buildCardGrid()` (the one card-grid builder used by every archive/index
@@ -116,6 +121,27 @@ homepage — it's a thin shell (see below) rather than a hand-authored page.
   (see "Podcast feed & playlist" below).
 - `scripts/generate_feed.py` — regenerates `feed.xml` and `station.m3u`
   from `data/station/queue.json`.
+- `scripts/sync_social_meta.py` — writes Open Graph / Twitter Card tags, a
+  description and a canonical URL into every public page, from the JSON
+  below (crawlers don't run JS, so these can't be rendered client-side).
+  `--check` verifies, `--report` previews. Everything it writes sits between
+  `BEGIN/END social-meta` comments — never hand-edit inside them.
+- `scripts/make_share_images.py` — builds the 1200×630 link-preview images
+  in `assets/img/og/`, each with the logo seal and info strip: broadcast cards
+  (poster + big date) and episode cards (name over radio-wave rings) come
+  straight from the JSON, photo cards from a short list in the script (needs
+  Pillow, dev-time only; its fonts live in `scripts/fonts/`).
+- `scripts/make_qr_codes.py` — print-ready QR codes (PNG + SVG, logo in the
+  centre) for the homepage and each broadcast, in `assets/img/qr/`; `--verify`
+  decodes them.
+- `scripts/make_icons.py` — derives the 512 px / maskable app icons and the
+  podcast cover from the one master logo, `assets/img/favicon/radio-hectolitre.png`.
+- `manifest.webmanifest` — web-app manifest (name, theme colour, icons) so the
+  site can be installed to a phone home screen; linked from every page by
+  `sync_social_meta.py`.
+- `docs/social-previews.md` — where each preview's title/description/image
+  comes from, image rules, how to add one for a new broadcast, and how to
+  refresh the platforms' cached cards.
 - `scripts/probe_durations.py` — measures real durations for self-hosted
   (`"type": "file"`) tracks via `ffprobe` and updates `queue.json` in
   place. SoundCloud tracks are out of scope (see `docs/station-notes.md`
@@ -196,7 +222,7 @@ playlist) are generated from `data/station/queue.json` by
 — i.e. self-hosted audio with a real, redistributable URL. SoundCloud's
 embed widget doesn't expose one, so SoundCloud-only tracks can't appear in
 either format; they're still discoverable via SoundCloud's own feed for
-the account. This means both files are small today (one item) and grow
+the account. This means both files are small today (two items) and grow
 automatically as broadcast recordings get self-hosted rather than
 SoundCloud-only — no code changes needed, just add the track to
 `queue.json` with `"type": "file"` and re-run the script.
@@ -219,7 +245,9 @@ below for what to check on the hosting side if that comes back empty.
   "hero": {
     "eyebrowLeft": "...", "eyebrowRight": "...",
     "title": "...", "dateLine": "...", "timeLine": "...", "venueLine": "...",
-    "shortDescription": "...", "heroImage": "assets/img/photos/<id>/poster.jpg"
+    "shortDescription": "...", "heroImage": "assets/img/photos/<id>/poster.jpg",
+    "shareImage": "assets/img/og/<id>.jpg",   // optional: override the generated card
+    "shareImageAlt": "..."                    // optional alt text for the card
   },
   "program": { "heading": "...", "paragraphs": ["..."], "tags": ["..."] },
   "live": { "liveLabel": "Live stream", "liveStreamUrl": "https://..." },
@@ -282,7 +310,9 @@ Both content types share one shape, rendered by `render-feature.js`:
   "title": "...",
   "subtitle": "...",             // guest name, or a short line for a standalone work
   "dateLine": "...",
-  "coverImage": "https://... or assets/img/...",
+  "coverImage": "https://... or assets/img/...",   // also the link-preview image
+  "coverImageAlt": "...",        // optional; alt text for that preview
+  "shareCard": "large",          // optional; only for a wide REMOTE cover (local sizes are auto-detected)
   "synopsis": ["paragraph one", "paragraph two"],
   "embed": {
     "type": "soundcloud",        // or "bandcamp" ({ embedUrl }), "audio" ({ src }), "link" ({ href, label })
@@ -296,7 +326,8 @@ Both content types share one shape, rendered by `render-feature.js`:
 
 Add a new episode: create `data/episodes/<slug>.json`, add an index entry
 to `data/episodes/index.json`, copy `pages/episodes/trailer.html` and
-update its two `window.FEATURE_DATA` / back-link values. A new guest work:
+update its two `window.FEATURE_DATA` / back-link values, then run
+`python3 scripts/sync_social_meta.py` to give it its link preview. A new guest work:
 same pattern, but add the index entry to `data/works/index.json` and copy
 `pages/works/god-bless-usa.html` instead. Either way, if the track has a
 real, self-hosted audio file (not just a SoundCloud or Bandcamp embed),
@@ -316,9 +347,16 @@ Bandcamp doesn't expose an equivalent public control API — see
    the new one; flip the previous entry to `"archived"`).
 4. Copy `pages/broadcasts/2026-05-31.html`, rename it, and update the two
    inline `window.BROADCAST_ID` / `<title>` values.
-5. When local audio replaces a SoundCloud embed, set
+   Delete the copied `BEGIN social-meta … END social-meta` block — the script
+   regenerates it for the new page.
+5. Link preview: make sure the index entry has a `summary`, then run
+   `python3 scripts/make_share_images.py` (builds the card from the manifest —
+   no code to edit), `python3 scripts/sync_social_meta.py` and `--check`.
+   For a printed poster also `python3 scripts/make_qr_codes.py --verify`
+   (details: `docs/social-previews.md`).
+6. When local audio replaces a SoundCloud embed, set
    `tracks[].listen = { "type": "file", "src": "assets/audio/<id>/track.mp3" }`.
-6. If that recording should join the shared station, add it to
+7. If that recording should join the shared station, add it to
    `data/station/queue.json` too (`"type": "file"`, real `durationSec` if
    you have it) — this also gets it into `feed.xml`/`station.m3u` the next
    time `scripts/generate_feed.py` runs.
@@ -333,17 +371,23 @@ Bandcamp doesn't expose an equivalent public control API — see
   distinct "12:40 extract" asset was found in that project's public file
   listing, so rather than guess a URL that might 404, the page previews
   the trailer and links out to the full ~18-minute ceremony.
-- `pages/about.html` has structural copy only, pulled from the footer
-  credits already in the codebase — it needs real "about" writing.
+- Link previews of the 5 hub pages share one default image (a photo from
+  the first broadcast). Give `about`/`archive`/`episodes`/`works` their own
+  by adding `"image"` to their entry in `data/site.json` → `social.pages`.
+- Work previews (Venice, Richiamare) still use their remote cover images.
+  Those couldn't be size-checked from the build environment — open them in
+  the validators listed in `docs/social-previews.md` after deploying, or
+  bring the artwork into the repo to give them a branded card.
+- The logo master is a raster cut from a 1254 px JPEG; the 1500 px podcast
+  cover is an upscale of it. A vector original would make every icon sharper.
 - Self-hosted track durations can be measured automatically with
   `python3 scripts/probe_durations.py` (see `docs/station-notes.md`).
   SoundCloud track durations still need a manual check — no scriptable
   way to get those without SoundCloud's authenticated API.
-- `feed.xml`'s `<enclosure length>` is currently `0` — the host returned
-  an error on a HEAD request when the feed was last generated. See
-  `docs/audio-hosting-guide.md` for how to diagnose and fix this (it's
-  usually a bot-protection rule blocking non-browser requests, not a
-  fundamental hosting problem).
+- `feed.xml`'s `<enclosure length>` is `0` for any track whose host refused
+  the HEAD request when the feed was generated (the current items have real
+  sizes). See `docs/audio-hosting-guide.md` for how to diagnose and fix
+  this (usually a bot-protection rule blocking non-browser requests).
 
 ## Possible future direction
 
