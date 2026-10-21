@@ -25,7 +25,6 @@
   --accent-dim:#7a9424;
   --amber:#d4a43a;
   --text:#e2dfd4;
-  --muted:#6a6858;
   --dim:#2e2e26;
   --red:#d45030;
   --overlay-rgb:10,10,8; /* rgb() triplet of --bg, for translucent bars — can't rgba(var(--bg)) directly */
@@ -43,7 +42,6 @@
   --accent-dim:#5c6c2c;
   --amber:#8a651c;
   --text:#201f17;
-  --muted:#726d59;
   --dim:#ded9c7;
   --red:#c4451f;
   --overlay-rgb:245,242,230;
