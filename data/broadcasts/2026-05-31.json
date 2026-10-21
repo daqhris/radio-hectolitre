@@ -32,7 +32,7 @@
     ]
   },
   "live": {
-    "liveLabel": "Listen",
+    "liveLabel": "FRP Radio",
     "liveStreamUrl": "https://frpradio.rs/public/frpradio"
   },
   "listen": {
