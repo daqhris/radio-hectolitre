@@ -6,7 +6,7 @@ Radio Hectolitre is a static, open-source website — no server, no build step, 
 
 ## Content
 
-- [Homepage](https://daqhris.com/radio-hectolitre/): Currently transmitting, past broadcasts, interviews, and guest works
+- [Homepage](https://daqhris.com/radio-hectolitre/): Past web broadcasts, interviews, and guest soundworks
 - [Past broadcasts](https://daqhris.com/radio-hectolitre/pages/archive.html): Every live transmission recorded at Hectolitre
 - [Hectolitre.FM](https://daqhris.com/radio-hectolitre/pages/episodes.html): The interview series, trailer through episode 08
 - [Guest works](https://daqhris.com/radio-hectolitre/pages/works.html): Standalone sound/performance pieces shown beyond Hectolitre
@@ -25,4 +25,5 @@ Radio Hectolitre is a static, open-source website — no server, no build step, 
 ## Optional
 
 - [docs/station-notes.md](https://github.com/daqhris/radio-hectolitre/blob/main/docs/station-notes.md): How the shared station's wall-clock sync works, and its known playback-robustness history
+- [docs/social-previews.md](https://github.com/daqhris/radio-hectolitre/blob/main/docs/social-previews.md): How link previews (Open Graph / Twitter Card tags) are generated from the site's JSON, and how to add one for new content
 - [docs/audio-hosting-guide.md](https://github.com/daqhris/radio-hectolitre/blob/main/docs/audio-hosting-guide.md): What audio hosting needs to support direct linking, for anyone adding self-hosted tracks

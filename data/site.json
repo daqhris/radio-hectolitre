@@ -20,5 +20,29 @@
     "credit": "Radio Hectolitre is an internet art radio broadcast by Chris A. Iradukunda (daqhris), artist-in-residence at Hectolitre where the sound works originate."
   },
 
-  "tickerPrefix": ["Radio Hectolitre", "Brussels, Belgium", "daqhris.com/radio-hectolitre", "50.8503°N 4.3517°E"]
+  "tickerPrefix": ["Radio Hectolitre", "Brussels, Belgium", "daqhris.com/radio-hectolitre", "50.8503°N 4.3517°E"],
+
+  "social": {
+    "siteUrl": "https://daqhris.com/radio-hectolitre",
+    "siteName": "Radio Hectolitre",
+    "defaultImage": "assets/img/og/radio-hectolitre.jpg",
+    "defaultImageAlt": "Documentation photo from the first Radio Hectolitre transmission: people gathered around a laptop and a spherical metal sculpture on a stand, at Hectolitre in Brussels",
+    "pages": {
+      "index.html": {
+        "description": "Artists-run broadcasting at Hectolitre, Brussels — live transmissions, documentation and recordings."
+      },
+      "pages/about.html": {
+        "description": "An internet art radio by a resident at Hectolitre, an artists-run space in Brussels: live performances, interviews and concerts, then the recordings and documentation."
+      },
+      "pages/archive.html": {
+        "description": "Every web broadcast from Hectolitre, Brussels — live transmissions with their recordings, spoken words and photo documentation."
+      },
+      "pages/episodes.html": {
+        "description": "Hectolitre.FM, an interview series giving voice to the people who animate Hectolitre, a genre-crossing space in Brussels."
+      },
+      "pages/works.html": {
+        "description": "Guest works: standalone sound and performance pieces shown beyond Hectolitre."
+      }
+    }
+  }
 }
