@@ -37,18 +37,24 @@
 
   <main class="about-body">
     <p>
-      Radio Hectolitre is a web project constructed by a resident at Hectolitre, an artists-run space in Brussels.
-      It broadcasts live performances happening in the space and publishes documentation and recordings afterwards.
+      Radio Hectolitre is a web art radio broadcast by a resident at Hectolitre, an artists-run space in Brussels.
+      It broadcasts live performances, artist interviews, concerts, electroacoustic music, and more sonic experiences happening in the space and publishes documentation and recordings afterwards.
     </p>
 
     <h2>Format</h2>
     <p>
-      Each broadcast page combines a live stream link, a listen shelf of recordings, photo documentation from the night,
-      spoken words or liner notes read during the performance, and a running audio library.
+      Each broadcast page combines a live stream link, a listen shelf of recordings, photo or film documentation,
+      spoken words or liner notes of a performance, and a running audio library. 
+      External links embedding catalogue from online platforms are present and encoded to interweave web traces.
     </p>
 
     <h2>Infrastructure</h2>
-    <p>Open <a href="https://github.com/daqhris/radio-hectolitre" target="_blank">Code Source</a> <em>(git)</em> · Hosted on GitHub Pages  · <a href="https://daqhris.com" target="_blank">daqhris.com</a></p>
+    <p>Open <a href="https://github.com/daqhris/radio-hectolitre" target="_blank">Code Source</a> <em>(git repository)</em>· Hosted on GitHub Pages · Creator, coder, manager: <a href="https://daqhris.com" target="_blank">daqhris</a> · Studio: <a href="http://hectolitre.space" target="_blank">Hectolitre</a>, Marolles, Brussels · Online since <a href="https://github.com/daqhris/radio-hectolitre/commits/main/?since=2026-08-05&until=2026-08-05" target="_blank">August 5, 2026</a> <em>(construction-in-progress)</em></p>
+
+    <h2>Station</h2>
+    <p>The core idea is a synced station without a backend server. There's not one continuous shared audio stream produced the way a typical internet-radio setup does. Tapping play seeks to the current computed position and starts playback. Every listener's browser independently computes <em>"what should be playing right now"</em> from a fixed program and the wall clock — landing on the same track and offset without any server or listener-to-listener coordination. 
+    <p>For podcast apps & RSS readers: <a href="https://daqhris.com/radio-hectolitre/feed.xml" target="_blank">feed.xml</a> · Plain playlist file: <a href="https://daqhris.com/radio-hectolitre/station.m3u" target="_blank">station.m3u</a></p>
+
 
   </main>
 
