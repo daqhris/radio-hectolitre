@@ -33,11 +33,11 @@
 }
 
 :root[data-theme="light"]{
-  --bg:#e6d79a;
+  --bg:#e6e694;
   --surface:#ece7d8;
   --surface2:#e2ddc9;
-  --border:#d8d2bd;
-  --border2:#c7c0a6;
+  --border:#f1f8e9;
+  --border2:#7cb342;
   --accent:#57721c;
   --accent-hover:#6f8f28;
   --accent-dim:#5c6c2c;
