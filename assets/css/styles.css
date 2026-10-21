@@ -303,7 +303,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .station-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px;margin-bottom:2px}
 .station-title{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .station-sub{font-size:9px;color:var(--muted);letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.station-kind{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--accent-dim);border:1px solid var(--border2);padding:3px 8px;flex-shrink:0;white-space:nowrap}
+/*.station-kind{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--accent-dim);border:1px solid var(--border2);padding:3px 8px;flex-shrink:0;white-space:nowrap}*/
 body.has-station-bar{padding-bottom:60px}
 .station-bar.is-buffering .live-dot{animation:none;opacity:.35}
 @media (max-width:560px){.station-kind{display:none}.station-bar{gap:10px;padding:0 14px}}
