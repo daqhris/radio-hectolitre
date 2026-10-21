@@ -12,6 +12,8 @@ drives the rest of the site, so previews can't drift from the content:
   - hub pages (home, about, archive, episodes, works): data/site.json -> "social"
   - broadcasts: data/broadcasts/index.json + <id>.json
   - episodes / works: data/{episodes,works}/index.json + <slug>.json
+  - images: the card scripts/make_share_images.py built at assets/img/og/<id|slug>.jpg
+    when it exists, else the page's own artwork
 
 Everything this script writes lives between marker comments, so re-running it
 replaces its own block instead of duplicating tags. It never edits the
@@ -138,6 +140,12 @@ def resolve_image(site, src, alt, card=None):
 
 # ---------------------------------------------------------------- page records
 
+def generated_card(name):
+    """assets/img/og/<name>.jpg if scripts/make_share_images.py has built one for this page."""
+    rel = f"assets/img/og/{name}.jpg"
+    return rel if os.path.isfile(os.path.join(ROOT, rel)) else None
+
+
 def hub_pages(site):
     for href, spec in site.cfg["pages"].items():
         with open(os.path.join(ROOT, href), encoding="utf-8") as f:
@@ -169,7 +177,7 @@ def broadcast_pages(site):
             "description": b.get("summary") or hero.get("shortDescription", ""),
             "image": resolve_image(
                 site,
-                hero.get("shareImage") or hero["heroImage"],
+                hero.get("shareImage") or generated_card(b["id"]) or hero["heroImage"],
                 hero.get("shareImageAlt") or f"Poster for {hero['title']}",
             ),
             "url": site.page_url(b["href"]),
@@ -194,8 +202,10 @@ def feature_pages(site, kind, index_key):
             "description": description,
             "image": resolve_image(
                 site,
-                detail["coverImage"],
-                detail.get("coverImageAlt") or f"Cover art for {detail['title']}",
+                generated_card(item["slug"]) or detail["coverImage"],
+                (f"{detail['title']} — {detail.get('eyebrow', 'Radio Hectolitre')}, on a background of radio-wave rings"
+                 if generated_card(item["slug"]) else None)
+                or detail.get("coverImageAlt") or f"Cover art for {detail['title']}",
                 card=detail.get("shareCard"),
             ),
             "url": site.page_url(item["href"]),

@@ -226,6 +226,52 @@ const RadioHecto = (function () {
     return grid;
   }
 
+  /* "On air" favicon. While the station is audibly playing, the tab icon gets a
+     small red dot (like a recording light); when it stops, the original icons
+     come back. Called by station.js. Purely cosmetic — any failure (private
+     mode, file:// canvas restrictions, no canvas) just leaves the icon as is. */
+  let onAir = false;
+  let stashedIcons = [];
+
+  function setOnAir(next) {
+    next = !!next;
+    if (next === onAir) return;
+    onAir = next;
+    const ours = document.getElementById("rh-onair-icon");
+    if (!next) {
+      if (ours) ours.remove();
+      stashedIcons.forEach((link) => document.head.appendChild(link));
+      stashedIcons = [];
+      return;
+    }
+    const img = new Image();
+    img.onload = () => {
+      if (!onAir) return; // switched off again while the icon was loading
+      try {
+        const size = 64;
+        const canvas = document.createElement("canvas");
+        canvas.width = canvas.height = size;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, size, size);
+        ctx.beginPath();
+        ctx.arc(size - 16, size - 16, 15, 0, Math.PI * 2);
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(size - 16, size - 16, 11, 0, Math.PI * 2);
+        ctx.fillStyle = "#e5322d";
+        ctx.fill();
+        const href = canvas.toDataURL("image/png");
+        stashedIcons = Array.from(document.querySelectorAll('link[rel="icon"]'));
+        stashedIcons.forEach((link) => link.remove());
+        document.head.appendChild(createEl("link", { id: "rh-onair-icon", rel: "icon", type: "image/png", href }, []));
+      } catch (err) {
+        onAir = false;
+      }
+    };
+    img.src = withBase("assets/img/favicon/icon-192.png");
+  }
+
   async function initChrome(activePath) {
     try {
       const site = await fetchJSON("data/site.json");
@@ -239,5 +285,5 @@ const RadioHecto = (function () {
     }
   }
 
-  return { withBase, $, clearChildren, createEl, fetchJSON, renderNav, renderFooter, renderTicker, buildCardGrid, initChrome };
+  return { withBase, $, clearChildren, createEl, fetchJSON, renderNav, renderFooter, renderTicker, buildCardGrid, initChrome, setOnAir };
 })();

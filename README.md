@@ -92,7 +92,8 @@ homepage — it's a thin shell (see below) rather than a hand-authored page.
   Every color is a CSS custom property, defined once per theme
   (`:root`/`:root[data-theme="dark"]` and `:root[data-theme="light"]`) —
   see `docs/theme.md` before adding a hardcoded color anywhere.
-- `assets/js/app.js` — shared site chrome: reads `site.json`, renders the
+- `assets/js/app.js` — shared site chrome (also hosts `setOnAir()`, which puts a
+  red "on air" dot on the tab's favicon while the station plays): reads `site.json`, renders the
   nav bar (including the day/night toggle — see `docs/theme.md`) and
   footer into `#site-nav-mount` / `#site-footer-mount`, exposes
   `buildCardGrid()` (the one card-grid builder used by every archive/index
@@ -126,8 +127,13 @@ homepage — it's a thin shell (see below) rather than a hand-authored page.
   `--check` verifies, `--report` previews. Everything it writes sits between
   `BEGIN/END social-meta` comments — never hand-edit inside them.
 - `scripts/make_share_images.py` — builds the 1200×630 link-preview images
-  in `assets/img/og/` from existing artwork, each with the logo seal and info
-  strip (needs Pillow, dev-time only; its fonts live in `scripts/fonts/`).
+  in `assets/img/og/`, each with the logo seal and info strip: broadcast cards
+  (poster + big date) and episode cards (name over radio-wave rings) come
+  straight from the JSON, photo cards from a short list in the script (needs
+  Pillow, dev-time only; its fonts live in `scripts/fonts/`).
+- `scripts/make_qr_codes.py` — print-ready QR codes (PNG + SVG, logo in the
+  centre) for the homepage and each broadcast, in `assets/img/qr/`; `--verify`
+  decodes them.
 - `scripts/make_icons.py` — derives the 512 px / maskable app icons and the
   podcast cover from the one master logo, `assets/img/favicon/radio-hectolitre.png`.
 - `manifest.webmanifest` — web-app manifest (name, theme colour, icons) so the
@@ -240,8 +246,8 @@ below for what to check on the hosting side if that comes back empty.
     "eyebrowLeft": "...", "eyebrowRight": "...",
     "title": "...", "dateLine": "...", "timeLine": "...", "venueLine": "...",
     "shortDescription": "...", "heroImage": "assets/img/photos/<id>/poster.jpg",
-    "shareImage": "assets/img/og/<id>.jpg",   // 1200x630 link-preview card; falls back to heroImage
-    "shareImageAlt": "..."                    // alt text for that card
+    "shareImage": "assets/img/og/<id>.jpg",   // optional: override the generated card
+    "shareImageAlt": "..."                    // optional alt text for the card
   },
   "program": { "heading": "...", "paragraphs": ["..."], "tags": ["..."] },
   "live": { "liveLabel": "Live stream", "liveStreamUrl": "https://..." },
@@ -343,10 +349,10 @@ Bandcamp doesn't expose an equivalent public control API — see
    inline `window.BROADCAST_ID` / `<title>` values.
    Delete the copied `BEGIN social-meta … END social-meta` block — the script
    regenerates it for the new page.
-5. Link preview: add the poster to `CARDS` in `scripts/make_share_images.py`
-   and run it, set `hero.shareImage`/`shareImageAlt` in the manifest, make
-   sure the index entry has a `summary`, then run
-   `python3 scripts/sync_social_meta.py` and `--check`
+5. Link preview: make sure the index entry has a `summary`, then run
+   `python3 scripts/make_share_images.py` (builds the card from the manifest —
+   no code to edit), `python3 scripts/sync_social_meta.py` and `--check`.
+   For a printed poster also `python3 scripts/make_qr_codes.py --verify`
    (details: `docs/social-previews.md`).
 6. When local audio replaces a SoundCloud embed, set
    `tracks[].listen = { "type": "file", "src": "assets/audio/<id>/track.mp3" }`.
@@ -368,10 +374,12 @@ Bandcamp doesn't expose an equivalent public control API — see
 - Link previews of the 5 hub pages share one default image (a photo from
   the first broadcast). Give `about`/`archive`/`episodes`/`works` their own
   by adding `"image"` to their entry in `data/site.json` → `social.pages`.
-- Episode and work previews use their SoundCloud/Bandcamp square covers
-  (small-thumbnail cards). Those remote images couldn't be size-checked from
-  the build environment — open a few in the validators listed in
-  `docs/social-previews.md` after deploying.
+- Work previews (Venice, Richiamare) still use their remote cover images.
+  Those couldn't be size-checked from the build environment — open them in
+  the validators listed in `docs/social-previews.md` after deploying, or
+  bring the artwork into the repo to give them a branded card.
+- The logo master is a raster cut from a 1254 px JPEG; the 1500 px podcast
+  cover is an upscale of it. A vector original would make every icon sharper.
 - Self-hosted track durations can be measured automatically with
   `python3 scripts/probe_durations.py` (see `docs/station-notes.md`).
   SoundCloud track durations still need a manual check — no scriptable

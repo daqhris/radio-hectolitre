@@ -25,8 +25,9 @@ tags, a description edited in JSON but not re-synced, a typo'd image path).
 | Page | Title | Description | Image |
 |---|---|---|---|
 | Hub pages (`index.html`, `about`, `archive`, `episodes`, `works`) | the page's `<title>` | `data/site.json` → `social.pages.<file>.description` | `social.defaultImage` (override per page with `image` / `imageAlt`) |
-| Broadcast | built as `<title> · <date> — Radio Hectolitre` | `summary` in `data/broadcasts/index.json` | `hero.shareImage` in `data/broadcasts/<id>.json` (falls back to `heroImage`) |
-| Episode / work | the page's `<title>` | `summary` in the type's `index.json` | `coverImage` in `data/<type>/<slug>.json` |
+| Broadcast | built as `<title> · <date> — Radio Hectolitre` | `summary` in `data/broadcasts/index.json` | the generated card `assets/img/og/<id>.jpg` (else `hero.shareImage`, else `heroImage`) |
+| Episode | the page's `<title>` | `summary` in `data/episodes/index.json` | the generated card `assets/img/og/<slug>.jpg` (else `coverImage`) |
+| Work | the page's `<title>` | `summary` in `data/works/index.json` | `coverImage` in `data/works/<slug>.json` (or `assets/img/og/<slug>.jpg` if you make one) |
 
 The script also writes `<meta name="description">` and `<link rel="canonical">`
 where a page doesn't already have its own (the homepage keeps its hand-written
@@ -69,21 +70,49 @@ as the master and re-run `make_icons.py` + `make_share_images.py` + `sync_social
 - A *remote* cover image can't be measured offline. If it is wide, set
   `"shareCard": "large"` in its JSON (the Venice work does this).
 - `scripts/make_share_images.py` builds the 1200×630 cards into
-  `assets/img/og/` from artwork already in the repo (`CARDS` at the top of the
-  file). `"fit"` keeps a square poster whole over a blurred copy of itself;
-  `"crop"` centre-crops a landscape photo.
+  `assets/img/og/`. Three kinds, all with the logo seal + info strip:
+  **broadcast cards** (poster, date set big, title, venue — built automatically
+  from `data/broadcasts/`), **episode cards** (guest name over concentric
+  "transmission" rings radiating from the seal, echoing the logo's arcs — built
+  automatically from `data/episodes/`), and hand-picked **photo cards** (`CARDS`
+  at the top of the file; `"crop"` centre-crops a landscape photo, `"fit"` keeps a
+  square image whole over a blurred copy of itself). `--list` shows every card name.
+- Guest **works** keep their own artwork (Venice, Bandcamp) as their preview.
+  To give one a branded card, put the artwork in the repo, add it to `CARDS`,
+  run the script — `sync_social_meta.py` picks up `assets/img/og/<slug>.jpg` by name.
 - Always give an `…Alt` text (the script falls back to a generic one).
 
 ## Adding a new broadcast
 
 1. Add the poster/photos as usual (see README → "Adding a new broadcast").
-2. Add a line to `CARDS` in `make_share_images.py` for the poster, run it.
-3. In `data/broadcasts/<id>.json` set `hero.shareImage` (`assets/img/og/<id>.jpg`)
-   and `hero.shareImageAlt`.
-4. Make sure the index entry has a `summary` (1–2 sentences, 50–200 chars).
-5. `python3 scripts/sync_social_meta.py`, then `--check`.
+2. Make sure the index entry in `data/broadcasts/index.json` has a `summary`
+   (1–2 sentences, 50–200 chars) and the manifest's `hero` has `title`,
+   `dateLine`, `venueLine`, `eyebrowRight` and a square `heroImage`.
+3. `python3 scripts/make_share_images.py` — builds `assets/img/og/<id>.jpg` from that
+   data. No code or `CARDS` entry needed.
+4. `python3 scripts/sync_social_meta.py`, then `--check`.
+5. For a printed poster: `python3 scripts/make_qr_codes.py --verify` (below).
 
-A new episode or work needs only its `summary` and `coverImage`, then step 5.
+A new episode needs only its `summary`, `subtitle` (the guest's name), and steps 3–4.
+
+## QR codes for posters
+
+`python3 scripts/make_qr_codes.py --verify` writes `assets/img/qr/<name>.png` (1600 px)
+and `.svg` (vector; print from this) for the homepage and every broadcast page,
+each with the logo in the centre. They encode the page's plain canonical URL, so
+what a poster scans to is exactly what a shared link previews. `--verify` decodes
+every PNG as a sanity check, but **always scan a proof print before a run**: keep
+the code on a light background and don't shrink it below ~2.5 cm. Needs
+`pip install "qrcode[pil]"`, and `opencv-python-headless` for `--verify`.
+
+## The "on air" favicon
+
+While the station is audibly playing, the browser tab's icon gets a small red
+dot (like a recording light); it goes back to normal when the listener stops.
+`station.js` reports "on air" (`syncOnAir()`) and `RadioHecto.setOnAir()` in
+`app.js` swaps the `<link rel="icon">` elements. It waits ~3 s before switching
+off when audio only drops between tracks, so the icon doesn't blink. It never
+affects link previews (crawlers don't play audio) — it's tab-level polish only.
 
 ## Platform caches — the step that surprises everyone
 
