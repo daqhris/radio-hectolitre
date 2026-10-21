@@ -32,6 +32,33 @@ The script also writes `<meta name="description">` and `<link rel="canonical">`
 where a page doesn't already have its own (the homepage keeps its hand-written
 description).
 
+## The logo and icons
+
+One master, everything else derived: `assets/img/favicon/radio-hectolitre.png`
+(transparent, 1024 px, cut out of the original JPEG). `python3 scripts/make_icons.py`
+builds from it the 512 px web-app icon, a *maskable* 512 px icon (opaque, logo
+inside the safe zone so Android can crop it round), and the 1500 px podcast
+cover. The small favicons are older hand-made files and are left alone.
+
+Where each shows up:
+
+- **Share cards** — a white seal holding the logo, straddling a navy strip
+  (name · city · coordinates) along the bottom. The seal is white because the
+  logo's navy "H" vanishes on dark art. Built by `make_share_images.py`.
+- **Browser tab / bookmarks / iOS home screen** — `favicon.*`, `apple-touch-icon.png`.
+- **Android install / "Add to Home screen"** — `manifest.webmanifest` + the 192/512/maskable icons.
+- **Chrome address bar, Discord embed edge** — `<meta name="theme-color">`
+  (`#18a8c8`, the logo's teal; set in `data/site.json` → `social.themeColor`).
+  It is one fixed colour for both site themes on purpose: it only tints browser
+  chrome and an embed border, it doesn't restyle the page.
+- **Google** — `Organization` + `WebSite` structured data on the homepage
+  (logo, `sameAs` profiles), written by `sync_social_meta.py`.
+- **Podcast apps** — `<itunes:image>` in `feed.xml` (`scripts/generate_feed.py`
+  uses the same file). Apps want a square JPEG/PNG of 1400–3000 px.
+
+The master is raster. If you ever get the vector original, drop a better PNG in
+as the master and re-run `make_icons.py` + `make_share_images.py` + `sync_social_meta.py`.
+
 ## Image rules (why the script warns)
 
 - **1200 × 630 px, JPEG, under ~600 KB** is the safe card. Squares and huge
@@ -78,5 +105,3 @@ Images must be reachable at a public `https://` URL, so previews only work
   playable card needs a Twitter player-card approval that isn't worth it.
 - No `twitter:site` / `twitter:creator`: add them to `build_block()` in
   `sync_social_meta.py` if the project gets an X handle.
-- No `theme-color`: the site has a light and a dark theme (see `docs/theme.md`),
-  and one fixed colour would be wrong for one of them.

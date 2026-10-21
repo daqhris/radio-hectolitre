@@ -211,14 +211,41 @@ def all_pages(site):
 
 # ---------------------------------------------------------------- html
 
+def json_ld(site, page):
+    """Structured data for the homepage only: lets Google show the logo and link the
+    project to its other profiles. Other pages inherit the site identity from the URL."""
+    org = {
+        "@type": "Organization",
+        "@id": f"{site.url}/#organization",
+        "name": site.name,
+        "url": f"{site.url}/",
+        "logo": site.abs(site.cfg["logo"]),
+        "sameAs": site.cfg.get("sameAs", []),
+    }
+    web = {
+        "@type": "WebSite",
+        "@id": f"{site.url}/#website",
+        "name": site.name,
+        "url": f"{site.url}/",
+        "description": page["description"],
+        "publisher": {"@id": org["@id"]},
+    }
+    data = {"@context": "https://schema.org", "@graph": [org, web]}
+    # "</" would end the script element early; none appear today, but stay safe.
+    return json.dumps(data, ensure_ascii=False, indent=2).replace("</", "<\\/")
+
+
 def build_block(site, page, with_description, with_canonical):
     img = page["image"]
+    depth = page["file"].count("/")
     lines = [BEGIN]
     if with_description:
         lines.append(f'  <meta name="description" content="{attr(page["description"])}" />')
     if with_canonical:
         lines.append(f'  <link rel="canonical" href="{attr(page["url"])}" />')
     lines += [
+        f'  <meta name="theme-color" content="{attr(site.cfg["themeColor"])}" />',
+        f'  <link rel="manifest" href="{"../" * depth}manifest.webmanifest" />',
         '  <meta property="og:type" content="website" />',
         f'  <meta property="og:site_name" content="{attr(site.name)}" />',
         f'  <meta property="og:url" content="{attr(page["url"])}" />',
@@ -238,8 +265,12 @@ def build_block(site, page, with_description, with_canonical):
         f'  <meta name="twitter:description" content="{attr(page["description"])}" />',
         f'  <meta name="twitter:image" content="{attr(img["url"])}" />',
         f'  <meta name="twitter:image:alt" content="{attr(img["alt"])}" />',
-        END,
     ]
+    if page["file"] == "index.html":
+        lines.append('  <script type="application/ld+json">')
+        lines.append(json_ld(site, page))
+        lines.append("  </script>")
+    lines.append(END)
     return "\n".join(lines)
 
 
@@ -278,11 +309,11 @@ class MetaCounter(HTMLParser):
             key = a.get("property") or a.get("name")
             if key:
                 self.seen.setdefault(key, []).append(a.get("content", ""))
-        elif tag == "link" and a.get("rel") == "canonical":
-            self.seen.setdefault("canonical", []).append(a.get("href", ""))
+        elif tag == "link" and a.get("rel") in ("canonical", "manifest"):
+            self.seen.setdefault(a["rel"], []).append(a.get("href", ""))
 
 
-REQUIRED = ["description", "canonical", "og:type", "og:site_name", "og:url", "og:title",
+REQUIRED = ["description", "canonical", "manifest", "theme-color", "og:type", "og:site_name", "og:url", "og:title",
             "og:description", "og:image", "og:image:alt", "twitter:card", "twitter:title",
             "twitter:description", "twitter:image", "twitter:image:alt"]
 
@@ -298,6 +329,12 @@ def lint(page, rendered):
             errors.append(f"missing {key}")
         elif n > 1:
             errors.append(f"duplicate {key} ({n}x)")
+    if page["file"] == "index.html":
+        m = re.search(r'<script type="application/ld\+json">(.*?)</script>', rendered, re.S)
+        try:
+            json.loads(m.group(1)) if m else errors.append("missing JSON-LD on homepage")
+        except ValueError as exc:
+            errors.append(f"invalid JSON-LD: {exc}")
     d = len(page["description"])
     if not DESC_MIN <= d <= DESC_MAX:
         warnings.append(f"description is {d} chars (aim for {DESC_MIN}-{DESC_MAX})")

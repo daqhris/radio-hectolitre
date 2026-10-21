@@ -25,6 +25,14 @@
   "social": {
     "siteUrl": "https://daqhris.com/radio-hectolitre",
     "siteName": "Radio Hectolitre",
+    "themeColor": "#18a8c8",
+    "logo": "assets/img/favicon/radio-hectolitre.png",
+    "podcastImage": "assets/img/podcast/radio-hectolitre-1500.jpg",
+    "sameAs": [
+      "https://github.com/daqhris/radio-hectolitre",
+      "https://soundcloud.com/user-816404246",
+      "https://www.hectolitre.space"
+    ],
     "defaultImage": "assets/img/og/radio-hectolitre.jpg",
     "defaultImageAlt": "Documentation photo from the first Radio Hectolitre transmission: people gathered around a laptop and a spherical metal sculpture on a stand, at Hectolitre in Brussels",
     "pages": {

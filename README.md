@@ -126,7 +126,13 @@ homepage — it's a thin shell (see below) rather than a hand-authored page.
   `--check` verifies, `--report` previews. Everything it writes sits between
   `BEGIN/END social-meta` comments — never hand-edit inside them.
 - `scripts/make_share_images.py` — builds the 1200×630 link-preview images
-  in `assets/img/og/` from existing artwork (needs Pillow, dev-time only).
+  in `assets/img/og/` from existing artwork, each with the logo seal and info
+  strip (needs Pillow, dev-time only; its fonts live in `scripts/fonts/`).
+- `scripts/make_icons.py` — derives the 512 px / maskable app icons and the
+  podcast cover from the one master logo, `assets/img/favicon/radio-hectolitre.png`.
+- `manifest.webmanifest` — web-app manifest (name, theme colour, icons) so the
+  site can be installed to a phone home screen; linked from every page by
+  `sync_social_meta.py`.
 - `docs/social-previews.md` — where each preview's title/description/image
   comes from, image rules, how to add one for a new broadcast, and how to
   refresh the platforms' cached cards.
