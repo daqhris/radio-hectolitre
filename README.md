@@ -268,10 +268,15 @@ below for what to check on the hosting side if that comes back empty.
     { "attribution": "...", "variant": "default", "text": "...", "links": [] },
     { "attribution": "...", "variant": "highlight", "text": "...", "note": "...", "links": [{ "label": "...", "href": "..." }] }
   ],
+  "documents": [
+    { "kicker": "Document 01 · ...", "title": "...", "src": "assets/img/photos/<id>/<name>.jpg", "w": 1200, "h": 1600,
+      "alt": "...", "description": "...", "credit": "Photo: ..." }
+  ],
   "photos": [
     { "src": "assets/img/photos/<id>/01.jpg", "w": 2500, "h": 1670, "alt": "...", "caption": "..." }
   ],
   "ticker": ["..."],
+  "performers": [ { "role": "Flute", "names": ["..."] } ],
   "credits": { "madeFor": "...", "producer": "...", "design": "...", "infrastructure": "..." },
   "relatedContent": [
     { "href": "pages/episodes.html", "poster": "https://...", "dateLine": "9 episodes",
@@ -289,6 +294,13 @@ yet — the player shows "Recording not published yet for this track."
 `spokenWords[].variant: "highlight"` renders with the amber accent border
 (used for the Refaat Al-Areer tribute block) instead of the default
 green-accent border, and supports an optional `note` paragraph underneath.
+`documents[]` are documenting artifacts that don't belong in the photo parade
+(a source text, a rehearsal score): each renders as its own figure with
+context and an optional `credit`, in a "Documents" section above the strip,
+and opens in the lightbox as a set of its own. `performers[]` and `credits`
+render together in the "Credits" section; in `credits.design`, entries are
+separated by " · " and written "<role> by <name>" so each role gets its own
+label. Both sections hide themselves when their data is absent.
 `relatedContent[]` items use the same card shape as the broadcast/episode
 index grids (`RadioHecto.buildCardGrid`).
 
