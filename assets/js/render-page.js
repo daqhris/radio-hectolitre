@@ -10,6 +10,7 @@ const state = {
   activeTrack: null,
   audioEl: null, // the active <audio> for a self-hosted (type "file") track, if any
   lightboxIndex: 0,
+  lightboxItems: [], // the set the lightbox is stepping through: the photo parade or the documents
 };
 
 function setText(id, text) {
@@ -70,7 +71,7 @@ function renderPhotos() {
     if (p.caption) {
       el.appendChild(createEl("div", { class: "strip-caption" }, [p.caption]));
     }
-    el.addEventListener("click", () => openLightbox(i));
+    el.addEventListener("click", () => openLightbox(i, b.photos));
     strip.appendChild(el);
   });
 
@@ -122,7 +123,8 @@ function wireStripControls(strip) {
 
 /* ------------------------------------------------------------- Lightbox */
 
-function openLightbox(i) {
+function openLightbox(i, items) {
+  state.lightboxItems = items || [];
   state.lightboxIndex = i;
   updateLightbox();
   const modal = $("lightbox-modal");
@@ -139,19 +141,19 @@ function closeLightbox() {
 }
 
 function updateLightbox() {
-  const b = state.broadcast;
-  const photo = b?.photos?.[state.lightboxIndex];
+  const items = state.lightboxItems;
+  const photo = items[state.lightboxIndex];
   if (!photo) return;
   const img = $("lightbox-img");
   const cap = $("lightbox-caption");
   const counter = $("lightbox-counter");
   if (img) { img.src = withBase(photo.src); img.alt = photo.alt || ""; }
-  if (cap) cap.textContent = photo.caption || "";
-  if (counter) counter.textContent = `${state.lightboxIndex + 1} / ${b.photos.length}`;
+  if (cap) cap.textContent = photo.caption || photo.title || "";
+  if (counter) counter.textContent = `${state.lightboxIndex + 1} / ${items.length}`;
 }
 
 function stepLightbox(delta) {
-  const total = state.broadcast?.photos?.length || 0;
+  const total = state.lightboxItems.length;
   if (!total) return;
   state.lightboxIndex = (state.lightboxIndex + delta + total) % total;
   updateLightbox();
@@ -415,6 +417,92 @@ function wirePlayButton() {
   );
 }
 
+/* ------------------------------------------------------------ Documents
+   Documenting artifacts that are not part of the photo parade: a source
+   text and a rehearsal score. Each one gets a figure with its own context
+   and credit rather than a strip thumbnail, and opens in the lightbox as
+   a set of its own. */
+
+function renderDocuments() {
+  const b = state.broadcast;
+  const section = $("documents-section");
+  const mount = $("documents");
+  if (!mount) return;
+
+  if (!b?.documents?.length) {
+    if (section) section.style.display = "none";
+    return;
+  }
+
+  clearChildren(mount);
+
+  b.documents.forEach((doc, i) => {
+    const frame = createEl("button", {
+      type: "button",
+      class: "document-frame",
+      "aria-label": `Enlarge: ${doc.title}`,
+    }, []);
+    if (doc.w && doc.h) frame.style.aspectRatio = `${doc.w} / ${doc.h}`;
+    frame.appendChild(createEl("img", { src: withBase(doc.src), alt: doc.alt || "", loading: "lazy" }));
+    frame.addEventListener("click", () => openLightbox(i, b.documents));
+
+    const text = createEl("figcaption", { class: "document-text" }, [
+      createEl("div", { class: "document-kicker" }, [doc.kicker || ""]),
+      createEl("h3", { class: "document-title" }, [doc.title || ""]),
+      createEl("p", { class: "document-desc" }, [doc.description || ""]),
+    ]);
+    if (doc.credit) text.appendChild(createEl("div", { class: "document-credit" }, [doc.credit]));
+
+    mount.appendChild(createEl("figure", { class: "document" }, [frame, text]));
+  });
+}
+
+/* -------------------------------------------------------------- Credits */
+
+function creditGroup(label, lines) {
+  return createEl("div", { class: "credit-group" }, [
+    createEl("h3", { class: "credit-label" }, [label]),
+    ...lines.map((line) => createEl("div", { class: "credit-line" }, [line])),
+  ]);
+}
+
+function renderCredits() {
+  const b = state.broadcast;
+  const section = $("credits-section");
+  const mount = $("credits");
+  if (!mount) return;
+
+  const groups = [];
+
+  for (const p of b?.performers || []) {
+    groups.push(creditGroup(p.role, p.names || []));
+  }
+
+  const c = b?.credits;
+  if (c) {
+    if (c.madeFor) groups.push(creditGroup("Made for", [c.madeFor]));
+    if (c.producer) groups.push(creditGroup("Producer", [c.producer]));
+    if (c.design) {
+      // "Poster design by X · Documentation photography by Y · …" — one group per
+      // "<role> by <name>" entry, so each role is labelled like the performers.
+      for (const entry of c.design.split(" · ")) {
+        const [role, ...rest] = entry.split(" by ");
+        if (rest.length) groups.push(creditGroup(role, [rest.join(" by ")]));
+        else groups.push(creditGroup("Design", [entry]));
+      }
+    }
+    if (c.infrastructure) groups.push(creditGroup("Infrastructure", c.infrastructure.split(" · ")));
+  }
+
+  if (!groups.length) {
+    if (section) section.style.display = "none";
+    return;
+  }
+
+  clearChildren(mount);
+  groups.forEach((g) => mount.appendChild(g));
+}
+
 /* ------------------------------------------------------- Related content
    Optional "More from the archive" strip — points at episode/work pages
    without pulling their content into the broadcast page itself. */
@@ -456,8 +544,10 @@ async function initPage() {
   renderProgram();
   renderPhotos();
   renderSpokenWords();
+  renderDocuments();
   renderTrackLibrary();
   renderHeroLiveButton();
+  renderCredits();
   renderRelatedContent();
 }
 

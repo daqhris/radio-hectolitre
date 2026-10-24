@@ -94,6 +94,61 @@
       ]
     }
   ],
+  "documents": [
+    {
+      "kicker": "Document 01 · Venice Biennale 2026",
+      "title": "The poem on the wall at the Arsenale",
+      "src": "assets/img/photos/2026-05-31/ArsenaleVenice-RefaatAlAreer-VisitPhoto.jpg",
+      "w": 1200,
+      "h": 1600,
+      "alt": "A tall blue wall panel at the Arsenale in Venice carrying the full text of “If I Must Die” by Refaat al-Areer in white lettering, with a large brown-and-white painted canvas hanging above it.",
+      "description": "Refaat Al-Areer’s poem as installed at the 61st Venice Biennale. This photo was taken and shown to Chris-Armel by Jeremias Pérez Salerno, who visited the Biennale and then took part in the performance, while Chris-Armel could not travel. Reading the text beforehand is what settled the decision to read it aloud during the event.",
+      "credit": "Photo: Jeremias Pérez Salerno"
+    },
+    {
+      "kicker": "Document 02 · Rehearsal",
+      "title": "Notes structuring the hour",
+      "src": "assets/img/photos/2026-05-31/SoundPerformance-TimelineStructure-RehearsalNotes.jpg",
+      "w": 1200,
+      "h": 1600,
+      "alt": "A sheet of lined paper with a handwritten timeline of the performance in minute ranges, from the Reactor at minute zero through voices, a collective section, silence, a bang, fade-out and a final field section. The last lines say each person fades out, walks to the first floor, everyone gathers at the mother board, and the performance ends.",
+      "description": "Written down during rehearsal by Davide Paolillo, who took the initiative and gathered input from his collaborators to structure the one-hour performance. It shows who intervenes at which point, and tells him, at the mother board, whose turn it is.",
+      "credit": "Notes: Davide Paolillo"
+    }
+  ],
+  "performers": [
+    {
+      "role": "Voices",
+      "names": [
+        "Maria Stuut",
+        "Chris-Armel Iradukunda"
+      ]
+    },
+    {
+      "role": "Flute",
+      "names": [
+        "Bel McLaughlin"
+      ]
+    },
+    {
+      "role": "Clarinet",
+      "names": [
+        "Ghazal Faghihi"
+      ]
+    },
+    {
+      "role": "Live electronics",
+      "names": [
+        "Davide Paolillo"
+      ]
+    },
+    {
+      "role": "Electric guitar, loop, minichord",
+      "names": [
+        "Jeremias Pérez Salerno"
+      ]
+    }
+  ],
   "photos": [
     {
       "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB.jpg",

@@ -162,6 +162,24 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .spoken-links a{color:var(--muted);text-decoration:none;transition:color .2s;margin-right:14px}
 .spoken-links a:hover{color:var(--accent)}
 
+/* DOCUMENTS — source text + rehearsal score, shown apart from the photo parade */
+.documents{margin-bottom:8px}
+.documents-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-bottom:24px}
+.document{margin:0;display:flex;flex-direction:column;gap:16px;background:var(--surface);border-left:2px solid var(--amber);padding:20px}
+.document-frame{display:block;width:100%;max-width:360px;margin:0 auto;padding:0;border:1px solid var(--border2);background:var(--surface2);cursor:zoom-in;overflow:hidden}
+.document-frame img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.document-frame:hover img{transform:scale(1.02)}
+.document-kicker{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.document-title{font-family:var(--serif);font-style:italic;font-weight:300;font-size:22px;line-height:1.15;color:var(--text);margin-bottom:10px}
+.document-desc{font-size:11px;color:var(--muted);line-height:1.9}
+.document-credit{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:12px}
+
+/* CREDITS */
+.credits{margin-bottom:24px}
+.credits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px 32px}
+.credit-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:400;margin-bottom:6px}
+.credit-line{font-family:var(--serif);font-size:17px;font-weight:300;line-height:1.5;color:var(--text)}
+
 /* HORIZONTAL PHOTO STRIP */
 .photos{margin-bottom:4px}
 .photo-strip-wrap{position:relative;margin-bottom:4px;overflow:hidden}
