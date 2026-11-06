@@ -272,6 +272,11 @@ below for what to check on the hosting side if that comes back empty.
     { "kicker": "Document 01 · ...", "title": "...", "src": "assets/img/photos/<id>/<name>.jpg", "w": 1200, "h": 1600,
       "alt": "...", "description": "...", "credit": "Photo: ..." }
   ],
+  "videos": [
+    { "type": "instagram", "kicker": "Video 01 · ...", "title": "...", "url": "https://www.instagram.com/reel/<code>/",
+      "w": 9, "h": 16, "poster": "assets/img/photos/<id>/<name>.jpg", "description": "...", "credit": "Video: ..." },
+    { "type": "file", "title": "...", "src": "assets/video/<id>/<name>.mp4", "mime": "video/mp4", "poster": "..." }
+  ],
   "photos": [
     { "src": "assets/img/photos/<id>/01.jpg", "w": 2500, "h": 1670, "alt": "...", "caption": "..." }
   ],
@@ -297,7 +302,19 @@ green-accent border, and supports an optional `note` paragraph underneath.
 `documents[]` are documenting artifacts that don't belong in the photo parade
 (a source text, a rehearsal score): each renders as its own figure with
 context and an optional `credit`, in a "Documents" section above the strip,
-and opens in the lightbox as a set of its own. `performers[]` and `credits`
+and opens in the lightbox as a set of its own. `videos[]` render in a "Video" section
+below the photo strip and hide themselves when absent. `type: "instagram"`
+takes the post's public URL (`/p/`, `/reel/` or `/tv/`; tracking parameters are
+stripped) and shows a click-to-load poster — nothing is requested from
+Instagram until the visitor presses play, then Instagram's own player takes
+its place — plus an always-visible "Watch on Instagram" link. `w`/`h` give the
+video's aspect ratio (default 9:16, a vertical reel) and `poster` is an
+optional image from the repo to show before play. The embed only works for
+posts on a public account. `type: "file"` is a self-hosted `<video>` with
+`preload="none"` and a download link — the more durable option, since it can't
+disappear with the post. Keep video files well under GitHub's 100 MB per-file
+limit (compress with `ffmpeg -crf 28 -preset veryfast`), and remember the
+repository as a whole should stay inside Pages' ~1 GB soft limit. `performers[]` and `credits`
 render together in the "Credits" section; in `credits.design`, entries are
 separated by " · " and written "<role> by <name>" so each role gets its own
 label. Both sections hide themselves when their data is absent.

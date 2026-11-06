@@ -226,6 +226,23 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .track-sub{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
 .track-dur{font-size:10px;color:var(--muted);white-space:nowrap;flex-shrink:0;padding-top:4px}
 
+/* VIDEOS — Instagram click-to-load embed, or a self-hosted <video>. Caption text reuses .document-* */
+.videos{margin-bottom:8px}
+.videos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-bottom:24px}
+.video{margin:0;display:flex;flex-direction:column;gap:16px;background:var(--surface);border-left:2px solid var(--amber);padding:20px}
+.video-stage{width:100%;max-width:400px;margin:0 auto;background:#000;border:1px solid var(--border2);overflow:hidden}
+.video-stage iframe{display:block;width:100%;border:0}
+.video-stage video{display:block;width:100%}
+.video-stage .no-embed{font-size:11px;color:var(--text);background:var(--surface2);font-style:italic;padding:14px}
+.video-facade{position:relative;display:block;width:100%;padding:0;border:0;background:var(--surface2);color:#fff;cursor:pointer;overflow:hidden}
+.video-facade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .3s,transform .4s}
+.video-facade:hover img{opacity:1;transform:scale(1.02)}
+.video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(var(--overlay-rgb),.75);border:1px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px;padding-left:4px;transition:background .2s,color .2s}
+.video-facade:hover .video-play,.video-facade:focus-visible .video-play{background:var(--accent);color:var(--bg)}
+.video-facade-note{position:absolute;left:0;right:0;bottom:0;padding:10px 12px;font-size:9px;letter-spacing:1px;text-transform:uppercase;text-align:center;color:var(--text);background:rgba(var(--overlay-rgb),.8)}
+.video-source{align-self:flex-start;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border)}
+.video-source:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
 /* SOUNDCLOUD / EMBED */
 .listen{margin-bottom:8px}
 #listen-embed{margin-bottom:24px}
