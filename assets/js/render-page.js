@@ -457,6 +457,149 @@ function renderDocuments() {
   });
 }
 
+/* --------------------------------------------------------------- Videos
+   Short videos that document the broadcast, shown in their own section.
+   Two kinds, chosen per entry by `type`:
+
+   - "instagram": a public Instagram post or reel. It sits behind a
+     click-to-load poster ("facade"): nothing is requested from Instagram
+     until the visitor presses play, which keeps the page light and keeps
+     Instagram's cookies and tracking out of it for anyone who never
+     does. Once pressed, Instagram's own embed player replaces the poster
+     and plays the video in place. A plain "Watch on Instagram" link is
+     always shown too, so the video stays reachable if the embed is
+     blocked (privacy extensions do that) or the post is removed.
+   - "file": a self-hosted video — the durable choice, same spirit as the
+     self-hosted audio tracks. Native <video controls> with preload="none".
+
+   Embeds are iframes of the form <permalink>embed/, which needs no API
+   token. They only work for posts on a public account. */
+
+// Instagram's embed frame wraps the video in a header and a footer bar.
+// This is roughly their combined height at typical widths; tune it if the
+// embed ever shows a scrollbar or a blank strip.
+const INSTAGRAM_CHROME_PX = 150;
+
+// Accepts .../p/<code>/, .../reel/<code>/, .../reels/<code>/, .../tv/<code>/ and
+// the .../<username>/reel/<code>/ form that "Copy link" sometimes produces.
+// Returns { permalink, embedUrl } or null if the URL isn't an Instagram post.
+function parseInstagramUrl(url) {
+  const m = String(url || "").match(
+    /^https?:\/\/(?:www\.)?instagram\.com\/(?:[A-Za-z0-9._]+\/)?(p|reels?|tv)\/([A-Za-z0-9_-]+)/
+  );
+  if (!m) return null;
+  const kind = m[1] === "reels" ? "reel" : m[1];
+  const permalink = `https://www.instagram.com/${kind}/${m[2]}/`;
+  return { permalink, embedUrl: `${permalink}embed/` };
+}
+
+function buildInstagramStage(v) {
+  const ig = parseInstagramUrl(v.url);
+  const stage = createEl("div", { class: "video-stage" }, []);
+  if (!ig) {
+    stage.appendChild(createEl("div", { class: "no-embed" }, ["Video link is missing or not a valid Instagram post."]));
+    return stage;
+  }
+
+  const ratio = v.w && v.h ? v.h / v.w : 16 / 9; // default: a vertical reel
+  const facade = createEl("button", {
+    type: "button",
+    class: "video-facade",
+    "aria-label": `Play video: ${v.title || "Instagram video"}`,
+  }, []);
+  facade.style.aspectRatio = `${v.w || 9} / ${v.h || 16}`;
+  if (v.poster) {
+    facade.appendChild(createEl("img", { src: withBase(v.poster), alt: "", loading: "lazy" }));
+  }
+  facade.appendChild(createEl("span", { class: "video-play", "aria-hidden": "true" }, ["▶"]));
+  facade.appendChild(createEl("span", { class: "video-facade-note" }, ["Plays in Instagram's player — loads when you press play"]));
+
+  facade.addEventListener("click", () => {
+    const iframe = createEl("iframe", {
+      src: ig.embedUrl,
+      title: v.title ? `Video: ${v.title}` : "Instagram video",
+      loading: "lazy",
+      allow: "autoplay; encrypted-media; picture-in-picture; fullscreen",
+      referrerpolicy: "strict-origin-when-cross-origin",
+      scrolling: "no",
+    });
+    iframe.allowFullscreen = true;
+    iframe.style.height = `${Math.round(stage.clientWidth * ratio + INSTAGRAM_CHROME_PX)}px`;
+    // One thing at a time: tune the shared station out while the video plays.
+    window.__station?.stop?.();
+    clearChildren(stage);
+    stage.appendChild(iframe);
+  });
+
+  stage.appendChild(facade);
+  return stage;
+}
+
+function buildFileStage(v) {
+  const stage = createEl("div", { class: "video-stage" }, []);
+  if (!v.src) {
+    stage.appendChild(createEl("div", { class: "no-embed" }, ["Video not published yet."]));
+    return stage;
+  }
+  const url = withBase(v.src);
+  const video = document.createElement("video");
+  video.controls = true;
+  video.preload = "none";
+  video.playsInline = true;
+  if (v.poster) video.poster = withBase(v.poster);
+  video.setAttribute("aria-label", v.title ? `Video: ${v.title}` : "Video");
+  const source = createEl("source", { src: url }, []);
+  if (v.mime) source.setAttribute("type", v.mime);
+  video.appendChild(source);
+  video.appendChild(document.createTextNode("Your browser can't play this video here — use the download link below."));
+  video.addEventListener("play", () => window.__station?.stop?.());
+  stage.appendChild(video);
+  return stage;
+}
+
+function renderVideos() {
+  const b = state.broadcast;
+  const section = $("videos-section");
+  const mount = $("videos");
+  if (!mount) return;
+
+  if (!b?.videos?.length) {
+    if (section) section.style.display = "none";
+    return;
+  }
+
+  clearChildren(mount);
+
+  for (const v of b.videos) {
+    const isInstagram = v.type === "instagram";
+    const stage = isInstagram ? buildInstagramStage(v) : buildFileStage(v);
+
+    // Caption block reuses the Documents text styles (kicker / title / desc / credit).
+    const text = createEl("figcaption", { class: "document-text" }, [
+      createEl("div", { class: "document-kicker" }, [v.kicker || ""]),
+      createEl("h3", { class: "document-title" }, [v.title || ""]),
+      createEl("p", { class: "document-desc" }, [v.description || ""]),
+    ]);
+    if (v.credit) text.appendChild(createEl("div", { class: "document-credit" }, [v.credit]));
+
+    const figure = createEl("figure", { class: "video" }, [stage, text]);
+
+    // Always-available way to the video itself.
+    const ig = isInstagram ? parseInstagramUrl(v.url) : null;
+    if (ig) {
+      figure.appendChild(createEl("a", {
+        class: "video-source", href: ig.permalink, target: "_blank", rel: "noopener noreferrer",
+      }, ["Watch on Instagram ↗"]));
+    } else if (!isInstagram && v.src) {
+      figure.appendChild(createEl("a", { class: "video-source", href: withBase(v.src), download: "" }, [
+        `Download (${(v.src.split(".").pop() || "video").toUpperCase()}) ↓`,
+      ]));
+    }
+
+    mount.appendChild(figure);
+  }
+}
+
 /* -------------------------------------------------------------- Credits */
 
 function creditGroup(label, lines) {
@@ -545,6 +688,7 @@ async function initPage() {
   renderPhotos();
   renderSpokenWords();
   renderDocuments();
+  renderVideos();
   renderTrackLibrary();
   renderHeroLiveButton();
   renderCredits();
