@@ -149,6 +149,14 @@
       ]
     }
   ],
+  "videos": [
+    {
+      "type": "instagram",
+      "kicker": "Video · Instagram",
+      "title": "Time Board Mother Control",
+      "url": "https://www.instagram.com/p/De6iPnpiqW2/"
+    }
+  ],
   "photos": [
     {
       "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB.jpg",
