@@ -131,7 +131,7 @@ your host allows `HEAD` requests if you want it populated.
 - **Real audio-reactive VU meter.** The hero animation is still the
   original decorative `Math.sin()` loop, not driven by actual playback.
   Wiring it to a Web Audio `AnalyserNode` is a nice later upgrade, and
-  would need CORS headers enabled on daqhris.com's audio files.
+  would need CORS headers enabled on the audio files (GitHub Pages sends them by default).
 
 ## Playback robustness (why the SoundCloud path looks the way it does)
 

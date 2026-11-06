@@ -12,7 +12,7 @@ Usage:
 
 Requires only the standard library. Attempts an HTTP HEAD request per
 track to fill in the RSS <enclosure length> (bytes) — run this from a
-machine that can actually reach the audio host (daqhris.com), not from
+machine that can actually reach the audio host (radio.hectolitre.be), not from
 an offline/sandboxed environment.
 """
 import json
@@ -29,14 +29,14 @@ QUEUE_PATH = os.path.join(ROOT, "data", "station", "queue.json")
 FEED_PATH = os.path.join(ROOT, "feed.xml")
 M3U_PATH = os.path.join(ROOT, "station.m3u")
 
-SITE_URL = "https://daqhris.com/radio-hectolitre/"
+SITE_URL = "https://radio.hectolitre.be/"
 SITE_TITLE = "Radio Hectolitre"
 SITE_DESCRIPTION = (
     "Artists-run broadcasting at Hectolitre, Brussels — self-hosted recordings "
     "and guest works, as they're published. SoundCloud-only episodes aren't "
     "included here yet; see https://soundcloud.com/user-816404246 for those."
 )
-FEED_IMAGE = "https://daqhris.com/radio-hectolitre/assets/img/podcast/radio-hectolitre-1500.jpg"
+FEED_IMAGE = "https://radio.hectolitre.be/assets/img/podcast/radio-hectolitre-1500.jpg"
 
 
 def content_length(url):

@@ -6,16 +6,16 @@ Radio Hectolitre is a static, open-source website — no server, no build step, 
 
 ## Content
 
-- [Homepage](https://daqhris.com/radio-hectolitre/): Past web broadcasts, interviews, and guest soundworks
-- [Past broadcasts](https://daqhris.com/radio-hectolitre/pages/archive.html): Every live transmission recorded at Hectolitre
-- [Hectolitre.FM](https://daqhris.com/radio-hectolitre/pages/episodes.html): The interview series, trailer through episode 08
-- [Guest works](https://daqhris.com/radio-hectolitre/pages/works.html): Standalone sound/performance pieces shown beyond Hectolitre
-- [About](https://daqhris.com/radio-hectolitre/pages/about.html): What Hectolitre and Radio Hectolitre are
+- [Homepage](https://radio.hectolitre.be/): Past web broadcasts, interviews, and guest soundworks
+- [Past broadcasts](https://radio.hectolitre.be/pages/archive.html): Every live transmission recorded at Hectolitre
+- [Hectolitre.FM](https://radio.hectolitre.be/pages/episodes.html): The interview series, trailer through episode 08
+- [Guest works](https://radio.hectolitre.be/pages/works.html): Standalone sound/performance pieces shown beyond Hectolitre
+- [About](https://radio.hectolitre.be/pages/about.html): What Hectolitre and Radio Hectolitre are
 
 ## Feeds
 
-- [Podcast RSS feed](https://daqhris.com/radio-hectolitre/feed.xml): Self-hosted audio only — SoundCloud-embedded episodes aren't included, since SoundCloud doesn't expose a redistributable file URL
-- [Station playlist (M3U)](https://daqhris.com/radio-hectolitre/station.m3u): Same scope as the RSS feed
+- [Podcast RSS feed](https://radio.hectolitre.be/feed.xml): Self-hosted audio only — SoundCloud-embedded episodes aren't included, since SoundCloud doesn't expose a redistributable file URL
+- [Station playlist (M3U)](https://radio.hectolitre.be/station.m3u): Same scope as the RSS feed
 - [Hectolitre.FM on SoundCloud](https://soundcloud.com/user-816404246): All interview episodes, including the ones not in the RSS feed above
 
 ## Source

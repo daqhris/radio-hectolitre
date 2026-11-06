@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://daqhris.com/radio-hectolitre/sitemap.xml
+Sitemap: https://radio.hectolitre.be/sitemap.xml

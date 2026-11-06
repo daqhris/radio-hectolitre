@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
   <title>Radio Hectolitre</title>
-  <link>https://daqhris.com/radio-hectolitre/</link>
-  <atom:link href="https://daqhris.com/radio-hectolitre/feed.xml" rel="self" type="application/rss+xml"/>
+  <link>https://radio.hectolitre.be/</link>
+  <atom:link href="https://radio.hectolitre.be/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Artists-run broadcasting at Hectolitre, Brussels — self-hosted recordings and guest works, as they're published. SoundCloud-only episodes aren't included here yet; see https://soundcloud.com/user-816404246 for those.</description>
   <language>en</language>
   <itunes:author>Radio Hectolitre</itunes:author>
   <itunes:explicit>false</itunes:explicit>
   <itunes:category text="Arts"/>
-  <itunes:image href="https://daqhris.com/radio-hectolitre/assets/img/podcast/radio-hectolitre-1500.jpg"/>
+  <itunes:image href="https://radio.hectolitre.be/assets/img/podcast/radio-hectolitre-1500.jpg"/>
   <item>
     <title>God Bless The United States Of Aliens — Trailer</title>
-    <link>https://daqhris.com/radio-hectolitre/pages/works/god-bless-usa.html</link>
+    <link>https://radio.hectolitre.be/pages/works/god-bless-usa.html</link>
     <guid isPermaLink="false">radio-hectolitre-work-god-bless-usa-trailer</guid>
     <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
     <description>Venice Biennale 2026</description>
@@ -21,11 +21,11 @@
   </item>
   <item>
     <title>Time Board Mother Control — Official web radio recording</title>
-    <link>https://daqhris.com/radio-hectolitre/pages/broadcasts/2026-05-31.html</link>
+    <link>https://radio.hectolitre.be/pages/broadcasts/2026-05-31.html</link>
     <guid isPermaLink="false">radio-hectolitre-broadcast-2026-05-31</guid>
     <pubDate>Sun, 31 May 2026 00:00:00 GMT</pubDate>
     <description>Reactor · Live at Hectolitre · 31 May 2026</description>
-    <enclosure url="https://daqhris.com/radio-hectolitre/assets/audio/2026-05-31/Time-Board-Mother-Control_Web-Livestream.m4a" type="audio/mp4" length="62396662"/>
+    <enclosure url="https://radio.hectolitre.be/assets/audio/2026-05-31/Time-Board-Mother-Control_Web-Livestream.m4a" type="audio/mp4" length="62396662"/>
     <itunes:duration>01:04:18</itunes:duration>
   </item>
 </channel>
