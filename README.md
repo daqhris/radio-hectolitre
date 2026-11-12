@@ -176,6 +176,7 @@ paths:
 | `/index.html`                                          | `""` |
 | `/pages/*.html`                                        | `"../"` |
 | `/pages/broadcasts/*.html`, `/episodes/*.html`, `/works/*.html` | `"../../"` |
+| `/404.html` (served at any missing URL) | `"/"` — root paths, assumes the custom-domain root |
 
 `station.js` follows the same convention (it destructures `withBase` from
 `RadioHecto`, same as `render-page.js`/`render-feature.js` do) — the one

@@ -33,8 +33,7 @@ SITE_URL = "https://radio.hectolitre.be/"
 SITE_TITLE = "Radio Hectolitre"
 SITE_DESCRIPTION = (
     "Artists-run broadcasting at Hectolitre, Brussels — self-hosted recordings "
-    "and guest works, as they're published. SoundCloud-only episodes aren't "
-    "included here yet; see https://soundcloud.com/user-816404246 for those."
+    "and guest works, as they're published."
 )
 FEED_IMAGE = "https://radio.hectolitre.be/assets/img/podcast/radio-hectolitre-1500.jpg"
 

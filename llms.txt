@@ -16,7 +16,6 @@ Radio Hectolitre is a static, open-source website — no server, no build step, 
 
 - [Podcast RSS feed](https://radio.hectolitre.be/feed.xml): Self-hosted audio only — SoundCloud-embedded episodes aren't included, since SoundCloud doesn't expose a redistributable file URL
 - [Station playlist (M3U)](https://radio.hectolitre.be/station.m3u): Same scope as the RSS feed
-- [Hectolitre.FM on SoundCloud](https://soundcloud.com/user-816404246): All interview episodes, including the ones not in the RSS feed above
 
 ## Source
 
