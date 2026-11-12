@@ -178,6 +178,14 @@ const RadioHecto = (function () {
       footer.appendChild(createEl("div", { class: "footer-credit" }, [site.footer.credit]));
     }
 
+    if (site.footer.code?.href) {
+      const code = site.footer.code;
+      footer.appendChild(createEl("div", { class: "footer-credit" }, [
+        `${code.text || "Open source code on GitHub:"} `,
+        createEl("a", { href: code.href, target: "_blank", rel: "noopener noreferrer" }, [`↗ ${code.label || code.href}`]),
+      ]));
+    }
+
     mount.appendChild(footer);
   }
 
