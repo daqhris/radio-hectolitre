@@ -4,7 +4,7 @@
   <title>Radio Hectolitre</title>
   <link>https://radio.hectolitre.be/</link>
   <atom:link href="https://radio.hectolitre.be/feed.xml" rel="self" type="application/rss+xml"/>
-  <description>Artists-run broadcasting at Hectolitre, Brussels — self-hosted recordings and guest works, as they're published. SoundCloud-only episodes aren't included here yet; see https://soundcloud.com/user-816404246 for those.</description>
+  <description>Artists-run broadcasting at Hectolitre, Brussels — self-hosted recordings and guest works, as they're published.</description>
   <language>en</language>
   <itunes:author>Radio Hectolitre</itunes:author>
   <itunes:explicit>false</itunes:explicit>
