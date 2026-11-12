@@ -13,11 +13,15 @@
   "footer": {
     "aboutLine": "Artists-run transmissions and audio recordings from Hectolitre, Brussels.",
     "links": [
-      { "label": "hectolitre.space", "href": "https://www.hectolitre.space" },
-      { "label": "Web publications catalogue", "href": "https://www.hectolitre.space/web-publications.html" },
-      { "label": "Soundcloud archive", "href": "https://soundcloud.com/user-816404246" }
+      { "label": "hectolitre.be", "href": "https://www.hectolitre.be" },
+      { "label": "Web publications catalogue", "href": "https://www.hectolitre.space/web-publications.html" }
     ],
-    "credit": "Radio Hectolitre is an internet art radio broadcast by Chris A. Iradukunda (daqhris), artist-in-residence at Hectolitre where the sound works originate."
+    "credit": "Radio Hectolitre is an internet art radio broadcast by Chris A. Iradukunda (daqhris), artist-in-residence at Hectolitre where the sound works originate.",
+    "code": {
+      "text": "The source code of this website is open source on GitHub:",
+      "label": "daqhris/radio-hectolitre",
+      "href": "https://github.com/daqhris/radio-hectolitre"
+    }
   },
 
   "tickerPrefix": ["Radio Hectolitre", "Brussels, Belgium", "radio.hectolitre.be", "50.8503°N 4.3517°E"],

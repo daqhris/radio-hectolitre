@@ -321,6 +321,9 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .footer-links a{font-size:10px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color .2s}
 .footer-links a:hover{color:var(--accent)}
 .footer-credit{font-size:9px;color:var(--dim);letter-spacing:1px;margin-top:20px;line-height:1.9}
+.footer-credit + .footer-credit{margin-top:6px}
+.footer-credit a{color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-credit a:hover{color:var(--accent)}
 
 /* ==========================================================================
    STATION BAR — persistent, site-wide "virtual station" player.
