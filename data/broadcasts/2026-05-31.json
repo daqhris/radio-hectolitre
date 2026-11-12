@@ -149,6 +149,18 @@
       ]
     }
   ],
+  "videos": [
+    {
+      "type": "instagram",
+      "kicker": "Video · Instagram",
+      "title": "Time Board Mother Control",
+      "poster": "/assets/img/posters/2026-05-31/IMG_2134.png",
+      "w": 4, "h": 5,
+      "url": "https://www.instagram.com/p/De6iPnpiqW2/",
+      "description": "On the last Sunday of May 2026, a group of artists decided to explore the soundscape of Reactor at @hectolitre.space. We cooperated by mixing our different instruments and talents into a collective creation called Time Board Mother Control. It was a unique experience shared by people, space and time. On this last Sunday of October 2026, we are releasing a film made by @melin_sin_a who materialized the essence of the performance on video.",
+      "credit": "Sound Performers: Voices: @mariastuut, @walk.day , Flute: @perpetual.bel , Clarinet: @ghazalfaghihi , Live electronics: @_davidepaolillo , Electric Guitar, loop, minichord: @hola.jere.ps --- Photography: @mladen.bundalo.9 , Posters: @perpetual.bel , Live webradio: @pinter_ic , Videography: @melin_sin_a"
+    }
+  ],
   "photos": [
     {
       "src": "assets/img/photos/2026-05-31/Hecto-May31-2026-WEB.jpg",
