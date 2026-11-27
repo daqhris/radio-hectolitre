@@ -24,10 +24,10 @@
     }
   },
 
-  "tickerPrefix": ["Radio Hectolitre", "Brussels, Belgium", "radio.hectolitre.be", "50.8503°N 4.3517°E"],
+  "tickerPrefix": ["Radio Hectolitre", "Brussels, Belgium", "radio.hectolitre.space", "50.8503°N 4.3517°E"],
 
   "social": {
-    "siteUrl": "https://radio.hectolitre.be",
+    "siteUrl": "https://radio.hectolitre.space",
     "siteName": "Radio Hectolitre",
     "themeColor": "#18a8c8",
     "logo": "assets/img/favicon/radio-hectolitre.png",

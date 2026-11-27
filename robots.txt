@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://radio.hectolitre.be/sitemap.xml
+Sitemap: https://radio.hectolitre.space/sitemap.xml
