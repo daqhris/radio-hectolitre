@@ -6,16 +6,16 @@ Radio Hectolitre is a static, open-source website — no server, no build step, 
 
 ## Content
 
-- [Homepage](https://radio.hectolitre.be/): Past web broadcasts, interviews, and guest soundworks
-- [Past broadcasts](https://radio.hectolitre.be/pages/archive.html): Every live transmission recorded at Hectolitre
-- [Hectolitre.FM](https://radio.hectolitre.be/pages/episodes.html): The interview series, trailer through episode 08
-- [Guest works](https://radio.hectolitre.be/pages/works.html): Standalone sound/performance pieces shown beyond Hectolitre
-- [About](https://radio.hectolitre.be/pages/about.html): What Hectolitre and Radio Hectolitre are
+- [Homepage](https://radio.hectolitre.space/): Past web broadcasts, interviews, and guest soundworks
+- [Past broadcasts](https://radio.hectolitre.space/pages/archive.html): Every live transmission recorded at Hectolitre
+- [Hectolitre.FM](https://radio.hectolitre.space/pages/episodes.html): The interview series, trailer through episode 08
+- [Guest works](https://radio.hectolitre.space/pages/works.html): Standalone sound/performance pieces shown beyond Hectolitre
+- [About](https://radio.hectolitre.space/pages/about.html): What Hectolitre and Radio Hectolitre are
 
 ## Feeds
 
-- [Podcast RSS feed](https://radio.hectolitre.be/feed.xml): Self-hosted audio only — SoundCloud-embedded episodes aren't included, since SoundCloud doesn't expose a redistributable file URL
-- [Station playlist (M3U)](https://radio.hectolitre.be/station.m3u): Same scope as the RSS feed
+- [Podcast RSS feed](https://radio.hectolitre.space/feed.xml): Self-hosted audio only — SoundCloud-embedded episodes aren't included, since SoundCloud doesn't expose a redistributable file URL
+- [Station playlist (M3U)](https://radio.hectolitre.space/station.m3u): Same scope as the RSS feed
 
 ## Source
 
